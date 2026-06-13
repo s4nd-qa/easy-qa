@@ -7,84 +7,73 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="lesson-tag">📚 Вводный модуль · ✏️ Домашнее задание</div>
 <div class="lesson-number">Урок 0-6</div>
 <h1>Тестирование бэкенда. Swagger и API</h1>
-<p class="lesson-intro">На фронте мы смотрели на UI. На бэке — работаем на уровне сервера и БД напрямую. Знакомимся с API и первым инструментом — Swagger.</p>
+<p class="lesson-intro">На фронте мы смотрели на UI. На бэке — работаем на уровне сервера и БД напрямую.</p>
 
 <h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🔌</span> Что такое API</h2>
-
 <div class="callout info">
   <div class="callout-icon">📖</div>
   <div><div class="callout-title">Главное про API</div>
-  <p><strong>API — это контракт.</strong> Договор о том, как необходимо «общаться» с конкретным модулем или микросервисом. Одно конкретное взаимодействие называется <strong>API-ручкой</strong>.</p></div>
+  <p><strong>API — это контракт.</strong> Договор о том, как «общаться» с конкретным модулем. Одно взаимодействие = <strong>API-ручка</strong>.</p></div>
 </div>
 
-<div class="video-label">Видео: API простыми словами — что такое API?</div>
-<div class="video-wrap">
-  <iframe src="https://www.youtube.com/embed/vPVAYsc-U60" allowfullscreen></iframe>
-</div>
+<div class="video-label">Видео: API простыми словами</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/vPVAYsc-U60" allowfullscreen></iframe></div>
 
 <h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">⚡</span> Знакомство со Swagger</h2>
-
-<p>Swagger — инструмент документирования и тестирования API. Посмотри как выглядит интерфейс Swagger Petstore:</p>
-<img src="img-13-swagger-main.png" alt="Интерфейс Swagger Petstore" class="lesson-img">
+<p>Swagger — инструмент документирования и тестирования API.</p>
+<!-- img-16 = swagger main -->
+<img src="img-16-swagger-response.png" alt="Интерфейс Swagger Petstore" class="lesson-img">
 <p class="img-caption">Swagger Petstore — видны 4 API-ручки: GET, POST, DELETE и загрузка фото</p>
 
-<div class="video-label">Видео: тестирование API в Swagger — с чего начать</div>
-<div class="video-wrap">
-  <iframe src="https://www.youtube.com/embed/JgbsBpbUP-4" allowfullscreen></iframe>
-</div>
+<div class="video-label">Видео: тестирование API в Swagger</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/JgbsBpbUP-4" allowfullscreen></iframe></div>
 
 <h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🖱️</span> Как работать с API-ручкой — пошагово</h2>
-
 <p>Разберём на примере ручки <span class="method post">POST</span> <code>/pet</code> — добавить нового питомца.</p>
 
-<p><strong>Шаг 1.</strong> Найди ручку в Swagger, нажми <strong>Try it out</strong>:</p>
-<img src="img-14-swagger-tryit.png" alt="Кнопка Try it out в Swagger" class="lesson-img">
+<p><strong>Шаг 1.</strong> Нажми <strong>Try it out</strong>:</p>
+<!-- img-17 = swagger tryit -->
+<img src="img-17-testcase.png" alt="Кнопка Try it out" class="lesson-img">
 <p class="img-caption">Кнопка Try it out активирует режим редактирования запроса</p>
 
-<p><strong>Шаг 2–3.</strong> Замени значения в теле запроса и нажми <strong>Execute</strong>:</p>
-<img src="img-15-swagger-execute.png" alt="Заполнение запроса и Execute" class="lesson-img">
+<p><strong>Шаг 2–3.</strong> Замени значения и нажми <strong>Execute</strong>:</p>
+<!-- img-18 = swagger execute форма -->
+<img src="img-18-checklist.png" alt="Заполнение запроса и Execute" class="lesson-img">
 <p class="img-caption">Меняем id: 0 → 555, name: "doggie" → "Test", нажимаем Execute</p>
 
-<p><strong>Шаг 4.</strong> Проверяем Server Response — код 200 и правильные значения в ответе:</p>
-<img src="img-16-swagger-response.png" alt="Ответ сервера в Swagger" class="lesson-img">
+<p><strong>Шаг 4.</strong> Проверяем Server Response:</p>
+<!-- img-13 = swagger response -->
+<img src="img-13-swagger-main.png" alt="Ответ сервера" class="lesson-img">
 <p class="img-caption">Код 200 и значения id: 555, name: "Test" в ответе — всё прошло успешно</p>
 
 <div class="callout info">
   <div class="callout-icon">💡</div>
   <div><div class="callout-title">Коды ответов HTTP</div>
-  <p><code>200</code> — успешно · <code>201</code> — создано · <code>400</code> — плохой запрос · <code>404</code> — не найдено · <code>500</code> — ошибка сервера</p></div>
+  <p><code>200</code> — успешно · <code>404</code> — не найдено · <code>500</code> — ошибка сервера</p></div>
 </div>
 
 <div class="hw-block">
   <div class="hw-header"><span style="font-size:22px">✏️</span><div class="hw-title">Домашнее задание</div><div class="hw-num">ДЗ 0-6</div></div>
-
-  <p class="hw-task">Зайди в <a href="https://petstore.swagger.io" target="_blank" style="color:var(--blue)">Swagger Petstore ↗</a> и выполни сценарий тестирования.</p>
-
+  <p class="hw-task">Зайди в <a href="https://petstore.swagger.io" target="_blank" style="color:var(--blue)">Swagger Petstore ↗</a> и выполни сценарий:</p>
   <div class="steps" style="margin-bottom:20px">
     <div class="step"><div class="step-num">1</div><div class="step-text"><span class="method post">POST</span> <code>/pet</code> — создать: <code>"id": 777</code>, <code>"name": "Testpet"</code></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-text">Проверить: код <code>200</code>, питомец создан с указанными параметрами ✓</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Проверить: код <code>200</code> ✓</div></div>
     <div class="step"><div class="step-num">3</div><div class="step-text"><span class="method get">GET</span> <code>/pet/777</code> — найти питомца</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-text">Проверить: код <code>200</code>, имя питомца корректное ✓</div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-text"><span class="method delete">DELETE</span> <code>/pet/777</code> — удалить питомца</div></div>
-    <div class="step"><div class="step-num">6</div><div class="step-text">Проверить: код <code>200</code>, в параметре <code>"message"</code> передан нужный id ✓</div></div>
-    <div class="step"><div class="step-num">7</div><div class="step-text"><span class="method get">GET</span> <code>/pet/777</code> — найти удалённого питомца</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Проверить: код <code>200</code>, имя корректное ✓</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text"><span class="method delete">DELETE</span> <code>/pet/777</code> — удалить</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">Проверить: код <code>200</code> ✓</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-text"><span class="method get">GET</span> <code>/pet/777</code> — найти удалённого</div></div>
     <div class="step"><div class="step-num">8</div><div class="step-text">Проверить: код <code>404</code>, <code>"message": "Pet not found"</code> ✓</div></div>
-    <div class="step"><div class="step-num">9</div><div class="step-text"><span class="method delete">DELETE</span> <code>/pet/777</code> — удалить уже удалённого питомца</div></div>
+    <div class="step"><div class="step-num">9</div><div class="step-text"><span class="method delete">DELETE</span> <code>/pet/777</code> — удалить снова</div></div>
   </div>
-
   <div class="callout hard" style="margin-bottom:14px">
     <div class="callout-icon">🧠</div>
-    <div><div class="callout-title">Дополнительное задание</div>
-    <p>Повтори шаг 1 с <code>"id": -1</code>. Напиши, в чём по-твоему заключается баг.</p></div>
+    <div><div class="callout-title">Дополнительно</div><p>Повтори шаг 1 с <code>"id": -1</code>. Напиши, в чём баг.</p></div>
   </div>
-
-  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">
-    📎 <strong>В ответ на ДЗ:</strong> какой ответ получил после шага 9 и почему, на твой взгляд, так произошло?
-  </p>
+  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">📎 <strong>В ответ:</strong> что получил после шага 9 и почему?</p>
 </div>
 
 <div class="lesson-nav">

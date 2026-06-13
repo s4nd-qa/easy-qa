@@ -7,35 +7,34 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="lesson-tag">📚 Вводный модуль · ✏️ Домашнее задание</div>
 <div class="lesson-number">Урок 0-8</div>
 <h1>Тестовая документация</h1>
-<p class="lesson-intro">Акцент сделай на тест-кейсе. Остальное — поверхностно. Подробно разберём в модуле «Теория и процессы».</p>
+<p class="lesson-intro">Акцент сделай на тест-кейсе. Остальное — поверхностно.</p>
 
 <div class="callout warn">
   <div class="callout-icon">⚠️</div>
   <div><div class="callout-title">Ознакомься бегло</div>
-  <p>Не вчитывайся и не заучивай всё подряд. Главное сейчас — понять тест-кейс и баг-репорт.</p></div>
+  <p>Главное сейчас — понять тест-кейс и баг-репорт.</p></div>
 </div>
 
 <h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📄</span> Виды тестовой документации</h2>
 <div class="doc-grid">
-  <div class="doc-card"><div class="doc-card-icon">🗺️</div><div class="doc-card-title">Тест-план</div><div class="doc-card-desc">Главный документ. Стратегия тестирования, цель, техники, инструменты, критерии. Составляют QA Lead / тимлид.</div></div>
-  <div class="doc-card" style="border-top:2px solid var(--green)"><div class="doc-card-icon">📋</div><div class="doc-card-title">Тест-кейс ⭐</div><div class="doc-card-desc">Самый частый документ. Подробные шаги для проверки конкретного случая. Атрибуты: название, описание, предусловия, шаги, ОР.</div></div>
-  <div class="doc-card"><div class="doc-card-icon">✅</div><div class="doc-card-title">Чек-лист</div><div class="doc-card-desc">Упрощённый список проверок. Свободный формат. Рассчитан на опытных тестировщиков.</div></div>
-  <div class="doc-card"><div class="doc-card-icon">🐛</div><div class="doc-card-title">Баг-репорт</div><div class="doc-card-desc">Отчёт об обнаруженном дефекте. Включает: название, шаги воспроизведения, ОР, ФР, окружение, вложения.</div></div>
+  <div class="doc-card"><div class="doc-card-icon">🗺️</div><div class="doc-card-title">Тест-план</div><div class="doc-card-desc">Главный документ. Стратегия, цель, техники, инструменты, критерии.</div></div>
+  <div class="doc-card" style="border-top:2px solid var(--green)"><div class="doc-card-icon">📋</div><div class="doc-card-title">Тест-кейс ⭐</div><div class="doc-card-desc">Самый частый документ. Подробные шаги для проверки конкретного случая.</div></div>
+  <div class="doc-card"><div class="doc-card-icon">✅</div><div class="doc-card-title">Чек-лист</div><div class="doc-card-desc">Упрощённый список проверок. Свободный формат.</div></div>
+  <div class="doc-card"><div class="doc-card-icon">🐛</div><div class="doc-card-title">Баг-репорт</div><div class="doc-card-desc">Отчёт об обнаруженном дефекте: шаги, ОР, ФР, окружение, вложения.</div></div>
 </div>
 
 <h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📋</span> Тест-кейс на реальном проекте</h2>
-<p>Так выглядит тест-кейс в реальной системе управления тестированием:</p>
-<img src="img-17-testcase.png" alt="Тест-кейс в системе" class="lesson-img">
-<p class="img-caption">Тест-кейс «Тестируем авторизацию на google.com» — видны шаги, описание, ожидаемый результат и ссылки</p>
+<!-- img-06 = тест-кейс в системе -->
+<img src="img-06-bp-flow.png" alt="Тест-кейс в системе" class="lesson-img">
+<p class="img-caption">Тест-кейс «Тестируем авторизацию на google.com» — шаги, описание, ожидаемый результат</p>
 
 <div class="callout warn">
   <div class="callout-icon">⚠️</div>
   <div><div class="callout-title">Частая ошибка</div>
-  <p>Тест-кейс описывает <strong>конкретный случай</strong>, не функционал в целом. Нельзя «Проверка корзины» — напиши конкретно: «Добавление товара в корзину авторизованным пользователем».</p></div>
+  <p>Тест-кейс описывает <strong>конкретный случай</strong>. Нельзя «Проверка корзины» — пиши конкретно: «Добавление товара в корзину авторизованным пользователем».</p></div>
 </div>
 
 <a href="https://prostoitblog.ru/test-kejsy-i-chek-listy-primery-test-kejsov-i-chek-listov-na-realnyh-proektah/" target="_blank" class="link-card">
@@ -45,41 +44,33 @@
 </a>
 
 <h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">✅</span> Чек-лист — пример глубокого покрытия</h2>
-<img src="img-18-checklist.png" alt="Пример чек-листа" class="lesson-img">
+<!-- img-20 = чек-лист -->
+<img src="img-20-bugreport-2.png" alt="Пример чек-листа" class="lesson-img">
 <p class="img-caption">Пример чек-листа с глубоким покрытием — прикрепление картинки в разных форматах и разрешениях</p>
-<p>Видишь насколько детально можно расписать даже одну простую функцию? Это и называется <strong>глубокое покрытие</strong>.</p>
 
 <h2><span class="h2-icon" style="background:rgba(239,68,68,0.15)">🐛</span> Баг-репорт — хороший и плохой</h2>
-<p>Хороший баг-репорт — тот, по которому разработчик сразу понимает <em>что</em> сломано и <em>как</em> воспроизвести:</p>
-<img src="img-19-bugreport-1.png" alt="Хороший баг-репорт" class="lesson-img">
-<p class="img-caption">Хороший баг-репорт: есть название, шаги воспроизведения, ссылка на запись экрана</p>
+<p>Хороший баг-репорт — тот, по которому разработчик сразу понимает что сломано и как воспроизвести:</p>
+<!-- img-15 = swagger execute = хороший баг-репорт в Trello -->
+<img src="img-15-swagger-execute.png" alt="Хороший баг-репорт" class="lesson-img">
+<p class="img-caption">Хороший баг-репорт: есть название, шаги, ссылка на запись экрана</p>
 
 <p>А вот пример плохого баг-репорта:</p>
-<img src="img-20-bugreport-2.png" alt="Плохой баг-репорт" class="lesson-img">
-<p class="img-caption">Плохой баг-репорт: нет описания что было сделано до; на записи экрана показан уже результат, а не то как к нему пришли</p>
+<!-- img-09 = плохой баг-репорт -->
+<img src="img-09-html-css-js.png" alt="Плохой баг-репорт" class="lesson-img">
+<p class="img-caption">Плохой баг-репорт: нет описания что было сделано до; на записи показан результат, а не как к нему пришли</p>
 
 <div class="callout warn">
   <div class="callout-icon">⚠️</div>
-  <div><div class="callout-title">Главная ошибка в баг-репортах</div>
-  <p>Шаги воспроизведения должны быть воспроизводимы <strong>любым разработчиком с нуля</strong>. Если разраб не может повторить баг — он не может его починить.</p></div>
+  <div><div class="callout-title">Главная ошибка</div>
+  <p>Шаги воспроизведения должны быть воспроизводимы <strong>любым разработчиком с нуля</strong>.</p></div>
 </div>
 
 <div class="hw-block">
   <div class="hw-header"><span style="font-size:22px">✏️</span><div class="hw-title">Домашнее задание</div><div class="hw-num">ДЗ 0-8</div></div>
-
   <p class="hw-task">Тест-дизайн карточек товара на <a href="https://www.saucedemo.com/" target="_blank" style="color:var(--blue)">saucedemo.com ↗</a></p>
   <div class="cred-box" style="margin-bottom:16px"><span class="cred-label">Логин</span><span class="cred-val">standard_user</span><span class="cred-label">:</span><span class="cred-val">secret_sauce</span></div>
-
-  <p style="font-size:14px;color:var(--text);margin-bottom:10px"><strong>Задача:</strong> написать и оформить <strong>2 тест-кейса</strong> к модулю карточек товара:</p>
-  <ul class="content-list" style="margin-bottom:16px">
-    <li>Переход к детальной странице товара</li>
-    <li>Добавление / удаление товара из корзины</li>
-    <li>Проверка отображения карточки: стилизация, название при наведении, масштабирование</li>
-  </ul>
-
-  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">
-    📎 <strong>В ответ на ДЗ:</strong> оформленные тест-кейсы в Google Doc: название, описание, предусловия, шаги, ожидаемый результат
-  </p>
+  <p style="font-size:14px;color:var(--text);margin-bottom:10px">Написать и оформить <strong>2 тест-кейса</strong> к карточкам товара.</p>
+  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">📎 <strong>В ответ:</strong> оформленные тест-кейсы в Google Doc: название, описание, предусловия, шаги, ОР</p>
 </div>
 
 <div class="lesson-nav">
