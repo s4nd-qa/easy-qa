@@ -11,58 +11,33 @@
 <div class="lesson-tag">📚 Вводный модуль</div>
 <div class="lesson-number">Урок 0-3</div>
 <h1>Как работает интернет. Клиент-серверная архитектура</h1>
-<p class="lesson-intro">
-  Базовое понимание принципа работы всех веб-сайтов и приложений. Не закапывайся — пойми модель в пределах этой страницы.
-</p>
+<p class="lesson-intro">Базовое понимание принципа работы всех веб-сайтов и приложений. Не закапывайся — пойми модель в пределах этой страницы.</p>
 
 <div class="callout warn">
   <div class="callout-icon">⚠️</div>
-  <div>
-    <div class="callout-title">Помни про Правило №1</div>
-    <p>Здесь достаточно понять клиент-серверную архитектуру в пределах трёх компонентов: клиент, сервер и БД. Модель OSI — только поверхностно по картинке.</p>
-  </div>
+  <div><div class="callout-title">Помни про Правило №1</div>
+  <p>Здесь достаточно понять клиент-серверную архитектуру в пределах трёх компонентов: клиент, сервер и БД. Модель OSI — только поверхностно по картинке.</p></div>
 </div>
 
 <h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🌐</span> Модель OSI</h2>
-
 <p>Эталонная модель взаимодействия открытых систем в семи уровнях. Пойми в пределах картинки ниже.</p>
 
-<img src="img-08-osi.png" alt="Модель OSI" class="lesson-img half" style="margin:0 auto">
+<img src="img-08-osi.png" alt="Модель OSI — 7 уровней" class="lesson-img half" style="margin:0 auto">
 <p class="img-caption">Модель OSI — 7 уровней взаимодействия систем</p>
 
-<div class="video-label">Видео: как работает интернет и модель OSI</div>
+<div class="video-label">Видео: Модель OSI — 7 уровней за 7 минут</div>
 <div class="video-wrap">
-  <iframe src="https://www.youtube.com/embed/lwdy0tJGJOg" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/je0QFU7p5Oo" allowfullscreen></iframe>
 </div>
 
 <h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🔗</span> Три компонента клиент-серверной архитектуры</h2>
 
 <div class="arch-flow">
-  <div class="arch-node">
-    <span class="arch-node-icon">💻</span>
-    <span class="arch-node-label">Клиент</span>
-    <span class="arch-node-sub">Браузер / Приложение</span>
-  </div>
-  <div class="arch-arrow">
-    <span style="font-size:11px;color:var(--green)">запрос →</span>
-    <span class="arr" style="transform:rotate(180deg)">→</span>
-    <span style="font-size:11px;color:var(--blue)">← ответ</span>
-  </div>
-  <div class="arch-node">
-    <span class="arch-node-icon">⚙️</span>
-    <span class="arch-node-label">Сервер</span>
-    <span class="arch-node-sub">Логика / API</span>
-  </div>
-  <div class="arch-arrow">
-    <span style="font-size:11px;color:var(--green)">SQL →</span>
-    <span class="arr" style="transform:rotate(180deg)">→</span>
-    <span style="font-size:11px;color:var(--blue)">← данные</span>
-  </div>
-  <div class="arch-node">
-    <span class="arch-node-icon">🗄️</span>
-    <span class="arch-node-label">База данных</span>
-    <span class="arch-node-sub">CRUD-хранилище</span>
-  </div>
+  <div class="arch-node"><span class="arch-node-icon">💻</span><span class="arch-node-label">Клиент</span><span class="arch-node-sub">Браузер / Приложение</span></div>
+  <div class="arch-arrow"><span style="font-size:11px;color:var(--green)">запрос →</span><span class="arr">→</span><span style="font-size:11px;color:var(--blue)">← ответ</span></div>
+  <div class="arch-node"><span class="arch-node-icon">⚙️</span><span class="arch-node-label">Сервер</span><span class="arch-node-sub">Логика / API</span></div>
+  <div class="arch-arrow"><span style="font-size:11px;color:var(--green)">SQL →</span><span class="arr">→</span><span style="font-size:11px;color:var(--blue)">← данные</span></div>
+  <div class="arch-node"><span class="arch-node-icon">🗄️</span><span class="arch-node-label">База данных</span><span class="arch-node-sub">CRUD-хранилище</span></div>
 </div>
 
 <div class="video-label">Видео: клиент-серверная архитектура — главное</div>
@@ -71,26 +46,15 @@
 </div>
 
 <div class="team-list">
-  <div class="team-item">
-    <div class="team-role-tag" style="color:#93C5FD;border-color:rgba(147,197,253,0.2)">Клиент</div>
-    <div class="team-desc">Любая точка входа в систему (браузер, мобильное приложение, десктоп-клиент). Через клиент отправляются запросы на сервер, на клиент приходят обработанные ответы.</div>
-  </div>
-  <div class="team-item">
-    <div class="team-role-tag" style="color:#C4B5FD;border-color:rgba(196,181,253,0.2)">Сервер</div>
-    <div class="team-desc">Место обработки запросов в соответствии с заданной логикой. При необходимости сервер запрашивает данные из БД, формирует ответ и отправляет клиенту.</div>
-  </div>
-  <div class="team-item">
-    <div class="team-role-tag" style="color:#FCA5A5;border-color:rgba(252,165,165,0.2)">База данных</div>
-    <div class="team-desc">Место хранения данных. Принцип <strong>CRUD</strong>: Create, Read, Update, Delete. Хранит учётные данные, сообщения, файлы и т.д. Своей логики не имеет.</div>
-  </div>
+  <div class="team-item"><div class="team-role-tag" style="color:#93C5FD;border-color:rgba(147,197,253,0.2)">Клиент</div><div class="team-desc">Любая точка входа в систему (браузер, мобильное приложение, десктоп-клиент). Отправляет запросы на сервер, получает обработанные ответы.</div></div>
+  <div class="team-item"><div class="team-role-tag" style="color:#C4B5FD;border-color:rgba(196,181,253,0.2)">Сервер</div><div class="team-desc">Место обработки запросов в соответствии с заданной логикой. При необходимости запрашивает данные из БД, формирует ответ и отправляет клиенту.</div></div>
+  <div class="team-item"><div class="team-role-tag" style="color:#FCA5A5;border-color:rgba(252,165,165,0.2)">База данных</div><div class="team-desc">Место хранения данных. Принцип <strong>CRUD</strong>: Create, Read, Update, Delete. Своей логики не имеет.</div></div>
 </div>
 
 <div class="callout hard">
   <div class="callout-icon">🧠</div>
-  <div>
-    <div class="callout-title">На подумать</div>
-    <p>Что происходит, когда ты отправляешь сообщение в Telegram? Что происходит на каждом уровне модели OSI? Размышление поможет при выполнении ДЗ следующих уроков.</p>
-  </div>
+  <div><div class="callout-title">На подумать</div>
+  <p>Что происходит, когда ты отправляешь сообщение в Telegram? Что происходит на каждом уровне модели OSI?</p></div>
 </div>
 
 <h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">⚡</span> Фронтенд vs Бэкенд</h2>
@@ -99,39 +63,31 @@
   <div class="role-card" style="border-top:3px solid var(--blue)">
     <div class="role-label" style="color:#93C5FD;font-size:16px">Фронтенд</div>
     <div class="role-full">Client side</div>
-    <div class="role-desc">Визуальное интерактивное представление данных. То, с чем взаимодействует пользователь: интерфейс, анимации, переходы.</div>
+    <div class="role-desc">Визуальное интерактивное представление данных. То, с чем взаимодействует пользователь.</div>
     <div class="role-mantra" style="background:rgba(59,130,246,0.1);color:#93C5FD">≈ то же самое что клиент</div>
   </div>
   <div class="role-card" style="border-top:3px solid var(--purple)">
     <div class="role-label" style="color:#C4B5FD;font-size:16px">Бэкенд</div>
     <div class="role-full">Server side</div>
-    <div class="role-desc">Скрытая часть продукта. Прописанная логика, всё что работает «под капотом» системы и обеспечивает её полную функциональность.</div>
+    <div class="role-desc">Скрытая часть продукта. Прописанная логика, всё что работает «под капотом» системы.</div>
     <div class="role-mantra" style="background:rgba(124,58,237,0.1);color:#C4B5FD">≈ связка сервер + БД</div>
   </div>
 </div>
 
-<div class="video-label">Дополнительно: что такое фронтенд и бэкенд</div>
+<div class="video-label">Дополнительно: что такое фронтенд и бэкенд — в чём разница</div>
 <div class="video-wrap">
   <iframe src="https://www.youtube.com/embed/wLHuviTWnuY" allowfullscreen></iframe>
 </div>
 
-<div class="video-label">Дополнительно: как работают запросы и ответы</div>
-<div class="video-wrap">
-  <iframe src="https://www.youtube.com/embed/je0QFU7p5Oo" allowfullscreen></iframe>
-</div>
-
 <div class="callout warn">
   <div class="callout-icon">⚠️</div>
-  <div>
-    <div class="callout-title">Важно для тестировщика</div>
-    <p>Есть валидация на фронте ≠ есть валидация на бэке. Часто «ленивые» разработчики делают проверку только на фронте — QA должен проверить и бэк напрямую.</p>
-  </div>
+  <div><div class="callout-title">Важно для тестировщика</div>
+  <p>Есть валидация на фронте ≠ есть валидация на бэке. «Ленивые» разработчики делают проверку только на фронте — QA должен проверить и бэк напрямую.</p></div>
 </div>
 
 <div class="lesson-nav">
   <a class="nav-btn" href="0-2-processes.html">← Предыдущий урок</a>
   <a class="nav-btn primary" href="0-5-frontend.html">Следующий урок →</a>
 </div>
-
 </body>
 </html>
