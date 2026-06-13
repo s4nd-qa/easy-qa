@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 0-5 Тестирование фронтенда ✏️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Вводный модуль · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 0-5</div>
+<h1>Тестирование фронтенда</h1>
+<p class="lesson-intro">
+  Заходим в браузер, открываем сайт — и тестируем. Разбираемся из чего состоит сайт и что именно проверяет фронтенд-тестировщик.
+</p>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🧱</span> Из чего состоит сайт</h2>
+
+<img src="images/img-09-html-css-js.png" alt="Слои HTML, CSS, JavaScript" class="lesson-img half" style="margin:0 auto">
+<p class="img-caption">Три слоя любого сайта: HTML — каркас, CSS — внешний вид, JS — поведение</p>
+
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#F97316;border-color:rgba(249,115,22,0.2)">HTML</div>
+    <div class="team-desc"><strong>HyperText Markup Language</strong> — язык разметки. Отвечает за структуру и содержание: текст, изображения, ссылки, кнопки.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#3B82F6;border-color:rgba(59,130,246,0.2)">CSS</div>
+    <div class="team-desc"><strong>Cascading Style Sheets</strong> — каскадные таблицы стилей. Отвечает за внешний вид: расположение элементов, шрифты, цвета, отступы, анимации.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#EAB308;border-color:rgba(234,179,8,0.2)">JS</div>
+    <div class="team-desc"><strong>JavaScript</strong> — язык программирования. Пишет скрипты для фронта: интерактивность кнопок, валидация полей, динамические элементы.</div>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">👁️</span> Как выглядит сайт с CSS и без</h2>
+
+<p>Посмотри на реальный пример — сайт с включёнными стилями:</p>
+<img src="images/img-10-site-full.png" alt="Сайт с CSS" class="lesson-img">
+<p class="img-caption">Сайт с HTML + CSS + JS — всё на месте, выглядит нормально</p>
+
+<p>А вот так выглядит тот же сайт, если CSS не загрузился:</p>
+<img src="images/img-11-site-no-css.png" alt="Сайт без CSS" class="lesson-img">
+<p class="img-caption">Сайт без CSS — голый HTML-каркас. Именно так выглядит сайт при ошибке загрузки стилей. Помогает перезагрузка страницы.</p>
+
+<img src="images/img-12-site-product.png" alt="Страница товара без CSS" class="lesson-img">
+<p class="img-caption">Страница карточки товара без стилей — контент есть, но навигация и визуал полностью сломаны</p>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🔍</span> Что проверяет фронтенд-тестировщик</h2>
+
+<ul class="checklist">
+  <li>Тестировать работу сайта по разным сценариям — <strong>функциональное тестирование</strong></li>
+  <li>Проверять структуру и наполнение сайта, разметку HTML</li>
+  <li>Тестировать дизайн — сравнивать с макетами в Figma — <strong>UI-тестирование</strong></li>
+  <li>Находить проблемы в работе JS-скриптов</li>
+</ul>
+
+<div class="callout info">
+  <div class="callout-icon">💡</div>
+  <div>
+    <div class="callout-title">Функциональное vs Нефункциональное</div>
+    <p>Любое тестирование фронта приоритетно начинается с <strong>функционального</strong> — сначала убедись, выполняет ли система свои функции. Уже потом идёт нефункциональное (UI, адаптивность, производительность).</p>
+  </div>
+</div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Хорошего UI-тестера видно по насмотрённости</div>
+    <p>Чем чаще и скрупулёзнее сравниваешь — тем быстрее находишь неявные ошибки в разметке и стилизации. На этом сделаем упор в модуле «Фронтенд».</p>
+  </div>
+</div>
+
+<div class="hw-block">
+  <div class="hw-header">
+    <span style="font-size:22px">✏️</span>
+    <div class="hw-title">Домашнее задание</div>
+    <div class="hw-num">ДЗ 0-5</div>
+  </div>
+
+  <h3 style="margin-top:0;color:var(--green);font-size:14px;margin-bottom:12px">Часть 1 — UI-тестирование</h3>
+  <p class="hw-task">Перейди на сайт <a href="https://cantunsee.space/" target="_blank" style="color:var(--blue)">cantunsee.space ↗</a><br>
+  <strong>Задача:</strong> набрать <strong>6500+ очков из 8000</strong>.</p>
+  <ul class="content-list" style="margin-bottom:14px">
+    <li>~50 пар интерфейсов — выбери наиболее удачный дизайн</li>
+    <li>Обращай внимание на стили кнопок, шрифты, расположение элементов</li>
+    <li>Не трать больше 30 секунд на каждую пару</li>
+    <li>Если не получилось набрать нужное количество — попробуй второй раз</li>
+  </ul>
+  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">
+    📎 <strong>В ответ на ДЗ:</strong> пришли скрин с набранным количеством очков
+  </p>
+
+  <div class="divider" style="margin:20px 0"></div>
+
+  <h3 style="margin-top:0;color:var(--green);font-size:14px;margin-bottom:12px">Часть 2 — Функциональное тестирование</h3>
+  <p class="hw-task">Перейди на сайт <a href="https://www.saucedemo.com/" target="_blank" style="color:var(--blue)">saucedemo.com ↗</a><br>
+  <strong>Задача:</strong> протестировать две версии функционала, составить список багов.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">
+    <div class="cred-box">
+      <span class="cred-label">Исправная версия</span>
+      <span class="cred-val">standard_user</span>
+      <span class="cred-label">:</span>
+      <span class="cred-val">secret_sauce</span>
+    </div>
+    <div class="cred-box">
+      <span class="cred-label">Версия с багами</span>
+      <span class="cred-val">error_user</span>
+      <span class="cred-label">:</span>
+      <span class="cred-val">secret_sauce</span>
+    </div>
+  </div>
+
+  <div class="steps" style="margin-bottom:14px">
+    <div class="step"><div class="step-num done">1</div><div class="step-text">Войди под <code>standard_user</code>, пройдись по функционалу — <strong>запомни нормальное поведение</strong></div></div>
+    <div class="step"><div class="step-num done">2</div><div class="step-text">Выйди (кнопка Logout) и войди под <code>error_user</code></div></div>
+    <div class="step"><div class="step-num done">3</div><div class="step-text">Пройди те же проверки, найди несоответствия</div></div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">
+    📎 <strong>В ответ на ДЗ:</strong> список багов с подробным описанием — как работает и как должно работать
+  </p>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="0-3-client-server.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="0-6-backend.html">Следующий урок →</a>
+</div>
+
+</body>
+</html>
