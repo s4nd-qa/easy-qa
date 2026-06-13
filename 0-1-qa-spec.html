@@ -3,179 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Easy QA | 0-0 Нюансы обучения</title>
+<title>Easy QA | 0-1 Спецификация. Анализ рынка</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="lesson-tag">📚 Вводный модуль</div>
-<div class="lesson-number">Урок 0-0</div>
-<h1>Нюансы обучения</h1>
+<div class="lesson-number">Урок 0-1</div>
+<h1>Кто такой тестировщик? Анализ рынка</h1>
 <p class="lesson-intro">
-  Добро пожаловать на курс <strong>Easy QA</strong>! В этом уроке — базовые правила обучения, важные нюансы и подходы. Прочитай внимательно: эти принципы сэкономят тебе кучу времени.
+  QA, Тестировщик, Специалист по тестированию ПО — разбираемся в терминах, грейдах и реальных зарплатах на рынке.
 </p>
 
-<div class="toc">
-  <div class="toc-title">Содержание урока</div>
-  <div class="toc-links">
-    <a class="toc-link" href="#rules">Три правила обучения</a>
-    <a class="toc-link" href="#structure">Структура курса</a>
-    <a class="toc-link" href="#hw-workflow">Работа с домашними заданиями</a>
-    <a class="toc-link" href="#dictionary">IT-словарь</a>
-    <a class="toc-link" href="#callout-types">Обозначения в уроках</a>
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🎯</span> QC vs QA — в чём разница?</h2>
+
+<div class="role-grid">
+  <div class="role-card qc">
+    <div class="role-label">QC</div>
+    <div class="role-full">Quality Control</div>
+    <div class="role-desc">Специалист по контролю качества. Основные обязанности — тестирование ПО: проверка системы, поиск багов и ошибок.</div>
+    <div class="role-mantra">🐛 QC ищет баги в продукте</div>
+  </div>
+  <div class="role-card qa">
+    <div class="role-label">QA</div>
+    <div class="role-full">Quality Assurance</div>
+    <div class="role-desc">Инженер по обеспечению качества. Умеет всё что QC, плюс улучшает процессы в компании и ведёт задачу на всех этапах — от требований до поддержки у реальных пользователей.</div>
+    <div class="role-mantra">🛡️ QA не допускает баги в продукт</div>
   </div>
 </div>
 
-<h2 id="rules"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">📋</span> Три правила обучения</h2>
-
-<div class="rule-card">
-  <div class="rule-title"><span class="rule-num">Правило №1</span> Не закапывайся в материале</div>
-  <p>Изучил тему → возник вопрос → погуглил, открыл 2-3 ссылки → всё, идёшь дальше. Не трать время на то, что вряд ли когда-либо спросят. Из-за углубления куда не надо образуется каша в голове.</p>
-  <ul class="content-list">
-    <li>Конспекты не нужны — хватит одного Google Doc на всё обучение</li>
-    <li>Специально возвращаться к пройденному ради повторения не стоит — только если конкретно что-то забыл</li>
-    <li>В последних модулях будут задания с усиленным повторением всего материала</li>
-  </ul>
-</div>
-
-<div class="rule-card green">
-  <div class="rule-title"><span class="rule-num">Правило №2</span> Правильно задавай вопросы — будь активен</div>
-  <p>Если ресёрч по вопросу затянулся на 15–20 минут, пора остановиться и сформулировать конкретный вопрос. Умение формулировать вопросы — признак опытного специалиста.</p>
-  <div class="example">
-    <div class="example-label">Пример</div>
-    <p style="font-size:13.5px;margin-bottom:8px;color:#CBD5E1">Задача: снять <code>session_id</code> пользователя.</p>
-    <p style="font-size:13px;color:var(--red);margin-bottom:6px">❌ Дилетантский вопрос: <em>«где искать session_id?»</em></p>
-    <p style="font-size:13px;color:var(--green);margin:0">✅ Экспертный вопрос: <em>«снимаем только access токен или refresh тоже нужен?»</em></p>
-  </div>
-  <p style="font-size:13.5px">Сначала ресёрч — потом точечный вопрос. Ленивый вопрос в IT не приветствуется.</p>
-</div>
-
-<div class="rule-card blue">
-  <div class="rule-title"><span class="rule-num">Правило №3</span> Обучайся систематично</div>
-  <p>Старайся не выпадать из обучения. Перерыв 1–2 недели уже критичен: связи между знаниями угасают быстро. Хотя бы 10–20 минут в день.</p>
-  <div class="callout info" style="margin-top:12px;margin-bottom:0">
-    <div class="callout-icon">💡</div>
-    <div>
-      <div class="callout-title">Из личного опыта</div>
-      <p>Из-за постоянных перерывов обучение растянулось в 2–3 раза дольше, чем могло бы. В пересчёте на недополученную зарплату — фомо 😄</p>
-    </div>
-  </div>
-</div>
-
-<h2 id="structure"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🗂️</span> Структура курса</h2>
-
-<p>Обучение последовательно и модульно. Переходи к следующему модулю только после завершения текущего — включая принятые ДЗ.</p>
-
-<div class="team-list">
-  <div class="team-item">
-    <div class="team-role-tag">Модуль</div>
-    <div class="team-desc">Кластер знаний, содержит уроки. Имеет однозначный номер, например <code>0</code>. В конце каждого модуля — урок «Результаты модуля» с ключевыми итогами.</div>
-  </div>
-  <div class="team-item">
-    <div class="team-role-tag">Урок</div>
-    <div class="team-desc">Отдельная тема. Может быть с домашним заданием <strong>✏️</strong> или без. Можно переходить к следующим урокам пока ДЗ на проверке, но не держи больше двух ДЗ одновременно.</div>
-  </div>
-</div>
-
-<h2 id="hw-workflow"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📝</span> Работа с домашними заданиями</h2>
-
-<p>Взаимодействие по ДЗ идёт через <strong>Google Doc</strong>. Запроси ссылку-доступ в тг-теме «Проверка ДЗ».</p>
-
-<div class="callout info">
-  <div class="callout-icon">📌</div>
-  <div>
-    <div class="callout-title">Оформление Google Doc</div>
-    <ul class="content-list" style="margin:0">
-      <li>Модуль: номер, название — стиль <strong>Заголовок 1</strong></li>
-      <li>Урок: номер, название — стиль <strong>Заголовок 2</strong></li>
-      <li>Разрывы страниц между каждым уроком</li>
-    </ul>
-  </div>
-</div>
-
-<p>Так должен выглядеть документ с ДЗ после выполнения:</p>
-<img src="images/img-01-hw-example.png" alt="Пример оформления документа с ДЗ" class="lesson-img">
-<p class="img-caption">Пример оформленного Google Doc с домашними заданиями</p>
-
-<p>Так выглядит документ после проверки преподавателем:</p>
-<img src="images/img-02-hw-check.png" alt="Пример проверенного ДЗ" class="lesson-img">
-<p class="img-caption">Зелёная пометка — принято, жёлтая — на доработку</p>
-
-<div class="status-row">
-  <div class="status-badge accepted">🟢 <strong style="color:var(--green)">Принято</strong> — зелёная пометка</div>
-  <div class="status-badge review">🟡 <strong style="color:var(--yellow)">На доработку</strong> — жёлтая пометка</div>
-</div>
-
-<h2 id="dictionary"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📖</span> IT-словарь</h2>
-
-<p>Все специфические слова и IT-сленг, которые встречаются в обучении — разбирай и записывай в соответствующий топик в Telegram-группе. Не нужно писать всё подряд — только то, что можешь забыть или в значении чего не уверен.</p>
-
-<img src="images/img-03-it-dictionary.png" alt="Словарь IT в Telegram" class="lesson-img half">
-<p class="img-caption">Бот «Словарь IT» в Telegram-группе курса</p>
-
-<div class="callout info">
-  <div class="callout-icon">💡</div>
-  <div>
-    <div class="callout-title">Полезные словари</div>
-    <p>Для ресёрча по незнакомым терминам используй эти ресурсы:</p>
-  </div>
-</div>
-
-<a href="https://involta.ru/" target="_blank" class="link-card">
-  <div class="link-card-icon">📚</div>
-  <div class="link-card-text">
-    <div class="link-card-title">Словарь IT-сленга — Involta</div>
-    <div class="link-card-url">involta.ru</div>
-  </div>
-  <div class="link-card-arrow">↗</div>
-</a>
-
-<a href="https://docs.google.com/document/d/192vMjZjdZX9IIXiHSN2UH8ZxKcKDCAWnBZIltK4Hdvw/mobilebasic#heading=h.8i6o3gxucuuy" target="_blank" class="link-card">
-  <div class="link-card-icon">📄</div>
-  <div class="link-card-text">
-    <div class="link-card-title">Расширенный словарь IT — Google Doc</div>
-    <div class="link-card-url">docs.google.com</div>
-  </div>
-  <div class="link-card-arrow">↗</div>
-</a>
-
-<h2 id="callout-types"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🔖</span> Обозначения в уроках</h2>
-
-<div class="callout info">
-  <div class="callout-icon">ℹ️</div>
-  <div>
-    <div class="callout-title">Информация</div>
-    <p>Инструкции, ссылки на материалы, напоминания, подсказки и т.д.</p>
-  </div>
-</div>
+<img src="img-04-qa-vs-qc.png" alt="Сравнение QA и QC" class="lesson-img">
+<p class="img-caption">Детальное сравнение ролей QA и QC по ключевым параметрам</p>
 
 <div class="callout warn">
   <div class="callout-icon">⚠️</div>
   <div>
-    <div class="callout-title">Важное</div>
-    <p>Держать в голове на протяжении всего урока, иногда — всего обучения.</p>
+    <div class="callout-title">Важно запомнить</div>
+    <p>QC — это часть QA. Всё, что умеет QC, умеет и QA. Идём от меньшего к большему.</p>
   </div>
 </div>
 
-<div class="callout hard">
-  <div class="callout-icon">🧠</div>
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📊</span> Грейды в тестировании</h2>
+
+<p>Каждая роль в IT подразделяется на грейды — уровни компетенций:</p>
+
+<div class="grade-row">
+  <div class="grade-pill junior">Junior <span class="target">база + контроль</span></div>
+  <div class="grade-pill middle">Middle <span class="target">самостоятельность</span></div>
+  <div class="grade-pill senior">Senior <span class="target">декомпозиция задач</span></div>
+  <div class="grade-pill lead">Lead <span class="target">управление командой</span></div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">💡</div>
   <div>
-    <div class="callout-title">Повышенная сложность / «на подумать»</div>
-    <p>Необязательный материал или доп. задача, если всё показалось лёгким. В будущем этим можно блеснуть на собеседовании.</p>
+    <div class="callout-title">Хорошая новость для QA</div>
+    <p>В тестировании градация особенно условная — ощутимой разницы между джуном и мидлом нет. Попасть в диапазон <strong>Middle/Senior</strong> — наша цель.</p>
   </div>
 </div>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">💰</span> Зарплаты на рынке</h2>
+
+<img src="img-05-salaries.png" alt="Зарплаты специалистов по качеству" class="lesson-img">
+<p class="img-caption">Зарплаты IT-специалистов, II полугодие 2024 — Хабр.Карьера. Галочками отмечены наши позиции.</p>
+
+<div class="callout info">
+  <div class="callout-icon">💡</div>
+  <div>
+    <div class="callout-title">Важный инсайт</div>
+    <p>Собеседования на 150к и на 300к часто совсем не отличаются. При должном подходе — 150–250к+ чистыми. Потолок ручного QA — порядка 330к.</p>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🚀</span> Кто ты после обучения?</h2>
 
 <div class="callout hw">
-  <div class="callout-icon">✏️</div>
+  <div class="callout-icon">🎯</div>
   <div>
-    <div class="callout-title">Домашнее задание</div>
-    <p>В конце уроков с ДЗ: описание задачи, ожидания и критерии приёмки.</p>
+    <div class="callout-title">Цель курса</div>
+    <p>Уверенный <strong>Middle/Senior Manual QA</strong>, получающий зарплату уровня опытных разработчиков. Цель — довести до первого проекта, а дальше открываются перспективы на выбор.</p>
   </div>
 </div>
 
+<ul class="content-list">
+  <li>Рост вверх → QA Lead, Head of QA</li>
+  <li>Рост вширь → Автоматизатор, Fullstack QA</li>
+  <li>Рост в сторону → Тимлид, PM, Аналитик, Разработчик</li>
+</ul>
+
 <div class="lesson-nav">
-  <span></span>
-  <a class="nav-btn primary" href="0-1-qa-spec.html">Следующий урок →</a>
+  <a class="nav-btn" href="0-0-intro.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="0-2-processes.html">Следующий урок →</a>
 </div>
 
 </body>
