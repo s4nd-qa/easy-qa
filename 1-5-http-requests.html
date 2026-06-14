@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-5 HTTP-запросы</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд</div>
+<div class="lesson-number">Урок 1-5</div>
+<h1>HTTP-запросы</h1>
+<p class="lesson-intro">Общение фронта и бэка чаще всего выстроено через HTTP-запросы. При открытии страницы в определённом приоритете начинают отправляться запросы на подгрузку контента.</p>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">⚡</span> Приоритизация HTTP-запросов</h2>
+
+<img src="m1-08-http-priority.png" alt="Приоритеты HTTP запросов" class="lesson-img">
+<p class="img-caption">Схема приоритизации загрузки ресурсов: HTML → скрипты → стили → шрифты → картинки</p>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">📋</span> Что важно знать в HTTP-запросах</h2>
+
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag">Request / Response</div>
+    <div class="team-desc">Структура <strong>HTTP request (запроса)</strong> и <strong>HTTP response (ответа)</strong> — основа взаимодействия клиента и сервера.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Methods</div>
+    <div class="team-desc"><strong>HTTP methods (методы/глаголы)</strong>: GET, POST, PUT, PATCH, DELETE и другие — определяют тип действия над ресурсом.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Headers / Body</div>
+    <div class="team-desc"><strong>HTTP headers (заголовки)</strong> — метаданные запроса/ответа. <strong>HTTP body (тело)</strong> — содержимое, передаётся в запросах и ответах.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Status Codes</div>
+    <div class="team-desc"><strong>HTTP status codes (статус-коды)</strong> — у ответов. Группы: 1xx, 2xx, 3xx, 4xx, 5xx.</div>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🔢</span> Основные статус-коды</h2>
+
+<div class="grade-row" style="flex-wrap:wrap">
+  <div class="grade-pill" style="border-color:#60A5FA;color:#60A5FA;background:rgba(96,165,250,0.08)">101 <span class="target">Switching Protocols</span></div>
+  <div class="grade-pill" style="border-color:#4ADE80;color:#4ADE80;background:rgba(74,222,128,0.08)">200 <span class="target">OK</span></div>
+  <div class="grade-pill" style="border-color:#4ADE80;color:#4ADE80;background:rgba(74,222,128,0.08)">201 <span class="target">Created</span></div>
+  <div class="grade-pill" style="border-color:#4ADE80;color:#4ADE80;background:rgba(74,222,128,0.08)">204 <span class="target">No Content</span></div>
+  <div class="grade-pill" style="border-color:#A78BFA;color:#A78BFA;background:rgba(167,139,250,0.08)">301 <span class="target">Moved Permanently</span></div>
+  <div class="grade-pill" style="border-color:#A78BFA;color:#A78BFA;background:rgba(167,139,250,0.08)">302 <span class="target">Found</span></div>
+  <div class="grade-pill" style="border-color:#A78BFA;color:#A78BFA;background:rgba(167,139,250,0.08)">304 <span class="target">Not Modified</span></div>
+  <div class="grade-pill" style="border-color:#F59E0B;color:#F59E0B;background:rgba(245,158,11,0.08)">400 <span class="target">Bad Request</span></div>
+  <div class="grade-pill" style="border-color:#F59E0B;color:#F59E0B;background:rgba(245,158,11,0.08)">401 <span class="target">Unauthorized</span></div>
+  <div class="grade-pill" style="border-color:#F59E0B;color:#F59E0B;background:rgba(245,158,11,0.08)">403 <span class="target">Forbidden</span></div>
+  <div class="grade-pill" style="border-color:#F59E0B;color:#F59E0B;background:rgba(245,158,11,0.08)">404 <span class="target">Not Found</span></div>
+  <div class="grade-pill" style="border-color:#F59E0B;color:#F59E0B;background:rgba(245,158,11,0.08)">405 <span class="target">Method Not Allowed</span></div>
+  <div class="grade-pill" style="border-color:#F87171;color:#F87171;background:rgba(248,113,113,0.08)">500 <span class="target">Internal Server Error</span></div>
+  <div class="grade-pill" style="border-color:#F87171;color:#F87171;background:rgba(248,113,113,0.08)">502 <span class="target">Bad Gateway</span></div>
+  <div class="grade-pill" style="border-color:#F87171;color:#F87171;background:rgba(248,113,113,0.08)">503 <span class="target">Service Unavailable</span></div>
+  <div class="grade-pill" style="border-color:#F87171;color:#F87171;background:rgba(248,113,113,0.08)">504 <span class="target">Gateway Timeout</span></div>
+</div>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Интересные статус-коды — блесни на собеседовании</div>
+    <p>Почитай про <strong>418</strong> (I'm a Teapot) и <strong>451</strong> (Unavailable For Legal Reasons) — будет что интересного рассказать! Дополнительно почитай про коды <strong>520-526</strong> от Cloudflare.</p>
+  </div>
+</div>
+
+<a href="https://yandex.ru/support/webmaster/ru/error-dictionary/http-codes.html" target="_blank" class="link-card">
+  <div class="link-card-icon">📖</div>
+  <div class="link-card-text"><div class="link-card-title">Справочник HTTP статус-кодов — Яндекс</div><div class="link-card-url">yandex.ru</div></div>
+  <div class="link-card-arrow">↗</div>
+</a>
+
+<div class="video-label">Видео: HTTP-запросы и ответы — подробно</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/DtI-Mijo8o8" allowfullscreen></iframe></div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-4-figma.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-6-json.html">Следующий урок →</a>
+</div>
+</body>
+</html>

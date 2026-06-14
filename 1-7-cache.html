@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-7 Кэши (cache)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд</div>
+<div class="lesson-number">Урок 1-7</div>
+<h1>Кэши (cache)</h1>
+<p class="lesson-intro">Кэш — это память программы или устройства, которая сохраняет временные или часто используемые файлы для быстрого доступа. Умение работать с кэшем — необходимый навык тестировщика.</p>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">💾</span> Что такое кэш</h2>
+
+<p>Кэшей бывает несколько — они есть на каждом уровне модели OSI. Но чаще всего тестировщик сталкивается с <strong>браузерным кэшем</strong>.</p>
+
+<p>Пример работы браузерного кэша — прогресс-бар видеоплеера:</p>
+<img src="m1-09-cache-video.png" alt="Пример кэша в видеоплеере" class="lesson-img">
+<p class="img-caption">Голубая часть — уже просмотрено, серая — загрузилось в кэш, тёмная — ещё не загрузилось</p>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🔄</span> Как работает браузерный кэш</h2>
+
+<img src="m1-10-cache-diagram.png" alt="Схема работы кэша" class="lesson-img">
+<p class="img-caption">Первый запрос: данные берутся из БД и сохраняются в кэш. Второй запрос: данные берутся прямо из кэша, БД не обращается.</p>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🗄️</span> Серверный кэш</h2>
+
+<img src="m1-11-cache-server.png" alt="Серверный кэш" class="lesson-img half" style="margin:0 auto">
+<p class="img-caption">Приложение может обращаться как к кэшу (быстро), так и к основной БД</p>
+
+<h2><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🧹</span> Зачем чистить кэш при тестировании</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Кэш может скрывать баги или создавать ложные баги</div>
+    <p>Браузер может хранить старые JS-файлы или картинки. Когда на сайт выгрузят новую версию — браузер продолжит брать данные из своего кэша и некорректно отобразит сайт. Перед тестированием нового функционала — чисти кэш!</p>
+  </div>
+</div>
+
+<a href="https://habr.com/ru/articles/734660/" target="_blank" class="link-card">
+  <div class="link-card-icon">📖</div>
+  <div class="link-card-text"><div class="link-card-title">Статья про браузерный кэш — Хабр</div><div class="link-card-url">habr.ru</div></div>
+  <div class="link-card-arrow">↗</div>
+</a>
+
+<div class="video-label">Видео: как работает кэш браузера</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/nY0ov55kjRA" allowfullscreen></iframe></div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-6-json.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-8-cookies.html">Следующий урок →</a>
+</div>
+</body>
+</html>

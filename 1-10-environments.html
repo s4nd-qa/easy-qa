@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-10 Окружения</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд</div>
+<div class="lesson-number">Урок 1-10</div>
+<h1>Окружения</h1>
+<p class="lesson-intro">В IT термин «окружение» носит два смысла. Пробеги глазами, не углубляйся — тема окружений детально разбирается в модуле «Процессы».</p>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Не углубляйся</div>
+    <p>Пока достаточно понять что у термина «Окружение» два применения, и что разработчики/тестировщики работают не на реальном сайте, а на его «копиях» — стендах.</p>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">💻</span> Значение 1: Окружение / User-Agent</h2>
+
+<p>Идентификационная информация о платформе, с которой осуществляется доступ к системе: ОС, браузер, версия, устройство.</p>
+
+<p>Эта информация часто упоминается в баг-репортах — один и тот же баг может воспроизводиться на MacOS в Safari и не воспроизводиться на Windows в Chrome.</p>
+
+<img src="m1-14-bugreport-env.png" alt="Окружение в баг-репорте" class="lesson-img">
+<p class="img-caption">Пример как указывается окружение в баг-репорте: ОС + браузер + версия</p>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🖥️</span> Значение 2: Тестовое окружение / Стенд / Контур</h2>
+
+<p>Отдельная приватная версия системы для разработки, тестирования и отладки.</p>
+
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#60A5FA;border-color:rgba(96,165,250,0.2)">dev</div>
+    <div class="team-desc"><strong>Development</strong> — используется разработчиками. Туда часто выкатываются правки и фиксы для оценки в моменте.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#4ADE80;border-color:rgba(74,222,128,0.2)">test</div>
+    <div class="team-desc"><strong>Testing</strong> — когда разработчик готов передать фикс на тестирование, загружается версия на test-стенд. Здесь проходит основное тестирование.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#A78BFA;border-color:rgba(167,139,250,0.2)">stage</div>
+    <div class="team-desc"><strong>Stage (сцена)</strong> — здесь собирается воедино несколько фиксов. Фронт + бэк в сборе. Предназначение: смотреть на готовую систему целиком.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#F59E0B;border-color:rgba(245,158,11,0.2)">preprod</div>
+    <div class="team-desc"><strong>Pre-production (пп)</strong> — копия основной системы. Используется для приёмочного тестирования и воспроизведения багов с прода.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#F87171;border-color:rgba(248,113,113,0.2)">prod</div>
+    <div class="team-desc"><strong>Production (прод/продакшн)</strong> — основная версия системы, доступная реальным пользователям.</div>
+  </div>
+</div>
+
+<div class="example">
+  <div class="example-label">Примеры URL стендов</div>
+  <p style="font-size:13px;color:#CBD5E1;margin-bottom:6px"><code>https://test4.mypet.io/</code> — test стенд №4 через домен 3-го уровня</p>
+  <p style="font-size:13px;color:#CBD5E1;margin-bottom:6px"><code>https://petshop.net/?env=dev15</code> — dev стенд №15 через query params</p>
+  <p style="font-size:13px;color:#CBD5E1;margin:0"><code>https://mypet.io/</code> — прод</p>
+</div>
+
+<div class="video-label">Видео: тестовые окружения и стенды</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/AK_W91FKwM4" allowfullscreen></iframe></div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Важная оговорка к видео</div>
+    <p>В видео говорится что сборки выливаются на прод для тестирования. Это крайне неверный подход — на нормальных проектах непротестированные сборки на прод не выкладывают. Такое может быть только у стартапов.</p>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-9-devtools.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-11-browsers.html">Следующий урок →</a>
+</div>
+</body>
+</html>

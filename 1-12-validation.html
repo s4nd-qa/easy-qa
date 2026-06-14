@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-12 Валидация в UI ✏️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 1-12</div>
+<h1>Валидация в UI</h1>
+<p class="lesson-intro">Процесс тестирования форм и UI-элементов на валидацию необъятен. Важно знать о проверках и уметь использовать чит-листы и расширения.</p>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">✅</span> Что такое валидация данных</h2>
+
+<p><strong>Валидация данных</strong> — проверка данных на соответствие требованиям, проверка корректности введённых данных. Может быть как на фронтенде (JS), так и на бэкенде.</p>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Идеальный сценарий</div>
+    <p>Валидация должна быть <strong>и на фронте, и на бэке</strong>. Помни из вводного модуля: наличие валидации на фронте не гарантирует её наличие на бэке!</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: тестирование валидации форм</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/ZCdw3Js887E" allowfullscreen></iframe></div>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🛡️</span> Инъекции — базовое тестирование безопасности</h2>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">SQL и XSS-инъекции — для кругозора</div>
+    <p>На проектах пен-тестинг редко необходим. Но базовые инъекции полезно знать — можно блеснуть на собеседовании.</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: SQL-инъекции — что это и как тестировать</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/pDvSNaQfuIc" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: XSS-атаки — что это и как тестировать</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/GHjNbtnaGQs" allowfullscreen></iframe></div>
+
+<div class="hw-block">
+  <div class="hw-header"><span style="font-size:22px">✏️</span><div class="hw-title">Домашнее задание</div><div class="hw-num">ДЗ 1-12</div></div>
+
+  <p class="hw-task">Тестирование поля имени и формы регистрации:</p>
+
+  <a href="https://checklists.expert/checklist/109712-testirovanie-formy-registracii" target="_blank" class="link-card" style="margin-bottom:12px">
+    <div class="link-card-icon">📋</div>
+    <div class="link-card-text"><div class="link-card-title">Чек-лист тестирования формы регистрации</div><div class="link-card-url">checklists.expert</div></div>
+    <div class="link-card-arrow">↗</div>
+  </a>
+
+  <a href="https://testingchallenges.thetestingmap.org/index.php" target="_blank" class="link-card" style="margin-bottom:16px">
+    <div class="link-card-icon">🎯</div>
+    <div class="link-card-text"><div class="link-card-title">Челлендж по тестированию поля First Name</div><div class="link-card-url">testingchallenges.thetestingmap.org</div></div>
+    <div class="link-card-arrow">↗</div>
+  </a>
+
+  <div class="steps" style="margin-bottom:16px">
+    <div class="step"><div class="step-num done">1</div><div class="step-text">Изучи и пройди чек-лист формы регистрации</div></div>
+    <div class="step"><div class="step-num done">2</div><div class="step-text">Перейди на челлендж и протестируй поле <strong>First Name</strong></div></div>
+    <div class="step"><div class="step-num done">3</div><div class="step-text">Набери минимум <strong>11 очков</strong> (согласно требованиям: максимальная длина поля 30 символов)</div></div>
+  </div>
+
+  <div class="callout info" style="margin-bottom:14px">
+    <div class="callout-icon">💡</div>
+    <div>
+      <div class="callout-title">Не тестируй в челлендже: кросс-браузерность, UI, адаптив</div>
+      <p>Очки набираются только вводом в поле и нажатием кнопки «Submit».</p>
+    </div>
+  </div>
+
+  <div class="callout hard" style="margin-bottom:14px">
+    <div class="callout-icon">🧠</div>
+    <div>
+      <div class="callout-title">Как получить больше 11 очков</div>
+      <p><strong>+3 очка:</strong> попробуй базовые инъекции (SQL, XSS) — не углубляйся, только для кругозора.<br>
+      <strong>+4 очка:</strong> залезь в DevTools и исследуй в рамках пройденных уроков.</p>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">
+    📎 <strong>В ответ на ДЗ:</strong> скрин пройденного чек-листа формы регистрации + скрин с 11+ очками из челленджа
+  </p>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-11-browsers.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-13-practice.html">Следующий урок →</a>
+</div>
+</body>
+</html>

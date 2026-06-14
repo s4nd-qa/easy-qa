@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-9 DevTools ✏️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 1-9</div>
+<h1>DevTools</h1>
+<p class="lesson-intro">DevTools — основной инструмент при тестировании фронтенда. Открой прямо сейчас!</p>
+
+<div class="callout info">
+  <div class="callout-icon">⌨️</div>
+  <div>
+    <div class="callout-title">Как открыть DevTools</div>
+    <ul class="content-list" style="margin:0">
+      <li><strong>Windows:</strong> <code>F12</code> или <code>Ctrl + Shift + I</code></li>
+      <li><strong>Mac:</strong> <code>Fn + F12</code> или <code>Command + Shift + I</code></li>
+    </ul>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🛠️</span> Что такое Chrome DevTools</h2>
+
+<p>Chrome DevTools — набор инструментов, встроенных в браузер Google Chrome. Позволяют просматривать исходный код сайта, отлаживать HTML, CSS и JavaScript, проверять сетевой трафик, быстродействие и многое другое.</p>
+
+<div class="team-list">
+  <div class="team-item"><div class="team-role-tag">Elements</div><div class="team-desc">HTML-структура страницы и CSS-стили. Здесь можно найти конкретный элемент и посмотреть его свойства, отступы, цвета.</div></div>
+  <div class="team-item"><div class="team-role-tag">Console</div><div class="team-desc">Консоль JS. Здесь видны ошибки JavaScript и можно выполнять команды.</div></div>
+  <div class="team-item"><div class="team-role-tag">Network</div><div class="team-desc">Все HTTP-запросы страницы: методы, заголовки, тела запросов/ответов, статус-коды, время загрузки.</div></div>
+  <div class="team-item"><div class="team-role-tag">Application</div><div class="team-desc">Cookie, Local Storage, Session Storage — всё хранилище браузера для текущего сайта.</div></div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📊</span> JSON в DevTools — parsed vs source</h2>
+
+<p>В задании 3 тренажёра начнёшь работать с JSON в DevTools. Обрати внимание:</p>
+
+<img src="m1-12-devtools-parsed.png" alt="DevTools Payload parsed" class="lesson-img">
+<p class="img-caption">Parsed (отформатированный) — ключи без кавычек, удобно читать</p>
+
+<img src="m1-13-devtools-source.png" alt="DevTools Payload source" class="lesson-img">
+<p class="img-caption">Source (исходный) — ключи в кавычках, это настоящий JSON-формат</p>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Важно</div>
+    <p>JSON в parsed-формате отображается без кавычек у ключей — это только для удобства чтения. Нажми <strong>view source</strong> чтобы увидеть реальный JSON с кавычками.</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: DevTools для тестировщика — полный разбор</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/4iIryVM77HM" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: Network вкладка в DevTools</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/O9rUH-zfVKo" allowfullscreen></iframe></div>
+
+<div class="hw-block">
+  <div class="hw-header"><span style="font-size:22px">✏️</span><div class="hw-title">Домашнее задание</div><div class="hw-num">ДЗ 1-9</div></div>
+
+  <p class="hw-task">Пройди тренажёр по DevTools:</p>
+
+  <a href="https://devtools.qa.studio/" target="_blank" class="link-card" style="margin-bottom:16px">
+    <div class="link-card-icon">🎯</div>
+    <div class="link-card-text"><div class="link-card-title">DevTools тренажёр — devtools.qa.studio</div><div class="link-card-url">devtools.qa.studio</div></div>
+    <div class="link-card-arrow">↗</div>
+  </a>
+
+  <ul class="content-list" style="margin-bottom:14px">
+    <li>Выполняй все задания по порядку</li>
+    <li>15-е задание можно пропустить (нажать рандом), но если хочешь попробовать — инструкция ниже</li>
+  </ul>
+
+  <div class="callout hard" style="margin-bottom:14px">
+    <div class="callout-icon">🧠</div>
+    <div>
+      <div class="callout-title">Задание 15 — инструкция</div>
+      <p>Нужно проверить валидацию на бэке. Вернись к видео на тайминг <strong>1:22:00</strong>: скопируй cURL запроса, подмени в JSON email на невалидный, вставь в командную строку/терминал. Так поверхностно протестируешь валидацию на бэке.</p>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text);background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 14px">
+    📎 <strong>В ответ на ДЗ:</strong> скрин с пройденным тренажёром
+  </p>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-8-cookies.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-10-environments.html">Следующий урок →</a>
+</div>
+</body>
+</html>

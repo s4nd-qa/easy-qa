@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-11 Браузеры</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд</div>
+<div class="lesson-number">Урок 1-11</div>
+<h1>Браузеры и их особенности. Кросс- и адаптив-тестинг</h1>
+<p class="lesson-intro">Три важных вида тестирования фронтенда: кроссбраузерное, кроссплатформенное и тестирование адаптивной вёрстки.</p>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🌐</span> Кроссбраузерное тестирование</h2>
+
+<p>Браузеры отличаются движками — это стоит учитывать при тестировании. Наиболее популярный — Google Chrome, но на разных браузерах по-разному отрисовывается вёрстка и дефолтные стили.</p>
+
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#4ADE80;border-color:rgba(74,222,128,0.2)">Blink</div>
+    <div class="team-desc"><strong>80-85% пользователей.</strong> Быстрый и высокопроизводительный. Применяется в <strong>Google Chrome, Opera, Microsoft Edge (новые версии), Yandex Browser</strong>.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#60A5FA;border-color:rgba(96,165,250,0.2)">WebKit</div>
+    <div class="team-desc">Оптимизирован под устройства Apple. Высокое качество рендеринга текста и графики, энергоэффективность. Применяется в <strong>Safari</strong>.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#F59E0B;border-color:rgba(245,158,11,0.2)">Gecko / Quantum</div>
+    <div class="team-desc">Поддерживает Windows, macOS, Linux, Android. Отличается расширяемостью — поддерживает множество уникальных плагинов. Применяется в <strong>Firefox</strong>.</div>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">💡</div>
+  <div>
+    <div class="callout-title">3 основных браузера для тестирования</div>
+    <p>По одному от каждого движка: <strong>Chrome</strong> (Blink) + <strong>Safari</strong> (WebKit) + <strong>Firefox</strong> (Gecko). Этого достаточно для покрытия 99% пользователей.</p>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">📱</span> Кроссплатформенное тестирование</h2>
+
+<p>Тестирование на разных ОС и платформах:</p>
+<ul class="content-list">
+  <li><strong>Мобильные приложения и веб:</strong> iOS и Android</li>
+  <li><strong>Десктопные приложения и веб:</strong> Windows, macOS, Linux</li>
+</ul>
+<p>Подробнее об этом — в модуле «Мобилки».</p>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📐</span> Тестирование адаптивной вёрстки</h2>
+
+<p>Проверяем, что сайт корректно отображается при разных разрешениях экрана и его ориентации (альбомная / книжная). Удобно делать через <strong>DevTools → Toggle Device Bar</strong>.</p>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-10-environments.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-12-validation.html">Следующий урок →</a>
+</div>
+</body>
+</html>

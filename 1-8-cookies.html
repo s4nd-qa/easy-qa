@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-8 Cookie, хранилища</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд</div>
+<div class="lesson-number">Урок 1-8</div>
+<h1>Cookie, хранилища</h1>
+<p class="lesson-intro">Cookie, Local Storage, Session Storage — три типа хранилищ на стороне браузера. Тестировщик работает с ними в DevTools → Application.</p>
+
+<h2><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🍪</span> Cookie (Куки)</h2>
+
+<p>Cookie — небольшие текстовые файлы, сгенерированные сайтами. Хранятся на компьютере пользователя и нужны для его идентификации.</p>
+
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#60A5FA;border-color:rgba(96,165,250,0.2)">Временные</div>
+    <div class="team-desc">Используются только в момент пользования сайтом. Например, данные форм заказов или просмотренные страницы. <strong>Удаляются после закрытия браузера.</strong></div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#4ADE80;border-color:rgba(74,222,128,0.2)">Постоянные</div>
+    <div class="team-desc">Хранятся продолжительный период (обычно год). Содержат пароли, логины, платёжные реквизиты. Срок устанавливается сервером через response headers.</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag" style="color:#F59E0B;border-color:rgba(245,158,11,0.2)">Сторонние</div>
+    <div class="team-desc">Принадлежат не сайту, а сторонним организациям (рекламные компании, Яндекс.Метрика, Google Analytics). Фиксируют переходы и предпочтения.</div>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">📦</span> Local Storage и Session Storage</h2>
+
+<div class="role-grid">
+  <div class="role-card" style="border-top:3px solid var(--purple)">
+    <div class="role-label" style="color:#A78BFA;font-size:14px">Local Storage</div>
+    <div class="role-desc">Постоянное хранилище в браузере. Используется для сохранения пользовательских настроек: цвет темы, язык, настройки виджетов. <strong>Не очищается при закрытии браузера.</strong></div>
+  </div>
+  <div class="role-card" style="border-top:3px solid var(--blue)">
+    <div class="role-label" style="color:#60A5FA;font-size:14px">Session Storage</div>
+    <div class="role-desc">Временное хранилище. Часто используется для сохранения данных из полей формы. <strong>Очищается после закрытия браузера</strong> (окончания сессии).</div>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">💡</div>
+  <div>
+    <div class="callout-title">Для чего это тестеру</div>
+    <p>В следующем модуле будешь изучать как работает авторизация. По сути авторизация «живёт» в куках, реже в Session Storage. Local Storage используется для пользовательских настроек. Всё это видно в <strong>DevTools → Application</strong>.</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: Cookie, Local Storage, Session Storage — разбор</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/6OGVhOanIHs" allowfullscreen></iframe></div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-7-cache.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-9-devtools.html">Следующий урок →</a>
+</div>
+</body>
+</html>

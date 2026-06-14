@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 1-13 Практика по фронтенду ✏️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 1 — Фронтенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 1-13</div>
+<h1>Практика по фронтенду</h1>
+<p class="lesson-intro">Большая практическая работа по фронтенду. Главная задача — научиться тестить фронт наподобие того, как это делается на реальном проекте.</p>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Рекомендация</div>
+    <p>Убедись что все предыдущие ДЗ со статусом «принято». Если есть непонимание какой-то темы — разберись и задай вопросы в чате.</p>
+  </div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📋</span> Описание задачи</h2>
+
+<p>Представь, что фронтендер выкатил тебе на тестовый стенд новый функционал — <strong>форму обратной связи по вакансиям</strong> (фича с интеграцией Google Meet <strong>НЕ</strong> относится к задаче, её не тестировать).</p>
+
+<a href="https://rivo.agency/contacts/" target="_blank" class="link-card" style="margin-bottom:16px">
+  <div class="link-card-icon">🌐</div>
+  <div class="link-card-text"><div class="link-card-title">Ссылка на функционал (открывается с VPN)</div><div class="link-card-url">rivo.agency/contacts</div></div>
+  <div class="link-card-arrow">↗</div>
+</a>
+
+<img src="m1-15-practice-form.png" alt="Реализованный функционал — форма" class="lesson-img">
+<p class="img-caption">Реализованный функционал — форма обратной связи слева, Google Meet справа (не тестируем)</p>
+
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">📄</span> Технические требования (ТЗ)</h2>
+
+<div class="team-list">
+  <div class="team-item"><div class="team-role-tag">Радиокнопки</div><div class="team-desc">Две радиокнопки для выбора режима. Названия задаются в админке, на тесте обе захардкожены как «Sales Representative».</div></div>
+  <div class="team-item"><div class="team-role-tag">Плейсхолдеры</div><div class="team-desc">Остаются после ввода — анимацией перемещаются наверх.</div></div>
+  <div class="team-item"><div class="team-role-tag">Name</div><div class="team-desc">Максимальная длина 100 символов, только буквы.</div></div>
+  <div class="team-item"><div class="team-role-tag">Email / Phone</div><div class="team-desc">Стандартная валидация.</div></div>
+  <div class="team-item"><div class="team-role-tag">Message</div><div class="team-desc">Максимальная длина 300 символов, нельзя вставлять ссылки.</div></div>
+  <div class="team-item"><div class="team-role-tag">Attach file</div><div class="team-desc">Максимальный размер 2Мб, форматы: <code>.pdf .doc .docx</code>. Иконка справа, при наведении — тултип «Maximum size 2MB».</div></div>
+  <div class="team-item"><div class="team-role-tag">Send Message</div><div class="team-desc">Анимация с жёлтым выделением при наведении курсора.</div></div>
+  <div class="team-item"><div class="team-role-tag">Валидация</div><div class="team-desc">Только на фронтенде (JS), невалидные запросы не отправляются на сервер. Единый стиль: тултип с описанием ошибки справа от поля — красный текст + иконка. Линия поля окрашивается в красный.</div></div>
+  <div class="team-item"><div class="team-role-tag">Адаптив</div><div class="team-desc">Поддерживает ширину экрана от 270px.</div></div>
+  <div class="team-item"><div class="team-role-tag">Session Storage</div><div class="team-desc">Данные из полей сохраняются в Session Storage до момента отправки формы.</div></div>
+</div>
+
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">✏️</span> Задания</h2>
+
+<div class="hw-block">
+  <div class="hw-header"><span style="font-size:22px">✏️</span><div class="hw-title">Домашнее задание</div><div class="hw-num">ДЗ 1-13</div></div>
+
+  <div class="steps" style="margin-bottom:20px">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong style="color:var(--text)">Функциональное тестирование формы</strong><br>
+        <span style="font-size:13px;color:#CBD5E1">Провести функциональное тестирование полей ввода и кнопки «Send Message». Изучи ТЗ, сначала вводи корректные данные, затем «ломай» систему. Смотри запросы в DevTools → Network. Не трать больше 2 часов.</span>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">📎 Список багов: название / ожидаемый результат / фактический результат</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong style="color:var(--text)">UI-тестирование</strong><br>
+        <span style="font-size:13px;color:#CBD5E1">Сравнить реализованный фронтенд с макетом в Figma. Использовать PerfectPixel (масштаб картинки 0.5). Затем в DevTools → Elements проверить HTML и CSS, отступы. Не трать больше 1 часа.</span>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">📎 Список багов: название / ожидаемый результат / фактический результат</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong style="color:var(--text)">Кросс-браузерность и адаптив</strong><br>
+        <span style="font-size:13px;color:#CBD5E1">Проверить корректность отображения на Chrome, Safari, Firefox и разных разрешениях. Не трать больше 30 минут.</span>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">📎 Список багов: название / ожидаемый результат / фактический результат</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <strong style="color:var(--text)">Восстановление после сбоев</strong><br>
+        <span style="font-size:13px;color:#CBD5E1">Проверить восстанавливаются ли данные в полях после перезагрузки страницы. Согласно ТЗ, данные должны сохраняться в Session Storage. Опиши как дело обстоит на самом деле. Не трать больше 30 минут.</span>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">📎 Комментарий — как работает и есть ли несоответствие с ТЗ</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div>
+      <div class="callout-title">Локализация багов приветствуется</div>
+      <p>Прикладывай скрины, названия элементов из DevTools, свои комментарии. Это выделит тебя как хорошего специалиста на реальном проекте.</p>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="1-12-validation.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="1-results.html">Результаты модуля →</a>
+</div>
+</body>
+</html>
