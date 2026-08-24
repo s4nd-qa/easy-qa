@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проверка картинок — модуль 2</title>
+<style>
+  body { background:#0F1724; color:#E2E8F0; font-family:system-ui,-apple-system,sans-serif;
+         padding:24px; margin:0; }
+  h1 { font-size:20px; margin:0 0 6px; }
+  p.sub { color:#94A3B8; font-size:13px; margin:0 0 24px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .item { background:#1A2438; border:1px solid #2A3A55; border-radius:10px; padding:12px; }
+  .item img { width:100%; border-radius:6px; border:1px solid #2A3A55; display:block;
+               background:#212E45; min-height:60px; }
+  .item code { display:block; margin-top:10px; font-family:'JetBrains Mono',monospace;
+                font-size:12px; color:#22C55E; word-break:break-all; }
+  .item span { display:block; margin-top:4px; font-family:'JetBrains Mono',monospace;
+                font-size:11px; color:#94A3B8; }
+  @media (max-width:700px) { .grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<h1>Проверка картинок — модуль 2</h1>
+<p class="sub">Всего 26. Под каждой картинкой — имя файла и урок, в котором она используется. Сверь содержимое с именем и пришли скрины.</p>
+<div class="grid">
+  <div class="item"><img src="m2-01-client-server-scheme.png" alt="m2-01-client-server-scheme.png"><code>m2-01-client-server-scheme.png</code><span>2-1-client-server.html</span></div>
+  <div class="item"><img src="m2-02-servers-meme.png" alt="m2-02-servers-meme.png"><code>m2-02-servers-meme.png</code><span>2-1-client-server.html</span></div>
+  <div class="item"><img src="m2-03-microservices-gym.png" alt="m2-03-microservices-gym.png"><code>m2-03-microservices-gym.png</code><span>2-1-client-server.html</span></div>
+  <div class="item"><img src="m2-04-rest-openapi-swagger.png" alt="m2-04-rest-openapi-swagger.png"><code>m2-04-rest-openapi-swagger.png</code><span>2-2-rest-soap.html</span></div>
+  <div class="item"><img src="m2-05-ws-grpc-scheme.png" alt="m2-05-ws-grpc-scheme.png"><code>m2-05-ws-grpc-scheme.png</code><span>2-3-websocket-grpc.html</span></div>
+  <div class="item"><img src="m2-06-ssr-scheme.png" alt="m2-06-ssr-scheme.png"><code>m2-06-ssr-scheme.png</code><span>2-4-csr-ssr.html</span></div>
+  <div class="item"><img src="m2-07-csr-scheme.png" alt="m2-07-csr-scheme.png"><code>m2-07-csr-scheme.png</code><span>2-4-csr-ssr.html</span></div>
+  <div class="item"><img src="m2-08-preflight-headers.png" alt="m2-08-preflight-headers.png"><code>m2-08-preflight-headers.png</code><span>2-5-cors.html</span></div>
+  <div class="item"><img src="m2-09-cors-vk-flow.png" alt="m2-09-cors-vk-flow.png"><code>m2-09-cors-vk-flow.png</code><span>2-5-cors.html</span></div>
+  <div class="item"><img src="m2-10-jwt-scheme.png" alt="m2-10-jwt-scheme.png"><code>m2-10-jwt-scheme.png</code><span>2-6-tokens-auth.html</span></div>
+  <div class="item"><img src="m2-11-petstore-swagger-link.png" alt="m2-11-petstore-swagger-link.png"><code>m2-11-petstore-swagger-link.png</code><span>2-7-swagger.html</span></div>
+  <div class="item"><img src="m2-12-openapi-json.png" alt="m2-12-openapi-json.png"><code>m2-12-openapi-json.png</code><span>2-7-swagger.html</span></div>
+  <div class="item"><img src="m2-13-postman-client.png" alt="m2-13-postman-client.png"><code>m2-13-postman-client.png</code><span>2-8-postman.html</span></div>
+  <div class="item"><img src="m2-14-postman-collection.png" alt="m2-14-postman-collection.png"><code>m2-14-postman-collection.png</code><span>2-8-postman.html</span></div>
+  <div class="item"><img src="m2-15-elk-scheme.png" alt="m2-15-elk-scheme.png"><code>m2-15-elk-scheme.png</code><span>2-10-kibana.html</span></div>
+  <div class="item"><img src="m2-16-kafka-structure.png" alt="m2-16-kafka-structure.png"><code>m2-16-kafka-structure.png</code><span>2-11-kafka.html</span></div>
+  <div class="item"><img src="m2-17-kafka-topic-flow.png" alt="m2-17-kafka-topic-flow.png"><code>m2-17-kafka-topic-flow.png</code><span>2-11-kafka.html</span></div>
+  <div class="item"><img src="m2-18-pipeline-example.png" alt="m2-18-pipeline-example.png"><code>m2-18-pipeline-example.png</code><span>2-12-cicd-git-docker.html</span></div>
+  <div class="item"><img src="m2-19-docker-step11.png" alt="m2-19-docker-step11.png"><code>m2-19-docker-step11.png</code><span>2-12-cicd-git-docker.html</span></div>
+  <div class="item"><img src="m2-20-randomprice-var.png" alt="m2-20-randomprice-var.png"><code>m2-20-randomprice-var.png</code><span>2-14-backend-practice.html</span></div>
+  <div class="item"><img src="m2-21-randomprice-response.png" alt="m2-21-randomprice-response.png"><code>m2-21-randomprice-response.png</code><span>2-14-backend-practice.html</span></div>
+  <div class="item"><img src="m2-22-randomprice-db.png" alt="m2-22-randomprice-db.png"><code>m2-22-randomprice-db.png</code><span>2-14-backend-practice.html</span></div>
+  <div class="item"><img src="m2-23-deepseek-prompt.png" alt="m2-23-deepseek-prompt.png"><code>m2-23-deepseek-prompt.png</code><span>2-14-backend-practice.html</span></div>
+  <div class="item"><img src="m2-24-randomdesc-vars.png" alt="m2-24-randomdesc-vars.png"><code>m2-24-randomdesc-vars.png</code><span>2-14-backend-practice.html</span></div>
+  <div class="item"><img src="m2-25-order-variable.png" alt="m2-25-order-variable.png"><code>m2-25-order-variable.png</code><span>2-14-backend-practice.html</span></div>
+  <div class="item"><img src="m2-26-randomdesc-db.png" alt="m2-26-randomdesc-db.png"><code>m2-26-randomdesc-db.png</code><span>2-14-backend-practice.html</span></div>
+</div>
+</body>
+</html>

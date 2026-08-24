@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-10 Логи в Kibana</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 2-10</div>
+<h1>Логи в Kibana (стек ELK)</h1>
+<p class="lesson-intro">В этом уроке рассмотрим стек ELK (Elasticsearch, Logstash, Kibana), посмотрим как набор этих инструментов, интегрируемый в архитектуру продукта, оптимизирует работу на сторону бэкенда, делает бэк умнее, и дает возможность управлять обратной связью от бэка (логи). И именно с логами научимся работать, это важно при тестировании бэка.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#elk">Что такое ELK</a>
+    <a class="toc-link" href="#logs">Снятие логов в Kibana</a>
+    <a class="toc-link" href="#hw">ДЗ: найти лог по фильтрам</a>
+    <a class="toc-link" href="#hints">Подсказки к ДЗ</a>
+  </div>
+</div>
+
+<h2 id="elk"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">📊</span>ELK</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">ELK</div>
+    <p>Стек ELK — это набор трех взаимосвязанных инструментов:<br><br>
+    – <strong>Elasticsearch:</strong> оптимизация поисковых запросов, данный инструмент разгружает БДшки тем, что берет часть работы БД на себя — хранит в быстром доступе индексы популярных запросов, что-то вроде отдельной умной БД-кэша. Про эластик посмотри видео ниже<br>
+    – <strong>Logstash:</strong> по сути фильтр, которой способен парсить через себя большой объем данных (чаще всего логи) и упаковывать их в JSON для последующей передаче эластику/кибане<br>
+    – <strong>Kibana:</strong> инструмент для удобной работы с логами (поиск, визуализирования), использует свой собственный язык запросов KQL (Kibana Query Language) и фильтры, есть некоторые инструменты для настраивания мониторов (например, для отслеживания 500-х ошибок на предпроде в конкретном эндпоинте после раскатки новой фичи)</p>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Логи</div>
+    <p>Записи поведения системы, в нашем случае это записи бэка, некий журнал событий, которые происходили с бэком (например, ответ на запрос, или ошибка в каком-либо сервисе).</p>
+  </div>
+</div>
+
+<p>В рамках тестирования бэка, важно уметь пользоваться кибаной (минимально: зайти, найти нужные логи, выгрузить и прикрепить в баг-репорт, максимально: попытаться вникнуть в логи и разобраться в чем проблема), и в целом понимать как работает стек. Углубляться сильно не надо.</p>
+
+<div class="video-label">Видео: что такое ELK за 10 минут (немного нудный, для ознакомления)</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/ZsGOJiLCvrc" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: ElasticSearch — всё, что нужно знать за 30 минут</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/vxE1aGTEnbE" allowfullscreen></iframe></div>
+
+<h2 id="logs"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🔍</span>Снятие логов в Kibana</h2>
+
+<p>Посмотри видео. В логуру, графану и sentry не углубляйся, посмотри и можешь просто понять для чего это. Про кафку можешь посмотреть повнимательнее, это будет след урок. Сейчас внимание на кибану.</p>
+
+<div class="video-label">Видео: как тестировщику работать с логами (Kibana, Sentry, Grafana)</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/keBrfAhFiP4" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: как искать логи в Kibana — пример фильтра trace.id, url.path и status</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/yZG2GmkkI80" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: Kibana для тестировщиков</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/UnIp7t5RX8o" allowfullscreen></iframe></div>
+
+<img class="lesson-img" src="m2-15-elk-scheme.png" alt="Участие ELK в клиент-серверной архитектуре">
+<div class="img-caption">Участие ELK в клиент-серверной архитектуре. Elasticsearch — БД с логами, Logstash — микросервис с 3 плагинами, Kibana — клиент для управления логами</div>
+
+<div class="divider"></div>
+
+<div class="hw-block" id="hw">
+  <div class="hw-header">
+    <div class="hw-title">Снятие логов</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+  <div class="hw-task"><strong>Задача:</strong> найти лог по заданным фильтрам.<br><strong>Дополнительно:</strong> понять и написать в чем заключается баг.</div>
+
+  <p><strong>Представь такой флоу на воображаемом проекте:</strong></p>
+  <ul class="content-list">
+    <li>Техподдержка прислала твоей команде баг: пользователь на проде вводит номер своей карты, нажимает кнопку Далее и ничего не происходит, система никак не реагирует</li>
+    <li>Ты попытался воспроизвести баг на предпроде, и у тебя не получилось: карта проходит, всё ок</li>
+    <li>Ты запросил более подробные данные у техподдержки и узнал город пользователя, у которого возникла ошибка: <strong>Frankfurt am Main</strong>. Также стоит учесть, что ошибка возникла <strong>на этой неделе</strong></li>
+    <li>Пообщавшись с аналитиком, ты узнаешь, что за отправку данных отвечает запрос <span class="method post">POST</span> <code>/checkout</code>, и допускается ответ либо 200 статус-код и фронт отрабатывает переход на оплату, либо 401 код (недействительная карта) — фронт обрабатывает ошибку и выводит сообщение, исходя из тела ответа (например, несуществующая карта)</li>
+    <li>Ты допускаешь, что ни один из этих статус-кодов не пришел пользователю</li>
+    <li>Идешь в кибану ставить фильтры и смотреть логи</li>
+  </ul>
+
+  <a class="link-card" href="https://demo.elastic.co/app/discover" target="_blank">
+    <div class="link-card-icon">🔎</div>
+    <div class="link-card-text">
+      <div class="link-card-title">Демка эластика</div>
+      <div class="link-card-url">demo.elastic.co/app/discover</div>
+    </div>
+    <div class="link-card-arrow">→</div>
+  </a>
+
+  <div class="hw-task">Попробуй выставить как можно более корректные фильтры, чтобы исключить вероятность читать не те логи.</div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Сначала подумай какие фильтры необходимо выставить, чтобы найти конкретные логи (ниже подсказка* по фильтрам, если затрудняешься)</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Теперь тебе надо узнать, как называются поля, по которым будешь фильтровать (как бы ты ресерчил на реальном проекте)</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Изучи кибану и вкладку <em>Available Fields</em>, почитай какие-нибудь логи, посмотри какие там названия полей (ниже подсказка** по названиям полей, если затрудняешься)</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Перейди в любой подходящий лог и изучи содержимое, скопируй <code>trace.id</code></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">(Доп.) Попробуй разобраться почему возник баг (подсказка***, если затрудняешься)</div></div>
+  </div>
+
+  <div class="hw-task"><strong>В ответ на ДЗ пришли</strong> скрин кибаны с открытым логом и выставленным фильтром + значение <code>trace.id</code></div>
+  <ul class="checklist">
+    <li>Если понял в чем баг, напиши свой комментарий и кто из разрабов запорол (фронт или бэк), объясни свои мысли</li>
+    <li>Напиши смотрел ли подсказки, чтобы выполнить ДЗ ))</li>
+  </ul>
+</div>
+
+<h2 id="hints"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">💡</span>Подсказки к ДЗ</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">*Подсказка к ДЗ — какие фильтры</div>
+    <p>Исходя из того, что ты узнал из общения с аналитиком:<br>
+    – метод запроса POST<br>
+    – путь ручки /checkout<br>
+    – статус-код НЕ должен быть 200 или 401<br>
+    – название города по геолокации клиента Frankfurt am Main<br>
+    – дата This Week</p>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">**Подсказка к ДЗ — названия полей</div>
+    <p>– метод запроса POST: <code>http.request.method is POST</code><br>
+    – путь ручки /checkout: <code>url.path is /checkout</code><br>
+    – статус-код НЕ должен быть 200: <code>http.response.status_code is not 200</code><br>
+    – статус-код НЕ должен быть 401: <code>http.response.status_code is not 401</code><br>
+    – город клиента: <code>client.geo.city_name is Frankfurt am Main</code></p>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">***Подсказка к ДЗ (доп. часть)</div>
+    <p>Посмотри какой статус-код пришел в запросе в логе, сравни с требованиями какие допускаются. В самом логе посмотри поле <code>message</code>, подумай что не так, какой из разрабов ответственнен за эту ошибку и как система должна себя вести.</p>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-9-devtools-override.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-11-kafka.html">Следующий урок →</a>
+</div>
+</body>
+</html>

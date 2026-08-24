@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-14 Практика по бэкенду</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 2-14</div>
+<h1>Практика по бэкенду</h1>
+<p class="lesson-intro">Зафиналим техническую составляющую тестирования веб-проектов. В этой практической работе проведем интеграционное тестирование тестового интернет-магазина, подергаем ручки и попишем SQL запросы в базу.</p>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Рекомендация</div>
+    <p>Убедись что все предыдущие ДЗ со статусом «принято», если сейчас есть непонимание какой-то из тем — разберись, задай вопросы в чате.<br>
+    Какие ключевые знания и навыки понадобятся для практики: <strong>REST API, Postman, SQL</strong></p>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#task">Описание задачи</a>
+    <a class="toc-link" href="#hw1">ДЗ №1: создание товара</a>
+    <a class="toc-link" href="#hw2">ДЗ №2: просмотр товара</a>
+    <a class="toc-link" href="#hw3">ДЗ №3: редактирование товара</a>
+    <a class="toc-link" href="#hw4">ДЗ №4: удаление товара</a>
+    <a class="toc-link" href="#extra">Доп. материал: заведение тестовых данных</a>
+    <a class="toc-link" href="#hw5">ДЗ №5*: автоматизированное заведение данных</a>
+  </div>
+</div>
+
+<p>В процессе выполнения нормально возвращаться к предыдущим урокам, гуглить инфу и смотреть дополнительные видео если что не понятно, задавать вопросы в чате тг или пользоваться ChatGPT. Главная задача этой практики — попробовать на тестовом проекте потестить бэк через Postman в связке с БД, посмотреть как ходят данные, половить баги.</p>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Чит-листы для тестирования HTTP методов</div>
+    <p>Непосредственно перед тем как тестить разные методы, можешь посмотреть видео по чит-листам (подсказкам). Так ты сможешь увеличить покрытие API проверками.</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: чит-листы для тестирования HTTP методов</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/QoulD9-U1uU" allowfullscreen></iframe></div>
+
+<h2 id="task"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🛒</span>Описание задачи</h2>
+
+<p>Представь ты тестируешь интернет-магазин, бэкенд-разраб выкатил все 4 круд ручки для работы с товарами, однако на фронте реализован пока только просмотр товара. Тебе нужно проверить, что на стороне бэка всё ок и крудовские ручки работают согласно документации, данные в БД заносятся корректно.</p>
+
+<p>Увы ты попал на проект, где плохо описана дока, а аналитик неопытный джун. Единственное что ты знаешь — у тебя на проекте <strong>RESTful API</strong>, а значит нужно внимательнее отнестись к стилю API, который реализовал разраб, и подсветить несостыковки.</p>
+
+<a class="link-card" href="https://testbase.atlassian.net/wiki/spaces/SHOP/pages/1957496610/Create+item" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Дока по ручкам (тебя интересуют только крудовские для товаров — items)</div>
+    <div class="link-card-url">testbase.atlassian.net/wiki/spaces/SHOP/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<a class="link-card" href="https://46.36.217.134:8888/phpmyadmin/sql.php?server=1&amp;db=shop_bugred_r_db&amp;table=items&amp;pos=0" target="_blank">
+  <div class="link-card-icon">🗄️</div>
+  <div class="link-card-text">
+    <div class="link-card-title">База данных (нажимай довериться сайту)</div>
+    <div class="link-card-url">46.36.217.134:8888/phpmyadmin</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="cred-box"><span class="cred-label">пользователь</span><span class="cred-val">view_user</span></div>
+<div class="cred-box"><span class="cred-label">пароль</span><span class="cred-val">ZQl3Ea1uhHTzzl3j</span></div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Начало тестирования</div>
+    <p>Перед выполнением задач, попробуй сначала просто подергать ручки, посмотреть в БД. Потыкай доку, постман, создай коллекцию для будущих запросов, БД минут 20-30. Проведи свой ресерч.</p>
+  </div>
+</div>
+
+<div class="hw-block" id="hw1">
+  <div class="hw-header">
+    <div class="hw-title">Создание товара</div>
+    <div class="hw-num">ДЗ №1</div>
+  </div>
+  <div class="hw-task"><strong>API:</strong> используя Postman и доку, в коллекции сформировать сьют (папку) из 5 запросов:</div>
+  <ul class="content-list">
+    <li>1 позитивная проверка, создание валидного товара (обязательные поля заполнены, типы данных соблюдены)</li>
+    <li>4 негативных проверки, создание невалидного товара (любые отклонения от требований и REST API на твое усмотрение)</li>
+    <li>покрыть необходимыми тестами в post-response (минимум 2). Если не знаешь как написать тест, используй deepseek или сниппеты (и пересмотри в видео по постману)</li>
+    <li>запустить сьют (Run), сделать скрин во вкладке View Results</li>
+  </ul>
+  <div class="hw-task"><strong>БД:</strong> используя SQL запрос, проверить, добавились ли товары в БД.</div>
+  <div class="hw-task">Баги оформлять в виде <strong>Название-ОР-ФР-(Комментарий)</strong>, комментарий по желанию если есть мысли.</div>
+  <div class="hw-task"><strong>В ответ пришли</strong> скрин результатов рана и SQL запрос, список багов.<br>Не трать на задачу больше <strong>1 часа</strong>.</div>
+</div>
+
+<div class="hw-block" id="hw2">
+  <div class="hw-header">
+    <div class="hw-title">Просмотр товара</div>
+    <div class="hw-num">ДЗ №2</div>
+  </div>
+  <div class="hw-task"><strong>API:</strong> сформировать сьют из 3 запросов:</div>
+  <ul class="content-list">
+    <li>1 позитивная проверка</li>
+    <li>2 негативные проверки</li>
+    <li>покрыть тестами в post-response (минимум 2)</li>
+    <li>запустить сьют, сделать скрин во вкладке View Results</li>
+  </ul>
+  <div class="hw-task"><strong>БД:</strong> чтение ты уже проверил в первом задании, здесь ничего не надо.</div>
+  <div class="hw-task"><strong>В ответ пришли</strong> скрин результатов рана и список багов.<br>Не трать на задачу больше <strong>30 минут</strong>.</div>
+</div>
+
+<div class="hw-block" id="hw3">
+  <div class="hw-header">
+    <div class="hw-title">Редактирование товара</div>
+    <div class="hw-num">ДЗ №3</div>
+  </div>
+  <div class="hw-task"><strong>API:</strong> сформировать сьют из 5 запросов:</div>
+  <ul class="content-list">
+    <li>1 позитивная проверка (изменение обязательного поля)</li>
+    <li>4 негативные проверки</li>
+    <li>покрыть тестами в post-response (минимум 2)</li>
+    <li>запустить сьют, сделать скрин во вкладке View Results</li>
+  </ul>
+  <div class="hw-task"><strong>БД:</strong> используя SQL запрос, проверить, изменилась ли ранее добавленная запись.</div>
+  <div class="hw-task"><strong>В ответ пришли</strong> скрин результатов рана и SQL запрос, список багов.<br>Не трать на задачу больше <strong>1 часа</strong>.</div>
+</div>
+
+<div class="hw-block" id="hw4">
+  <div class="hw-header">
+    <div class="hw-title">Удаление товара</div>
+    <div class="hw-num">ДЗ №4</div>
+  </div>
+  <div class="hw-task"><strong>API:</strong> сформировать сьют из 3 запросов:</div>
+  <ul class="content-list">
+    <li>1 позитивная проверка</li>
+    <li>2 негативные проверки (одна из них обязательно повторное удаление того же id)</li>
+    <li>покрыть тестами в post-response (минимум 2)</li>
+    <li>запустить сьют, сделать скрин во вкладке View Results</li>
+  </ul>
+  <div class="hw-task"><strong>БД:</strong> используя SQL запрос, проверить, удалилась ли запись из таблицы.</div>
+  <div class="hw-task"><strong>В ответ пришли</strong> скрин результатов рана и SQL запрос, список багов. Также пришли <strong>скрин всей коллекции</strong> (раскрой все 4 папки, чтобы было видно запросы).<br>Не трать на задачу больше <strong>30 минут</strong>.</div>
+</div>
+
+<p>Отлично, ты протестил ручки, сформировал простые баг-репорты и параллельно глядел в БД. Как ты видишь ничего сложного в интеграционном тестировании нет, ты посмотрел как данные ходят в бэк, с бэка в БД.</p>
+
+<div class="divider"></div>
+
+<h2 id="extra"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🎲</span>Доп. материал: заведение тестовых данных</h2>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Доп. материал</div>
+    <p>Далее ниже идет дополнительный материал по постману, если хочешь копнуть в автоматическое наполнение БД тестовыми данными, то приступай, в конце контрольное ДЗ :)</p>
+  </div>
+</div>
+
+<p>Часто на проектах с тестированием бэка ты будешь сам заводить тестовые данные. И как ты понял из заданий выше, делать это можно как через API, так и через БД (в тестовой БД разрешен только оператор SELECT, поэтому с остальными мы не работали).</p>
+
+<p>Например, для корректности тестирования данной функциональности мы можем создать 100 товаров. Какие есть способы?</p>
+<ul class="content-list">
+  <li>Через фронт понятно, что дело это долгое, каждый раз тыкать UI и сохранять изменения</li>
+  <li>Через БД казалось бы тоже необходимо писать длинный SQL запрос на добавление 100 строк, но благодаря ctrl+C ctrl+V уже ощутимо быстрее, чем через фронт</li>
+  <li>Остается бэк и его API методы, которые мы можем засунуть в постман в прогон коллекции. Но и здесь нужно сидеть заполнять самому все переменные?</li>
+</ul>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Автоматизация тестовых данных в Postman</div>
+    <p>Конечно мы не будем сидеть и писать всё руками, в постмане есть <strong>встроенный рандомайзер</strong> через переменную, а также <strong>pre-request</strong> и <strong>post-response</strong> вкладки, куда можем вставить js-код с любой логикой. И с помощью этих способов мы можем сгенерировать случайные тестовые данные.</p>
+  </div>
+</div>
+
+<h3>Простой способ генерации рандомных значений: встроенный рандомайзер</h3>
+
+<p>В постмане есть встроенный рандомайзер популярных групп значений (аббревиатуры, имена, цены, даты и так далее). Объявляется он через те же переменные, достаточно написать синтаксис объявления переменных и начать писать имя интересующей группы значений (например, price — цена). И постман предложит переменную-рандомайзер, которая при каждом запросе будет генерировать случайное значение в соответствии со своим описанием.</p>
+
+<img class="lesson-img" src="m2-20-randomprice-var.png" alt="Автодополнение переменной $randomPrice в Postman">
+<div class="img-caption">В JSON в теле запроса в значении ключа price указываю постмановскую переменную $randomPrice. Детали: случайная цена между 0 и 1000 (float)</div>
+
+<img class="lesson-img" src="m2-21-randomprice-response.png" alt="Тело запроса с randomPrice и ответ с ценой 538.66">
+<div class="img-caption">Отправил запрос — постман сгенерировал мне цену 538.66. С каждым последующим запросом будет генерироваться новая цена</div>
+
+<img class="lesson-img small" src="m2-22-randomprice-db.png" alt="Три записи в БД с разными ценами">
+<div class="img-caption">Вот что получилось в БД (отправил 3 запроса)</div>
+
+<h3>Более сложный способ генерации рандомных значений</h3>
+
+<p>Что если мы хотим так же быстро сформировать список тестовых данных и отталкиваться уже от него, а не генерировать данные «вслепую»? Тогда нам нужен рукописный скрипт, который поможет создать тестовые данные. Можем воспользоваться <a href="https://chat.deepseek.com/" target="_blank">deepseek</a> и накидать промт для поля «description» — зарандомим 10 разных описаний нашей одежды.</p>
+
+<img class="lesson-img" src="m2-23-deepseek-prompt.png" alt="Промт в deepseek для генерации pre-request скрипта">
+<div class="img-caption">Пример промта в дипсик. Осталось грузануть в предзапрос и отправить запрос. Здесь на самом деле неважно, этот скрипт pre-request или post-response, так как с самим запросом мы не работаем, а лишь создаем набор переменных коллекций</div>
+
+<img class="lesson-img" src="m2-24-randomdesc-vars.png" alt="Переменные randomDesc1-randomDesc10 с описаниями одежды">
+<div class="img-caption">Вот такие переменные зарандомил ИИшный скрипт, выглядят как описания товаров на алиэкспресс. Но конечно совершенствовать скрипт можно бесконечно. Все-таки лучше таблица со словами (какой-нибудь json), откуда скрипт будет рандомно брать слова и обрабатывать их каким-либо образом</div>
+
+<img class="lesson-img half" src="m2-25-order-variable.png" alt="Переменная order внутри названия переменной randomDesc">
+<div class="img-caption">Добавил переменную коллекции order прямо внутрь названия другой переменной, начальное значение = 1. order будет отвечать за номер переменной randomDesc (от 1 до 10), а в post-response напишу скрипт для увеличения этого номера на 1. Так, у меня в каждом следующем запросе будет использоваться разная переменная. Создам прогон на 10 итераций</div>
+
+<img class="lesson-img" src="m2-26-randomdesc-db.png" alt="Записи в БД с разными сгенерированными описаниями">
+<div class="img-caption">Заглянем в базу, увидим что все наши рандомные переменные успешно проставились</div>
+
+<div class="hw-block" id="hw5">
+  <div class="hw-header">
+    <div class="hw-title">Автоматизированное заведение тестовых данных</div>
+    <div class="hw-num">ДЗ №5*</div>
+  </div>
+  <div class="hw-task"><strong>Задача:</strong> создать 30 товаров с автосгенерированными тестовыми данные для полей <code>name</code>, <code>description</code>, <code>price</code>. Для поля <code>section</code> указать значение <code>Test</code>. После напиши SQL запрос на вывод обозначенных полей, например, отсортируй <code>last_id</code> по убыванию и ограничь ответ 30 строками. Должны остаться только твои товары.</div>
+  <div class="hw-task"><strong>Приложить</strong> скрины тела запроса, списка переменных (если пошел сложным путем), веб-морды где виден твой SQL запрос и ответ на него.</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-13-sql.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-results.html">Результаты модуля →</a>
+</div>
+</body>
+</html>

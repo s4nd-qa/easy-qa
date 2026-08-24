@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-12 CI/CD, Git, Docker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 2-12</div>
+<h1>Введение в TestOps: CI/CD, деплой, Docker, GitLab. Версионирование в Git</h1>
+<p class="lesson-intro">Следующие темы являются входом в отдельное направление тестирования — TestOps, и подобная база железно необходима всем обычным QA мидлам-сеньорам и будущим автоматизаторам.</p>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Много инфы в уроке</div>
+    <p>Рекомендую разделить изучение материала на 3 дня:<br>
+    <strong>День 1:</strong> Вникаешь в CI/CD, деплой в GitLab<br>
+    <strong>День 2:</strong> Вникаешь в Git, делаешь ДЗ<br>
+    <strong>День 3:</strong> Вникаешь в Docker, делаешь ДЗ, досматриваешь пару видео в конце урока</p>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#big">О чём этот урок</a>
+    <a class="toc-link" href="#cicd">Что такое CI/CD, что такое пайплайны</a>
+    <a class="toc-link" href="#gitlab">Деплой в GitLab</a>
+    <a class="toc-link" href="#git">Контроль версий в Git</a>
+    <a class="toc-link" href="#gitflow">Git Flow</a>
+    <a class="toc-link" href="#docker">Docker</a>
+    <a class="toc-link" href="#tools">Про другие инструменты CI/CD</a>
+    <a class="toc-link" href="#deep">Углубление в CI/CD для автотестирования</a>
+  </div>
+</div>
+
+<h2 id="big"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📦</span>Большой урок</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Большой урок</div>
+    <p>Вся эта инфа относится к теме инфраструктуры на проекте, автоматизации и оптимизации процессов сборки и разворачивания, как раз именно этим и занимаются в проектах TestOps (DevOps для тестирования). Обыкновенному тестеру также крайне полезно и важно об этом всем знать, зачастую чтобы понимать, что вообще происходит у разрабов и как выглядят их процессы, а также иногда применить эти знания в тестировании (например, откаты сборки, тестирование новых пайплайнов, локальная сборка стенда).<br><br>
+    P.S. В сторону не копай, уйдешь в обучение на девопса :D</p>
+  </div>
+</div>
+
+<p>Ключевые слова, на что будем вообще обращать внимание в этом уроке:</p>
+<ul class="content-list">
+  <li>Понятие CI/CD</li>
+  <li>Пайплайн в CI/CD</li>
+  <li>Деплой (разворачивание) кода/приложения (бывают проекты где тестер сам деплоит на стенды)</li>
+  <li>Работа с Docker, локальный деплой контейнеров, docker compose — <strong>в уроке задание по докеру</strong></li>
+  <li>Основы Git: гибкая работа с версиями кода — <strong>в уроке задание по гиту</strong></li>
+  <li>Git flow: модель ветвления git</li>
+  <li>GitLab CI/CD: управление кодом на проекте, зачастую основной инструмент в CI/CD</li>
+  <li>Информационная безопасность в контексте CI/CD</li>
+</ul>
+
+<p><strong>Куда копать поменьше, но на собесе классно будет блеснуть этим:</strong></p>
+<ul class="content-list">
+  <li>ArgoCD: мониторинг состояния сервисов</li>
+  <li>Kubernetes: управление (оркестрация) контейнерами</li>
+  <li>Jenkins: аналог GitLab, используется в энтерпрайзе и нагруженных системах</li>
+  <li>GitHub Actions: еще один аналог для билда и деплоя сборок</li>
+</ul>
+<p><em>Внимание: инструменты CI/CD — на проекте используется какой-то один, не вместе.</em></p>
+
+<h2 id="cicd"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">♾️</span>Что такое CI/CD, что такое пайплайны</h2>
+
+<div class="video-label">Видео: CI/CD простым языком на понятном примере</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/pFKwmEdwZZQ" allowfullscreen></iframe></div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">CI/CD</div>
+    <p>Это методология улучшения процессов разработки на проекте, некий подход к разработке. А уже в рамках этого подхода используются различные инструменты, благодаря которым достигается основная цель CI/CD:<br>
+    – автоматизация сборки (интеграции нового кода с существующим — <strong>CI</strong>, Continuous Integration),<br>
+    – доставки и установки (разворачивание кода на стенды, сборки — <strong>CD</strong>, Continuous Delivery/Deployment)<br><br>
+    Каждый этап в этом процессе называется <strong>stage</strong>, содержащий в себе как минимум 1 задачу (<strong>job</strong>, джобу). А все этапы вместе образуют собой тот самый <strong>пайплайн</strong> (последовательность шагов, для запоминания с англ. — труба).</p>
+  </div>
+</div>
+
+<img class="lesson-img" src="m2-18-pipeline-example.png" alt="Пример простого пайплайна с тремя стадиями и девятью джобами">
+<div class="img-caption">Пример простого пайплайна (3 стадии: сборка — билд, тест, разворачивание на стенд — деплой). В каждой стадии несколько джоб (всего 9)</div>
+
+<h2 id="gitlab"><span class="h2-icon" style="background:rgba(239,68,68,0.15)">🦊</span>Деплой в GitLab</h2>
+
+<p>Посмотри как собираются/билдятся (CI) и разворачиваются/деплоятся на стенды (CD). На некоторых проектах тестеры сами занимаются CD, то есть разраб билдит приложение, а тестер уже сам заходит в гитлаб и устанавливает его на выбранным им стенд (в практике ничего сложного, пару тыков и подождать несколько минут).</p>
+
+<div class="video-label">Видео: пишем реальный CI/CD пайплайн, GitLab CI/CD на практике</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/prOarIqL5Qs" allowfullscreen></iframe></div>
+
+<h2 id="git"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🌿</span>Контроль версий в Git, основные понятия и тренажер</h2>
+
+<p>Даже если тестер на проекте не имеет доступ к коду, не разворачивается на стенды и т.д., все равно необходимо знать о том, как устроен контроль версий в коде. Понимать, что проверка какого-то функционала может закончиться успешно на одной версии и неуспешно (баг) на другой, так как новый код может повлиять на старый функционал.</p>
+
+<div class="video-label">Видео: тестировщик с нуля #14 — кратко об Git (система контроля версий)</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/W4LmzZG6y1w" allowfullscreen></iframe></div>
+
+<div class="hw-block">
+  <div class="hw-header">
+    <div class="hw-title">Тренажер основных команд Git</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+  <div class="hw-task">Потыкай <a href="https://learngitbranching.js.org/?locale=ru_RU" target="_blank">тренажер</a> и разберись в логике формирования дерева версий.</div>
+  <div class="hw-task"><strong>Задача:</strong> пройти первые 9 уровней (до «Введение в Cherry-pick» включительно) и приложить скрин с этими пройденными уровнями.</div>
+</div>
+
+<h2 id="gitflow"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🔀</span>Git Flow</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Git Flow</div>
+    <p>Иногда на проектах вместо стандартной модели <code>main&lt;-feature</code> встречается модель с несколькими ролями, и часто это 2 роли: main и develop (dev, разработка). Основная идея git flow в том, чтобы не делать ответвления напрямую от мэйна, а сделать сначала ответвление develop — ветку в которой разработчик будет заниматься разработкой отдельно от основной ветки, в которой лежит приложение. И по готовности влить (смерджить) develop в main. Таким образом git flow модель выглядит как <code>main&lt;-dev&lt;-feature</code><br><br>
+    Также кроме <code>feature</code> веток могут быть <code>release</code> и <code>hotfix</code> ветки, для релизов и хотфиксов соответственно.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://productstar.ru/blog/gitflow-kak-organizovat-komandnuiu-razrabotku-s-pomoshhiu-git" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Про Git Flow подробнее</div>
+    <div class="link-card-url">productstar.ru/blog/gitflow-...</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<p>Предлагаю немного расслабиться за чилловым видосом про инфобез, в контексте нашего урока CI/CD :)</p>
+
+<div class="video-label">Видео: все IT угрозы, ИБ за 10 минут</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/wgvQ6eJlbXw" allowfullscreen></iframe></div>
+
+<h2 id="docker"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🐳</span>Docker</h2>
+
+<p>В видео выше ты уже что-то услышал о докере, но будет не лишним проработать тему отдельно.</p>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Для чего Docker тестировщику?</div>
+    <p><strong>Docker</strong> — это платформа для контейнеризации приложений со всеми их зависимостями (библиотеки, различные переменные, настройки, конфиги и т.д.). Грубо говоря высокотехнологичный архиватор, архивы (образы) которого без конфликтов можно распаковать (запустить контейнеры) на любой машине (windows, macOS, linux, сервер, облако и т.д.).<br><br>
+    Собственно докер решает такие проблемы тестера, как:<br>
+    – Необходимость кроссплатформенного тестирования (когда приложение ведет себя по-разному из-за отличающейся среды — машины)<br>
+    – Длительная подготовка окружения, когда при стандартном разворачивании надо вручную подключать базы, брокеры и т.д. Докер делает это одной командой <code>docker compose up</code> и так же легко сворачивает окружение обратно с помощью <code>docker compose down</code><br>
+    – Собственно локальное поднятие стендов на своей машине, не нужно ждать разраба пока тот поднимет стенд и т.д. На некоторых проектах это уметь обязательно<br>
+    – Можно тестировать разные версии приложения и его отдельных компонентов, например, если надо проверить PostgreSQL на разных ее версиях (очень быстро поднимается нужная версия)</p>
+  </div>
+</div>
+
+<p>Посмотри видео по сборке приложений через docker compose (написание самого <code>docker-compose.yml</code> можешь скипнуть):</p>
+
+<div class="video-label">Видео: Docker compose — всё что нужно знать за 15 минут</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/sXjkAEqFZEI" allowfullscreen></iframe></div>
+
+<div class="hw-block">
+  <div class="hw-header">
+    <div class="hw-title">Поднятие приложения в Docker</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Установи на комп <a href="https://git-scm.com/install/windows" target="_blank">Git</a></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Установи на комп <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Открывай докер десктоп и переходи в терминал (справа снизу)</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Перейди в корень своего диска командой <code>cd\</code>, убедись что на диске есть хотя бы 15Гб места</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">Перейти в папку, где у тебя будет лежать приложение, например, <code>cd \disc\divanQA</code></div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">Клонируй репозиторий с приложением командой <code>git clone https://github.com/yugoru/qa_kit.git</code></div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-text">По логам убедись что клонирование прошло успешно</div></div>
+    <div class="step"><div class="step-num">8</div><div class="step-text">Перейди в папку с клонированным приложением <code>cd qa_kit</code></div></div>
+    <div class="step"><div class="step-num">9</div><div class="step-text">Сначала тебе надо сбилдить образы, запускай билд всего приложения командой <code>docker compose up --build</code></div></div>
+    <div class="step"><div class="step-num">10</div><div class="step-text">При первом запуске билда Docker скачает все необходимые образы. Это может занять несколько минут. В последующих запусках приложения флаг <code>--build</code> будет не нужен (пока собраны все образы) — можешь пользоваться только <code>docker compose up</code></div></div>
+    <div class="step"><div class="step-num">11</div><div class="step-text">Как увидишь логи кафки, графаны и т.д. — переходи в <em>Containers</em> и проверяй, у тебя должна закончиться сборка и теперь твой локальный стенд развернут (скрин ниже)</div></div>
+    <div class="step"><div class="step-num">12</div><div class="step-text">В контейнере <code>qa_portal</code> переходи по портам (гиперссылка 8090:80) — так ты попадешь на фронтенд приложения, сделай скрин</div></div>
+    <div class="step"><div class="step-num">13</div><div class="step-text">Введи в терминал <code>docker ps</code> для просмотра запущенных контейнеров, сделай скрин (если не пишется ничего в терминал, запусти новый через + справа)</div></div>
+  </div>
+
+  <div class="hw-task"><strong>В ответ на ДЗ пришли</strong> скрины фронтенда и списка запущенных контейнеров.</div>
+
+  <div class="hw-task">Далее ты можешь сам потыкать этот тренажер, в нем много полезных сервисов, в том числе есть фронтенд для кафки, полный набор апишек для тестирования в постмане (gRPC, GraphQL, WS, REST). Чуть позже тренажер будет внедрен в практику по бэку.<br><br>
+  Не забудь остановить приложение через <code>docker compose down</code></div>
+</div>
+
+<img class="lesson-img" src="m2-19-docker-step11.png" alt="Docker Desktop со списком поднятых контейнеров">
+<div class="img-caption">На шаге 11 ДЗ должно быть так</div>
+
+<p>(Дополнительно) Сборка докер файлов и работа с докером под капотом — то как девопсы настраивают Dockerfile и docker-compose файл:</p>
+
+<div class="video-label">Видео: практика по Docker, разбор Docker за 35 минут</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/4Fz27eqhgqU" allowfullscreen></iframe></div>
+
+<h2 id="tools"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🧰</span>Про другие инструменты CI/CD и инфру в целом</h2>
+
+<p>Инструменты, встречающиеся в инфраструктурах реальных проектов (смотри и потом можешь что-нибудь притянуть в легенду, например очень легко притянуть ArgoCD, краткий пример: «в первую очередь заходил смотрел состояние сервисов, проверял жива ли инфра, если стенд вел себя странно или сыпал 500») + повторение по ELK.</p>
+
+<div class="video-label">Видео: инструменты CI/CD и инфраструктура проекта</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/jqQmWRSIeEM" allowfullscreen></iframe></div>
+
+<p>Пример взаимодействия с CI/CD:</p>
+
+<div class="video-label">Видео: что такое CI/CD? Пример работы</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/YzUVwMwXgso" allowfullscreen></iframe></div>
+
+<a class="link-card" href="https://habr.com/ru/companies/otus/articles/686138/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Небольшая статья по CI/CD</div>
+    <div class="link-card-url">habr.com/ru/companies/otus/articles/686138/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="deep"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🧠</span>Углубление в CI/CD для автотестирования</h2>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Углубление в CI/CD для автотестирования</div>
+    <p>Нижеперечисленные темы можно интегрировать в легенду, а можно вернуться на этапе изучения автотестов (либо когда уже работаешь ручным тестером, либо если решил минимально изучить автотесты для повышения шансов трудоустроиться).<br><br>
+    Автотестер пишет код и имеет полноценный доступ к репозиториям, инструментам CI/CD (например GitLab), соответственно, собирает и запускает автотесты — и в нормальной практике все эти этапы фигурируют в джобах пайплайнов.</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: пример участия автотестера в релизных процессах</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/2m-szkKMHrA" allowfullscreen></iframe></div>
+
+<p><strong>В чем также будет необходимо разобраться для постоянной работы с CI/CD:</strong></p>
+<ul class="content-list">
+  <li>Мастхев <a href="https://karpov.courses/docker" target="_blank">курс по докеру</a></li>
+  <li>Структура приложения: кластера, ноды, поды и так далее</li>
+  <li>Теоретическое понимание работы виртуальных машин</li>
+  <li>Работа с терминалом Linux, bash скрипты</li>
+  <li>Основы управления контейнерами в Kubernetes</li>
+  <li>Интеграция всех упомянутых инструментов в CI/CD</li>
+</ul>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-11-kafka.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-13-sql.html">Следующий урок →</a>
+</div>
+</body>
+</html>

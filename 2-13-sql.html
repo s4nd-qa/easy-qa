@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-13 Базы данных, SQL</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 2-13</div>
+<h1>Базы данных, SQL</h1>
+<p class="lesson-intro">Про БД и SQL часто спрашивают на собесах, но по факту работать с этим нужно не часто (в основном чтобы доставать тестовые данные). Изучим только самое необходимое: что такое базы данных, какие бывают, построим таблицы и поля, заполним тестовыми данными, поделаем SQL-запросы разной сложности. Урок объемный и состоит из 2 ДЗ (рекомендуемый уровень).</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#levels">Насколько глубоко изучать БД и SQL</a>
+    <a class="toc-link" href="#db">Что важно понимать про БД</a>
+    <a class="toc-link" href="#operators">Основные операторы и функции SQL</a>
+    <a class="toc-link" href="#min">Минимальный уровень: ДЗ по DBeaver</a>
+    <a class="toc-link" href="#rec">Рекомендуемый уровень: практика по SQL</a>
+    <a class="toc-link" href="#max">Максимальный уровень</a>
+  </div>
+</div>
+
+<h2 id="levels"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📶</span>Насколько глубоко изучать БД и SQL</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Три уровня</div>
+    <p><span class="grade-pill junior">Минимальный уровень</span> — <strong>обязательный</strong> для перехода к след. урокам. Посмотреть первые 3 видео, SQL: понимать что какой запрос делает на минимальном уровне и сделать первое ДЗ в уроке<br><br>
+    <span class="grade-pill middle">Рекомендуемый уровень</span> 👍 — посмотреть последний видос про теорию БД (чтобы увереннее отвечать на собесах), SQL: уметь писать запросы минимального уровня и понимать запросы рекомендуемого уровня, сделать второе ДЗ<br><br>
+    <span class="grade-pill senior">Максимальный уровень</span> — начать проходить расширенный SQL симулятор и набивать руку на запросах параллельно другим урокам (или после того как выйдешь на первый проект, если будет интерес или необходимость). Уметь писать запросы рекомендуемого уровня, понимать и попрактиковать запросы максимального уровня. После можно смело свичнуться в Data Engineer или аналитика по данным :D</p>
+  </div>
+</div>
+
+<p><strong>Насколько какой уровень нужен?</strong> Обычно про БД и SQL на собесах спрашивают на минимально-среднем уровне, по теории максимум спросят про виды связей и нормализацию (что это), по SQL погоняют по простым JOIN запросам и всякой фильтрации и агрегации, также могут погонять по крудовским запросам на создание, редактирование, удаление (CREATE, ALTER TABLE, INSERT, UPDATE, DELETE). Однако есть проекты с углубленной работой SQL, вилки ощутимо выше.</p>
+
+<h2 id="db"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🗄️</span>Что важно понимать про БД</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Что важно понимать про БД</div>
+    <p>БД бывают <strong>реляционные</strong> (например, PostreSQL или в простонародье «постгря») и <strong>нереляционные</strong> (например, MongoDB и серверный кэш Redis). Чаще всего на проектах для хранения данных используются реляционные или связка реляционные + нереляционные (тот же серверный кэш).<br><br>
+    Часто под БД имеют ввиду <strong>СУБД</strong> — систему управления базами данных. Представь простой эксель файлик — это будет БД, а когда ты зайдешь непосредственно в редактор Microsoft Excel, это уже будет СУБД. Смысл примерно тот же. Почти на всех проектах СУБД PostreSQL. Есть еще MySQL и SQLite (эта используется в первом ДЗ). Отличаются поддерживаемыми типами данных и операторами/функциями.<br><br>
+    Реляционная БД состоит из связных таблиц, таблицы состоят из <strong>столбцов (полей)</strong> и <strong>строк (записей)</strong>, а пересечение столбца и строки — это <strong>ячейка</strong>.<br><br>
+    «Главным полем» таблицы называют <strong>первичный ключ</strong> (primary key) — часто это поле id. А для связи таблиц друг с другом используют <strong>вторичные/внешние ключи</strong> (foreign key). Существуют разные связи: один-к-одному, один-ко-многим, многие-к-одному, многие-ко-многим. А схематичное представление связей таблиц называется <strong>схемой БД</strong>.<br><br>
+    <strong>SQL</strong> — язык запросов к БД.<br><br>
+    Через что чаще всего работают с БД на проектах? Либо десктоп клиент <strong>DBeaver</strong>, либо веб-морды такие как phpMyAdmin, pgAdmin или свои кастомные интерфейсы. Либо всё вместе.</p>
+  </div>
+</div>
+
+<h2 id="operators"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">⌨️</span>Основные операторы и функции SQL</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Минимальный уровень (понимать и попрактиковать)</div>
+    <p>– создание таблицы и добавление полей <code>CREATE TABLE</code>, <code>ALTER TABLE</code><br>
+    – наполнение, обновление таблицы данными <code>INSERT INTO &lt;table&gt; VALUES &lt;...&gt;</code>, <code>UPDATE &lt;...&gt; SET</code><br>
+    – удаление полей из таблицы <code>DELETE &lt;...&gt; FROM &lt;table&gt;</code><br>
+    – получение данных из таблицы <code>SELECT &lt;...&gt; FROM &lt;table&gt;</code><br>
+    – фильтрация по уникальности <code>DISTINCT</code><br>
+    – фильтрация по условию <code>WHERE</code><br>
+    – агрегирующие функции <code>MAX, MIN, COUNT, SUM, AVG</code><br>
+    – присоединение таблиц <code>JOIN &lt;table2&gt; ON &lt;...&gt;=&lt;...&gt;</code><br>
+    – сортировка <code>ORDER BY</code><br>
+    – ограничение строк в ответе <code>LIMIT</code></p>
+  </div>
+</div>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Рекомендуемый уровень (понимать и попрактиковать + УМЕТЬ минимальный)</div>
+    <p>– виды джойнов и круги эйлера для понимания: <code>INNER</code> (по-умолчанию), <code>LEFT</code>, <code>RIGHT</code>, <code>FULL</code><br>
+    – функции фильтров <code>IN</code>, <code>LIKE %</code>, <code>BETWEEN</code><br>
+    – группировка <code>GROUP BY</code><br>
+    – фильтрация после группировки <code>HAVING</code><br>
+    – работа с датами<br>
+    – простые подзапросы<br>
+    – перебор null значений <code>COALESCE</code></p>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Максимальный уровень (понимать и попрактиковать + УМЕТЬ рекомендуемый)</div>
+    <p>– продвинутое администрирование БД (CREATE, ALTER, INSERT, UPDATE, DELETE)<br>
+    – объединения данных <code>UNION</code>, <code>UNION ALL</code><br>
+    – условия <code>CASE</code><br>
+    – сложные подзапросы<br>
+    – оконные функции<br>
+    – оптимизация запросов<br>
+    – индексирование<br>
+    – парсинг и агрегация JSON<br>
+    – динамический SQL</p>
+  </div>
+</div>
+
+<h2 id="min"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">✅</span>Минимальный уровень (обязательно)</h2>
+
+<div class="video-label">Видео: что такое базы данных — для новичков</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/mvpDRH37IBQ" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: про SQL за 7 минут — что такое реляционные базы данных</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/bv5UqdWm-5k" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: первые шаги для тестировщика в изучении SQL, практика на тренажёре</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/wJZQn40TCWU" allowfullscreen></iframe></div>
+
+<div class="hw-block">
+  <div class="hw-header">
+    <div class="hw-title">Работа в DBeaver</div>
+    <div class="hw-num">ДЗ №1</div>
+  </div>
+  <div class="hw-task"><strong>Задача:</strong> просмотреть видео про работу в DBeaver и повторять за автором, самому потыкать интерфейс, создать свою тестовую таблицу и отправить несколько простых запросов к ней.</div>
+
+  <div class="hw-task">Открывай видео и повторяй за автором.</div>
+
+  <div class="hw-task">Затем сам попробуй создать таблицу <code>testers</code> и наполнить её разными тестовыми данными (~5 строк). В твоей таблице должны быть следующие поля (не забудь выбрать правильные типы данных из доступных):</div>
+  <ul class="content-list">
+    <li><code>id</code> (id тестера)</li>
+    <li><code>first_name</code> (имя)</li>
+    <li><code>last_name</code> (фамилия)</li>
+    <li><code>work_exp</code> (стаж работы в годах)</li>
+    <li><code>is_remote</code> (удаленка: есть или нет)</li>
+  </ul>
+  <div class="hw-task">Сделай скрин своей таблицы.</div>
+
+  <p><strong>Далее сделай SQL запросы:</strong></p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Выведи id, имя и фамилию тестеров чей стаж 1 год и более. Сделай скрин результата</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Выведи сумму стажа всех тестеров. Сделай скрин результата</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Выведи id, имя и фамилию тестера на удаленке с наибольшим стажем. <em>Можно решить несколькими способами.</em> Сделай скрин результата (или результатов)</div></div>
+  </div>
+
+  <div class="hw-task"><strong>В ответ на ДЗ пришли</strong> 3 запроса (скрин и сам запрос) + саммери (комментарий, краткая суть) того что ты сделал.</div>
+</div>
+
+<h2 id="rec"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">👍</span>Рекомендуемый уровень (необязательно)</h2>
+
+<p>Видос по теории (можешь посмотреть сейчас или перед выходом на собесы):</p>
+
+<div class="video-label">Видео: базы данных SQL/NoSQL — выжимка из практики</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/8OYoPGH0BX0" allowfullscreen></iframe></div>
+
+<p>Также посмотри короткий видос про группировку (GROUP BY). Запомни, что группировка часто применяется вместе с агрегацией (функции MAX, SUM и тд).</p>
+
+<div class="video-label">Видео: группировка в SQL — GROUP BY</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/QI8kWWyshBM" allowfullscreen></iframe></div>
+
+<div class="hw-block">
+  <div class="hw-header">
+    <div class="hw-title">Практика по SQL</div>
+    <div class="hw-num">ДЗ №2</div>
+  </div>
+  <div class="hw-task"><strong>Задача:</strong> решить SQL задачи в песочнице.</div>
+
+  <div class="hw-task">Переходи в <a href="https://sql-academy.org/ru/sandbox" target="_blank">песочницу</a>. Выбери таблицу «Семья» (по-умолчанию «Авиаперелеты»), изучи схему БД, поделай простые <code>SELECT *</code> запросы к каждой таблице, посмотри какие данные лежат в таблицах.</div>
+
+  <div class="hw-task">В ответ к ДЗ приложи SQL запросы и скрины ответов на каждый.</div>
+
+  <p><strong>Запросы (в порядке повышения сложности):</strong></p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Вывести имена всех матерей. Поле в таблице назови <code>mothers</code></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Вывести названия всех товаров из категории Еда. Поле в таблице назови <code>all_food</code></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Посчитать сумму всех покупок дочерей (сумма покупок: количество*цена товара). Поле в таблице назови <code>total_daughters</code></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Вывести список товаров, цены на которые находятся в пределах от 100 до 500. Отсортируй по убыванию цен. Поля в таблице: <code>good_name</code>, <code>unit_price</code></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">Вывести сумму и количество покупок для каждой женщины. Null заменить на 0. Количество покупок не должно превышать 6. Отсортируй по имени в алфавитном порядке. Поля в таблице: <code>member_name</code>, поле суммы назови <code>sum_by</code>, поле количества назови <code>count_by</code></div></div>
+  </div>
+
+  <div class="hw-task">Затем проверь себя и подтяни пробелы, пройдя <a href="https://www.learnqa.ru/sql_test" target="_blank">тест</a>. Скрин на результаты теста приложи в ответе к ДЗ (первую попытку).</div>
+</div>
+
+<h2 id="max"><span class="h2-icon" style="background:rgba(239,68,68,0.15)">🚀</span>Максимальный уровень (необязательно)</h2>
+
+<p>Цель настолько глубокого изучения SQL — как правило плотное и сложное тестирование баз данных на текущем проекте, либо желание бустануть свою конкурентноспособность на рынке, либо свичнуться в профессии связанные с данными, развиваться в этом. На классических проектах рекомендуемого уровня знаний достаточно.</p>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">SQL симулятор с 150+ запросами разной сложности</div>
+    <p>Переходи на <a href="https://karpov.courses/simulator-sql" target="_blank">платформу</a> и начинай проходить уроки, в каждом уроке есть материал, что-то конечно лучше гуглить для полного понимания. Объем знаний достаточно большой, я в 2023 году, когда думал идти в продуктовую аналитику, проходил этот тренажер и у меня ушло порядка двух месяцев, делал по 1-3 заданиям в день (всё прошел, кроме оконных функций).</p>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-12-cicd-git-docker.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-14-backend-practice.html">Следующий урок →</a>
+</div>
+</body>
+</html>

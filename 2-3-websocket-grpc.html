@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-3 WebSocket, gRPC</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 2-3</div>
+<h1>Типы API: WebSocket, gRPC</h1>
+<p class="lesson-intro">В этом уроке продолжим изучение типов общения. Возвращайся к видео и досматривай до конца (в GraphQL не углубляйся, достаточно поверхностного понимания, это почти никогда не спрашивают и не нужно).</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#ws">WebSocket</a>
+    <a class="toc-link" href="#hw">ДЗ: тестирование работы WS</a>
+    <a class="toc-link" href="#grpc">gRPC</a>
+  </div>
+</div>
+
+<div class="video-label">Видео: REST API, SOAP, GraphQL, WebSockets, RPC — досмотреть до конца</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/XaTwnKLQi4A" allowfullscreen></iframe></div>
+
+<h2 id="ws"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🔌</span>WebSocket</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Главное про WebSocket (WS)</div>
+    <p><strong>Вебсокет</strong> — технология на отдельном протоколе (WSS), позволяющая вести непрерывное общение клиента и сервера (вместо стандартного HTTP общения «запрос-ответ»).</p>
+  </div>
+</div>
+
+<p><strong>Что важно знать:</strong></p>
+<ul class="content-list">
+  <li>Подключение WS осуществляется отдельным TCP-запросом (с handshake) по протоколу <code>wss://</code></li>
+  <li>Специальный статус-код <strong>101 Switching Protocols</strong> информирует о переключении на протокол wss для данного запроса</li>
+  <li>Канал общения остается <strong>открытым</strong>, пока не закроется принудительно (например, через обновление страницы или по таймауту от сервера)</li>
+  <li>Есть свои статус-коды (1000-4999), завязанные на закрытие соединения</li>
+  <li>Взаимодействие с вебсокетом в Devtools во вкладке <strong>Network → WS → Messages</strong></li>
+</ul>
+
+<p>Почитай дополнительно про работу вебсокетов:</p>
+
+<a class="link-card" href="https://blog.skillfactory.ru/glossary/websocket/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">WebSocket — глоссарий Skillfactory</div>
+    <div class="link-card-url">blog.skillfactory.ru/glossary/websocket/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<a class="link-card" href="https://habr.com/ru/sandbox/171066/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Про вебсокеты на Хабре</div>
+    <div class="link-card-url">habr.com/ru/sandbox/171066/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="video-label">Видео: всё про WebSockets простыми словами</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/19d4AXt3dSI" allowfullscreen></iframe></div>
+
+<div class="divider"></div>
+
+<div class="hw-block" id="hw">
+  <div class="hw-header">
+    <div class="hw-title">Тестирование работы WS</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+  <div class="hw-task"><strong>Задача:</strong> протестировать корректность работы вебсокета на двух сайтах-площадках.</div>
+
+  <h3>Площадка Quickpizza</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Переходи на сайт</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Заходи в <strong>Devtools → Network</strong></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Обновляй страницу</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Перейди во вкладку <strong>WS</strong>, перейди в запрос и в <strong>Messages</strong></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">На фронте нажми на кнопку «Pizza, Please!» <strong>три раза</strong></div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">Убедись что с каждым кликом на кнопку по вебсокету уходит и приходит по одному JSON сообщению с ключами <code>user</code>, <code>ws_visitor_id</code>, <code>msg</code></div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-text">Сделай скрин</div></div>
+    <div class="step"><div class="step-num">8</div><div class="step-text">Напиши, какое сообщение передается в ключе <code>msg</code></div></div>
+    <div class="step"><div class="step-num">9</div><div class="step-text">Перезагрузи страницу</div></div>
+    <div class="step"><div class="step-num">10</div><div class="step-text">Убедись что создался новый ws запрос, и что в старый сообщения не ходят (соединение закрыто и в колонке <strong>Time</strong> отображается время прошедшей сессии — сколько длилось соединение)</div></div>
+  </div>
+
+  <h3>Площадка Websocketstest</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Переходи на сайт</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Заходи в <strong>Devtools → Network</strong></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Обновляй страницу</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Перейди во вкладку <strong>WS</strong>, перейди в запрос и в <strong>Messages</strong></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">Убедись что с клиента ушло 3 сообщения: <code>version,</code> <code>echo,test message</code> <code>timer,</code></div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">Убедись что с сервера пришли ответы на эти сообщения, а после сообщения <code>timer,</code> инициирован пинг на клиент раз в секунду (каждую секунду приходит сообщение с сервера)</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-text">Сделай скрин</div></div>
+    <div class="step"><div class="step-num">8</div><div class="step-text">Напиши, что вернул сервер в ответ на сообщение клиента <code>version,</code></div></div>
+    <div class="step"><div class="step-num">9</div><div class="step-text">Перезагрузи страницу</div></div>
+    <div class="step"><div class="step-num">10</div><div class="step-text">Убедись что создался новый ws запрос, и что в старом остановился ежесекундный пинг (соединение закрыто)</div></div>
+  </div>
+
+  <div class="hw-task" style="margin-top:16px"><strong>В ответ на ДЗ пришли</strong> 2 скрина с ответами на 8-й пункт по каждому.</div>
+</div>
+
+<h2 id="grpc"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">⚡</span>gRPC</h2>
+
+<p>Ну а топ самых популярных способов общения компонентов друг с другом закрывают такая технология, как RPC, и построенный на основе нее гугловский фреймворк gRPC.</p>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Главное про RPC, gRPC</div>
+    <p><strong>RPC</strong> — протокол, технология вызова функций, используется для общения между бэкенд сервисами (микросервисами). Вместо привычного реста использует обращения непосредственно к функциям микросервисов, а не передает значения парами ключ:значение.<br>
+    <strong>gRPC</strong> — по сути модернизированный гуглом ускоренный RPC, использует Protobuf (Protocol Buffers) вместо JSON, HTTP/2 вместо HTTP/1.</p>
+  </div>
+</div>
+
+<ul class="content-list">
+  <li>Этот протокол, как HTTP и WS, можно тестить в <strong>Postman</strong></li>
+  <li>Имеет <strong>17 статус-кодов</strong> от 0 до 16 (подробнее в последнем видео)</li>
+  <li>Спецификация хранится в <strong>.proto</strong> файле (наподобие WSDL и OpenAPI) и пишется самим разрабом в самом начале (в отличие от REST, не возникнет ситуации, когда эндпоинты готовы, а доки на них нет)</li>
+  <li>Можно отправлять или получать сразу несколько сообщений одним запросом (стрим)</li>
+  <li>Быстрее в 3-10 раз привычного HTTP, засчет обмена данными в бинарном (двоичном) виде</li>
+</ul>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Важно</div>
+    <p>Спрашивают об этом нечасто, но если знаешь и можешь рассказать, а позже внедрить в свою легенду — это покажет тебя синьором на собесе. Часто используется в продвинутых архитектурах, например, банках. Однажды я завалил собес в иностранный банк из-за незнания gRPC, у них все микросервисы были подвязаны ей — лишил себя оффера на 300к+ :D</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: что такое gRPC и Protobuf</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/_EqVG-El5z0" allowfullscreen></iframe></div>
+
+<a class="link-card" href="https://habr.com/ru/articles/953694/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Статья про gRPC</div>
+    <div class="link-card-url">habr.com/ru/articles/953694/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">P.S. к следующему видео</div>
+    <p>Кодинг и анализ трафика в Wireshark можешь пропустить в видео, главное внимательно посмотри работу в Postman.</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: gRPC для новичков</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/DGBLwNN-YM4" allowfullscreen></iframe></div>
+
+<img class="lesson-img" src="m2-05-ws-grpc-scheme.png" alt="Схема: WebSocket до чата поддержки, gRPC между микросервисом и мэйном">
+<div class="img-caption">Общение клиента и внешнего сервиса (чат поддержки) по вебсокету, общение микросервиса и мэйна по gRPC</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-2-rest-soap.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-4-csr-ssr.html">Следующий урок →</a>
+</div>
+</body>
+</html>

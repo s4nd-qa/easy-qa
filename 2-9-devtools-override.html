@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-9 DevTools Override</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд</div>
+<div class="lesson-number">Урок 2-9</div>
+<h1>DevTools Override</h1>
+<p class="lesson-intro">В этом уроке вернемся к Devtools и посмотрим, как еще можно использовать его в тестировании.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#console">Отправка запросов через консоль Devtools</a>
+    <a class="toc-link" href="#override">Локальное изменение ответов, или Devtools Override</a>
+  </div>
+</div>
+
+<h2 id="console"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">⌨️</span>Отправка запросов через консоль Devtools</h2>
+
+<p>Ты уже прошел урок с постманом и знаешь, что можно копировать запросы с фронта и инициировать их через сторонние клиенты, например через постман или даже ту же командную строку/терминал. Так вот, можно прокидывать запросы и напрямую через девтулз, делается это в консоли.</p>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Отправка запросов через консоль</div>
+    <p>В нетворке копируешь запрос через <strong>Copy as fetch</strong> (это оборачивание запроса в js), вставляешь в консоль, можешь также подменять метод/хэдеры/тело запроса. Можно использовать данную фичу девтулза, если нужно быстро прогнать ручку с невалидными данными и лезть в постман не хочется. Также об этом иногда спрашивают на собесах.</p>
+  </div>
+</div>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Попробуй сам поотправлять запросы через консоль</div>
+    <p>Погоняй запрос POST <code>applicants</code> на <a href="https://hr.karofilm.ru/steps" target="_blank">сайт</a> из прошлого урока через консоль.</p>
+  </div>
+</div>
+
+<div class="steps">
+  <div class="step"><div class="step-num">1</div><div class="step-text">Скопируй курл этого запроса как <strong>fetch</strong> (js скрипт)</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text">Вставь скрипт в консоль</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-text">Подмени возраст на невалидный: напиши отрицательное значение</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-text">Отправь запрос</div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-text">Подумай в чем по твоему заключается баг</div></div>
+</div>
+
+<h2 id="override"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🎭</span>Локальное изменение ответов, или Devtools Override</h2>
+
+<p>С недавнего времени в хроме появилась возможность локально подменять ответ от сервера, то есть скармливать фронту измененные тобой данные и смотреть, как на это реагирует верстка, стили, скрипты.</p>
+
+<div class="video-label">Видео: как работает подмена запроса в Devtools, применяем Devtools Overrides</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/WtxuEZ5SG-0" allowfullscreen></iframe></div>
+
+<a class="link-card" href="https://developer.chrome.com/docs/devtools/overrides?hl=ru" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Дока от хрома по devtools override</div>
+    <div class="link-card-url">developer.chrome.com/docs/devtools/overrides</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Практическое применение фичи</div>
+    <p>По сути это заглушка ответа (мок). Подмена ответов помогает тестировать фронт в изоляции от бэка, например, когда фронт реализовал обработку ответов бэка на какие-то ручки, но самого бэка еще нет или приходит какая-то ошибка. Тогда можно вручную прописать «ответ» от бэка, тем самым инициировав выполнение скриптов на фронте, отвечающих за обработку ответа.</p>
+  </div>
+</div>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Попробуй переписать ответы в запросах</div>
+    <p>Попробуй на <a href="https://coffee-cart.app/" target="_blank">сайте</a> поменять данные через подмену JSON ответа (GET запрос <code>list.json</code>), поиграться с объемом кружек. Чем-то напоминает редактирование верстки в Elements, но изменения сохраняются после обновления страницы, так как вместо привычного ответа с сервера подтягивается твоя заглушка.</p>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-8-postman.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-10-kibana.html">Следующий урок →</a>
+</div>
+</body>
+</html>

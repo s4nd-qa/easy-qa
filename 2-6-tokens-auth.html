@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-6 Токены, авторизация</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд</div>
+<div class="lesson-number">Урок 2-6</div>
+<h1>Токены, авторизация</h1>
+<p class="lesson-intro">Разберись в чем разница между идентификацией, аутентификацией и авторизацией, а затем посмотрим два самых популярных механизма авторизации.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#diff">Разница: идентификация, аутентификация, авторизация</a>
+    <a class="toc-link" href="#types">Виды авторизации</a>
+    <a class="toc-link" href="#jwt">Авторизация через JWT на схеме</a>
+  </div>
+</div>
+
+<div class="video-label">Видео: отличия между авторизацией, аутентификацией, идентификацией и валидацией</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/N-uOspPMBDk" allowfullscreen></iframe></div>
+
+<h2 id="diff"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🔑</span>Разница</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Разница</div>
+    <p><strong>Идентификация</strong> — проверка логина/email на соответствие в БД. Например, типичный пример работы идентификации — при попытке зарегистрироваться на уже существующий email, система выводит ошибку (тултип).<br><br>
+    <strong>Аутентификация</strong> — проверка логина/email и пароля на соответствие в БД. Например, когда ты неправильно ввел свои креды и нажал «войти», уходит POST запрос и возвращается <strong>401</strong> ошибка, значит, введенные данные отличаются от тех, что в БД, и попасть на сайт ты не можешь.<br><br>
+    <strong>Авторизация</strong> — выдача доступа к ресурсу и соответствующих прав, если таковые есть. Например, ты успешно зашел в свой аккаунт, но решил ввести в URL админский домен (например, <code>admin.gym.ru</code>). Для твоего логина прав в админку нет, а значит тебя развернет <strong>403</strong> ошибкой, которая сообщает о запрете доступа к этому ресурсу.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://habr.com/ru/articles/720842/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Статья про эти отличия</div>
+    <div class="link-card-url">habr.com/ru/articles/720842/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="types"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🎫</span>Авторизация через сессию, JWT (Access и Refresh токены)</h2>
+
+<p>Посмотри как устроены 2 самых популярных механизма авторизации:</p>
+
+<div class="video-label">Видео: что такое JWT, Access и Refresh токены, разница между JWT и сессиями</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/BlhDDaa4Cck" allowfullscreen></iframe></div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Виды авторизации</div>
+    <p><strong>Через сессии (куки, session storage)</strong> — после авторизации через хэдер ответа <code>Set-Cookie</code> выдается кука с сессией (обычно называется <em>session_id</em> или как-то так), при каждом последующем запросе передается в хэдере запроса <code>Cookie</code>. Как правило обновляются после перелогинивания, либо задается время жизни через хэдер <code>Max-Age</code><br><br>
+    <strong>Через JWT токен (JSON Web Token)</strong> — после авторизации выдается <code>access_token</code> и <code>refresh_token</code> в JSON в теле ответа (например, POST запроса на авторизацию). Аксесс живет недолго, обычно не больше 15 минут, рефреш живет долго и нужен для обновления аксесс токена рефреш запросами (например, это может быть ручка <em>auth.gym.ru/refresh</em>, а js будет контролировать логику отправки такого запроса раз в 15 минут). JWT несет в себе полезную инфу, можно декодировать, например, через jwt.io<br><br>
+    <strong>Через OAuth, OAuth 2.0</strong> — используют внешние сервисы авторизации (например, VK, Google)</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://habr.com/ru/companies/vk/articles/343288/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Про виды реализации аутентификации</div>
+    <div class="link-card-url">habr.com/ru/companies/vk/articles/343288/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<a class="link-card" href="https://www.tester-today.com/jwt" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Формат JWT токена</div>
+    <div class="link-card-url">tester-today.com/jwt</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="jwt"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📐</span>Авторизация через JWT на нашей схеме</h2>
+
+<img class="lesson-img" src="m2-10-jwt-scheme.png" alt="Схема авторизации через JWT: access и refresh токены">
+<div class="img-caption">Обрати внимание, какая низкая нагрузка на БД в сравнении с сессиями. Достаточно вытащить только рефреш, а уже бэк будет отвечать за своевременное обновление и аутентификацию этого токена в запросах</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-5-cors.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-7-swagger.html">Следующий урок →</a>
+</div>
+</body>
+</html>

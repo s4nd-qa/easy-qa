@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-2 REST и SOAP</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд</div>
+<div class="lesson-number">Урок 2-2</div>
+<h1>Типы API: REST и SOAP</h1>
+<p class="lesson-intro">В предыдущем уроке ты узнал, что компоненты клиент-серверной архитектуры общаются между собой. Существуют определенные правила и рекомендации по поводу этого общения. Рассмотрим архитектурный стиль REST и более строгий протокол SOAP, разберем что такое REST API, что такое CRUD-операции, а в следующих уроках посмотрим другие типы общения.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#rest">REST</a>
+    <a class="toc-link" href="#crud">CRUD и пример тестирования RESTful API</a>
+    <a class="toc-link" href="#soap">SOAP</a>
+  </div>
+</div>
+
+<div class="video-label">Видео: REST API, SOAP, GraphQL, WebSockets, RPC — смотреть до 31:42</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/XaTwnKLQi4A" allowfullscreen></iframe></div>
+
+<h2 id="rest"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🌐</span>REST</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Главное про REST</div>
+    <p><strong>REST</strong> — самый распространенный архитектурный подход (стиль) к общению, набор <strong>рекомендаций</strong> как лучше вести общение через HTTP протокол, то есть от них можно отклоняться и видоизменять. Пример: использование HTTP методов (глаголов) по своему усмотрению (об этом ниже).<br>
+    <strong>REST API / RESTful API</strong> — API (общение) построенное на принципах REST.</p>
+  </div>
+</div>
+
+<p><strong>Что важно знать:</strong></p>
+<ul class="content-list">
+  <li>Основные применяемые методы для общения по CRUD: GET, POST, PUT, PATCH, DELETE</li>
+  <li>Идемпотентность, безопасность и кэшируемость методов</li>
+  <li>Разница GET и POST, PUT и PATCH</li>
+  <li>Правильность построения запросов (правильный метод, заголовки и, если необходимо, тело запроса) и ответов (правильный статус-код, заголовки, если необходимо, тело ответа)</li>
+  <li>Версионность приложений</li>
+  <li>Документирование API (инструмент Swagger, спецификация OpenAPI)</li>
+</ul>
+
+<h2 id="crud"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🔁</span>CRUD и пример тестирования RESTful API</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">CRUD / CRUDL</div>
+    <p>Краткое сокращение 4 (5) основных типов операций с данными:<br>
+    – <strong>Create</strong> (создание) — по ресту это глагол POST<br>
+    – <strong>Read</strong> (чтение) — глагол GET<br>
+    – <strong>Update</strong> (обновление) — глаголы PUT или PATCH<br>
+    – <strong>Delete</strong> (удаление) — глагол DELETE<br>
+    – <strong>List</strong> (список) — иногда встречается расширение стандартного CRUD до CRUDL. Тот же GET, но не к конкретному объекту, а к списку объектов</p>
+  </div>
+</div>
+
+<p>На собесе могут спросить: представь, у тебя есть личный кабинет пользователя. Какие основные крудовские проверки ты бы провел? <strong>Ответить можно так:</strong></p>
+
+<div class="steps">
+  <div class="step"><div class="step-num">1</div><div class="step-text">Сначала попробовал бы создать личный кабинет пользователя, скорее всего это было бы через регистрацию нового пользователя и соответствующую <span class="method post">POST</span> ручку, например <code>/register</code></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text">Затем попробовал бы посмотреть, существует ли созданный личный кабинет и доступен ли он для просмотра, например через <span class="method get">GET</span> ручку <code>/profile</code></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-text">Затем попробовал бы изменить данные в личном кабинете. Тут уже смотря как реализовано на проекте, если ваш рест предполагает использование PUT и PATCH вместе, то прогнал бы сначала PUT ручку, посмотрел обновляется ли JSON целиком, затем прогнал бы PATCH ручку с обновлением выбранных ключей</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-text">И наконец попробовал бы удалить личный кабинет, скорее всего это есть удаление всей учетной записи через ту же ручку, но с методом <span class="method delete">DELETE</span></div></div>
+</div>
+
+<a class="link-card" href="https://habr.com/ru/articles/351890/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Как правильно реализовать REST API и версионность через хэдер Content-Type</div>
+    <div class="link-card-url">habr.com/ru/articles/351890/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<a class="link-card" href="https://stepik.org/lesson/844731/step/5" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Подробно про HTTP методы в рамках реста: чем отличается POST от PUT, PUT от PATCH</div>
+    <div class="link-card-url">stepik.org/lesson/844731/step/5</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<img class="lesson-img" src="m2-04-rest-openapi-swagger.png" alt="Применение REST, OpenAPI и Swagger к архитектуре">
+<div class="img-caption">Пример применения архитектурного стиля REST к API и архитектуре в целом: у компонентов присутствует версионность, общение идет через REST API, то есть согласно описанной спецификации (схеме) в OpenAPI и помещенной в Swagger для удобной документации этого API</div>
+
+<h2 id="soap"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🧼</span>SOAP</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Главное про SOAP</div>
+    <p><strong>SOAP</strong> — протокол обмена структурированными сообщениями. Это уже не рекомендации, а <strong>строгие правила</strong> как компонентам следует общаться, может использовать любой протокол прикладного уровня (не только HTTP).</p>
+  </div>
+</div>
+
+<p><strong>Что важно знать:</strong></p>
+<ul class="content-list">
+  <li><strong>WSDL</strong> — основной документ SOAP, контракт, язык описания сервисов и доступа к ним. Основан на языке XML. Своим смыслом напоминает OpenAPI, так как по сути тоже является API документацией — описывает общение между конкретными компонентами</li>
+  <li><strong>XML</strong> — формат сообщений, смысл тот же что в JSON, но с более сложной структурой (ты знакомился в уроке 1-6)</li>
+  <li>Сообщения состоят из <strong>Envelope, Header, Body</strong>, также можно прикладывать вложения в сообщения (<strong>Attachments</strong>)</li>
+  <li><strong>SoapUI</strong> — внешний интерфейс для более удобной работы с SOAP, сюда можно загрузить WSDL и начинать тестить. Схож с постманом для отправки запросов (заливаем wsdl-ку и дергаем соуповские «ручки»), также схож со сваггером для рест, так как сваггер по сути тоже интерфейс, основанный на OpenAPI</li>
+</ul>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Важно</div>
+    <p>На данный момент SOAP устаревший протокол, и большинство проектов использует рест. Однако на 10-15% собесов поощряется знания и опыт работы с SOAP, обычно это энтерпрайзы и банки. На практике вряд ли придется работать с SOAP.</p>
+  </div>
+</div>
+
+<p>Для более экспертного понимания SoapUI, SOAP и его отличий с REST, для закрепления принципов работы протоколов и API, посмотри видео:</p>
+
+<div class="video-label">Видео: SOAP vs REST запросы на примерах</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/C2TMZeRdLKw" allowfullscreen></iframe></div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-1-client-server.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-3-websocket-grpc.html">Следующий урок →</a>
+</div>
+</body>
+</html>

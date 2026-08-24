@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-4 CSR и SSR</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд</div>
+<div class="lesson-number">Урок 2-4</div>
+<h1>CSR и SSR, Тонкий и толстый клиенты</h1>
+<p class="lesson-intro">Посмотри видео про различия тонких и толстых клиентов, а затем разберемся с технологиями, отвечающими за логику работы клиента.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#thin">Тонкий и толстый клиенты</a>
+    <a class="toc-link" href="#csr-ssr">CSR и SSR</a>
+  </div>
+</div>
+
+<h2 id="thin"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">💻</span>Тонкий и толстый клиенты</h2>
+
+<div class="video-label">Видео: веб-программирование — тонкий и толстый клиент</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/DXEq98FLLtQ" allowfullscreen></iframe></div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">На практике веб-клиент является смешанным</div>
+    <p>Сейчас встречается реализация веба как тонкого клиента, так и толстого — зависит это от количества интерактивности на вебе (скриптов и их логики на фронте). Чаще всего это именно смешанный формат, например:<br><br>
+    – в одном эндпоинте это будет <strong>тонкий</strong> клиент (подгружается HTML с сервера и далее не меняется, например, страница контактных данных),<br>
+    – в другом же эндпоинте это будет <strong>толстый</strong> клиент (подгружается HTML с сервера и JS, отвечающие за изменение DOM-дерева, например, страница с карточками товара: по раскрытию карточки товара добавляются новые HTML-элементы, а при скрытии удаляются — так обеспечивается интерактивность верстки)</p>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Толстыми чаще всего называют не веб-клиенты</div>
+    <p>Зачастую под толстыми клиентами сейчас понимают десктопные и мобильные приложения со встроенной логикой и автономностью, например, оффлайн карты или игры.<br><br>
+    А толстые или смешанные веб-клиенты чаще называют просто <strong>смарт-клиентами</strong>, когда как устаревший полностью тонкий веб-клиент называют <strong>«тупым клиентом»</strong> (dumb client).<br><br>
+    В жаргоне айтишников также можно слышать «жирный» клиент и «худой» клиент :)</p>
+  </div>
+</div>
+
+<p>Почитай про плюсы и минусы каждого типа.</p>
+
+<h2 id="csr-ssr"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🎨</span>CSR и SSR</h2>
+
+<p>С определениями и их отличиями разобрались, посмотрим на технологии, отвечающие за логику работы клиента: <strong>CSR</strong> (Client-Side Rendering, рендеринг на стороне клиента) и <strong>SSR</strong> (Server-Side Rendering, рендеринг на стороне сервера).</p>
+
+<div class="video-label">Видео: принцип работы SSR, в чем разница между CSR и SSR</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/4LNqpmynmvs" allowfullscreen></iframe></div>
+
+<a class="link-card" href="https://seo2you.ru/blog/seo/csr-vs-ssr-chto-vybrat/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Статья про разницу CSR и SSR и влияние на SEO сайта</div>
+    <div class="link-card-url">seo2you.ru/blog/seo/csr-vs-ssr-chto-vybrat/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<img class="lesson-img" src="m2-06-ssr-scheme.png" alt="Схема SSR: запрос HTML, в ответе полностью сформированный HTML">
+<div class="img-caption">Пример SSR реализации в эндпоинте авторизации: данный эндпоинт статичен, поэтому интерактивная генерация HTML не нужна. Например, здесь пользователь всегда будет видеть несколько полей (логин, пароль) и кнопку «Войти»</div>
+
+<img class="lesson-img" src="m2-07-csr-scheme.png" alt="Схема CSR: JS запрашивает JSON и рендерит карточки тренировок">
+<div class="img-caption">Пример CSR реализации в эндпоинте списка тренировок: здесь с пролистыванием страницы вниз подгружаются всё новые и новые карточки с тренировками (наподобие ленты новостей в соц. сетях или товаров в маркетплейсе). Каждая такая подгрузка начинается с API-запроса со стороны скрипта (запрашивает JSON), затем скрипт (этот же или другой) парсит JSON новых данных в HTML элементы и обновляет текущую верстку (добавляет новые элементы в раннее загруженный «сырой» HTML файл)</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-3-websocket-grpc.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-5-cors.html">Следующий урок →</a>
+</div>
+</body>
+</html>

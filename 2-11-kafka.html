@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-11 Kafka, брокеры сообщений</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд</div>
+<div class="lesson-number">Урок 2-11</div>
+<h1>Kafka, брокеры сообщений</h1>
+<p class="lesson-intro">В каждом более менее развитом проекте наступает момент, когда для эффективного масштабирования системы мало классической архитектуры «клиент-сервер-БД». Тогда между сервером и БД добавляют новый компонент — брокер сообщений, который позволяет привнести асинхронность в бэк.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#integration">Интеграционное тестирование</a>
+    <a class="toc-link" href="#brokers">Брокеры сообщений</a>
+    <a class="toc-link" href="#diff">Отличия Kafka и RabbitMQ</a>
+    <a class="toc-link" href="#gui">GUI для кафки</a>
+    <a class="toc-link" href="#structure">Структура кафки</a>
+  </div>
+</div>
+
+<p>Тестеру важно уметь проводить интеграционное тестирование, и часто рядом с интеграционным тестированием стоит умение заглянуть в брокер сообщений. В этом уроке также посмотрим много примеров интеграционного тестирования.</p>
+
+<h2 id="integration"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🔗</span>Интеграционное тестирование</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Интеграционное тестирование</div>
+    <p>С теорией будешь знакомиться в следующем модуле, пока для понимания будет достаточно того, что тестирование интеграций — это тестирование общения компонентов на разных уровнях, например, сервис с сервисом через REST API (или gRPC), сервис с базой данных (через SQL), фронт с сервисом (REST API, WebSocket), сервис с кафкой (сообщения), внешние интеграции (внешнее API) и так далее.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://www.tester-today.com/integration-tests" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Простой пример что такое интеграционное тестирование</div>
+    <div class="link-card-url">tester-today.com/integration-tests</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="video-label">Видео: лучший гайд по Kafka для начинающих за 1 час</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/hbseyn-CfXY" allowfullscreen></iframe></div>
+
+<a class="link-card" href="https://habr.com/ru/articles/916726/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Статья на закрепление понимания</div>
+    <div class="link-card-url">habr.com/ru/articles/916726/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="brokers"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">📬</span>Брокеры сообщений</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Брокеры сообщений</div>
+    <p>Отдельный сервис, выполняющий функцию посредника в общении между компонентами. Обеспечивает асинхронное общение (компонент может обратиться к сообщению позже), доставку сообщений, иногда на брокерах реализуется бэковая валидация (дабы не нагружать сервера) и маршрутизация (что-то вроде внутреннего API-шлюза).</p>
+  </div>
+</div>
+
+<p><strong>Основные субъекты брокеров:</strong></p>
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag">Сообщение</div>
+    <div class="team-desc">Какие-то данные, например, запись о регистрации нового пользователя</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Продюсер (producer)</div>
+    <div class="team-desc">Отправитель сообщения, например, фронт</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Консьюмер (consumer)</div>
+    <div class="team-desc">Получатель или подписчик (если получателей несколько), например, сервис аналитики может быть подписан на сообщения с разных уголков фронта</div>
+  </div>
+</div>
+
+<p>Два самых популярных брокера: <strong>Kafka</strong> и <strong>RabbitMQ</strong>. Будем делать упор в кафку, но также посмотрим оба в сравнении.</p>
+
+<h2 id="diff"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">⚖️</span>Отличия Kafka и RabbitMQ</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Отличия Kafka и RabbitMQ</div>
+    <p><strong>Kafka:</strong><br>
+    – «Ленивый» брокер, подписчики сами забирают (пуллят, pull) сообщения<br>
+    – Время хранения сообщений задается вручную при настройке кафки (это делает девопс), сообщения можно перечитывать повторно<br>
+    – Выдерживает высокие нагрузки, 1-2 млн сообщений в секунду<br>
+    – Сложно развернуть в проекте, для высоконагруженных систем<br><br>
+    <strong>RabbitMQ:</strong><br>
+    – «Умный» брокер: сам отправляет (пушит, push) сообщения подписчикам<br>
+    – Сообщения удаляются сразу после прочтения<br>
+    – Небольшие нагрузки, 10-40 тыс сообщений в секунду<br>
+    – Легко развернуть в проекте, есть много инструментов «из коробки», эффективен на слабонагруженных системах<br>
+    – Гибкая маршрутизация</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: основы Kafka для тестировщиков. Apache Kafka for QA</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/PWBzLMsXr3A" allowfullscreen></iframe></div>
+
+<h2 id="gui"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🖥️</span>GUI для кафки</h2>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">GUI для кафки</div>
+    <p>На собесе иногда попросят рассказать, через что ты тестил кафку. Так как кафка сама по себе сервис, для комфортного взаимодействия с ней необходим GUI клиент. В видео выше использовался клиент Kowl, почитай в статье ниже какие клиенты есть и позже выбери себе в легенду. На собесах мало кто копает в это и тем более просит продемонстрировать, но уверенный ответ сильно выделит тебя. Еще подсвети проблемы с разворачиванием на проекте, занимательные истории можно найти на форумах типа stackoverflow.<br><br>
+    ⚠️ <strong>Kowl в легенду не брать</strong>, так как с 2022 не обслуживают кафку.<br><br>
+    P.S. Также есть неупомянутый клиент <strong>Offset Explorer</strong>, можешь тоже погуглить.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://habr.com/ru/companies/flant/articles/688190/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Статья по GUI для кафки</div>
+    <div class="link-card-url">habr.com/ru/companies/flant/articles/688190/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<img class="lesson-img" src="m2-16-kafka-structure.png" alt="Строение кафки: кластер, брокеры, топики, партиции, Zookeeper">
+<div class="img-caption">Строение кафки. Обрати внимание на Zookeeper — это отдельный сервис, который мониторит состояние кафки (если упадет какой-либо сервер кафки, zookeeper останется жить и сообщит о падении)</div>
+
+<h2 id="structure"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🧱</span>Структура кафки</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Структура кафки</div>
+    <p>Вложенность сущностей кафки следующая:<br>
+    – Экосистема Kafka (кластер Kafka и Zookeeper)<br>
+    – Кластер Kafka<br>
+    – Брокер (сервер)<br>
+    – Топик (тема)<br>
+    – Партиция (деление на потоки внутри темы)<br>
+    – Оффсет (порядковый номер сообщения, начиная с 0) и само сообщение</p>
+  </div>
+</div>
+
+<img class="lesson-img" src="m2-17-kafka-topic-flow.png" alt="Передача сообщений в кафке на примере топика кредов пользователей">
+<div class="img-caption">Передача сообщений в кафке на примере топика кредов пользователей</div>
+
+<p><strong>Видеопримеры тестирования через кафку:</strong></p>
+
+<div class="video-label">Видео: как тестировать Kafka в интеграции с другими микросервисами</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/mRBr1JMCwVs" allowfullscreen></iframe></div>
+
+<div class="video-label">Видео: используем Jaeger для тестирования интеграции между микросервисами</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/Jiy_Cgmx02U" allowfullscreen></iframe></div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-10-kibana.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-12-cicd-git-docker.html">Следующий урок →</a>
+</div>
+</body>
+</html>

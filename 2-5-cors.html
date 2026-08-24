@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-5 CORS запросы</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд</div>
+<div class="lesson-number">Урок 2-5</div>
+<h1>CORS запросы</h1>
+<p class="lesson-intro">Продолжаем изучать технологии и подходы современного веба, обсудим такую тему как CORS.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#main">Главное про CORS</a>
+    <a class="toc-link" href="#headers">Разбор Preflight-запроса</a>
+    <a class="toc-link" href="#deep">Если есть желание разобраться сильнее</a>
+  </div>
+</div>
+
+<div class="video-label">Видео: что такое CORS и зачем он нужен, по простому</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/39vDgivMPHs" allowfullscreen></iframe></div>
+
+<p>На что смотреть во время тестирования:</p>
+
+<div class="video-label">Видео: CORS, Preflight и Options — как тестировщику работать с корсами</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/sZGNDx_afPU" allowfullscreen></iframe></div>
+
+<h2 id="main"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🛡️</span>Главное про CORS</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Главное про CORS (корсы)</div>
+    <p><strong>CORS</strong> — механизм, обеспечивающий доступ к API (host) с разных источников (origin) с помощью специальных заголовков и, если требуется, предварительных запросов через метод <strong>OPTIONS</strong> (Preflight). В ответ на такой предварительный запрос возвращаются корс-заголовки группы <strong>Access-Control</strong>, которые указывают, как можно общаться с API с текущего домена.<br><br>
+    CORS запросы могут быть как <strong>простые</strong> (без Preflight, при соблюдении определенных требований: методы GET HEAD POST, ограниченный набор стандартных заголовков), так и <strong>предварительные</strong> (Preflight) — отдельный предзапрос с использованием метода OPTIONS.<br><br>
+    В тестировании важно это понимать, так как для некоторых запросов в Postman придется вручную менять заголовок запроса <code>Origin</code> на свой. Иначе CORS заблокирует запрос.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://doka.guide/tools/cors/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Какие основные заголовки есть</div>
+    <div class="link-card-url">doka.guide/tools/cors/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="headers"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🔍</span>Разбор Preflight-запроса</h2>
+
+<img class="lesson-img" src="m2-08-preflight-headers.png" alt="Preflight-запрос OPTIONS с CORS-заголовками ответа">
+<div class="img-caption">Пример Preflight запроса. Красным обведены CORS заголовки ответа с сервера</div>
+
+<p>Разберем ответ на предзапрос на скрине выше. В данном случае делался кроссдоменный POST запрос (с домена <code>pokemonbattle.ru</code> на домен <code>buro.pokemonbattle.ru</code>) с авторизованного клиента, соответственно, в предзапросе клиент спрашивает необходимые заголовки и получает ответ с сервера, где хедером:</p>
+
+<div class="team-list">
+  <div class="team-item">
+    <div class="team-role-tag">Access-Control-Allow-Credentials</div>
+    <div class="team-desc">разрешается использование куки</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Access-Control-Allow-Headers</div>
+    <div class="team-desc">разрешает передачу заголовка с токеном (подтверждение авторизации)</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Access-Control-Allow-Methods</div>
+    <div class="team-desc">перечисляет разрешенные методы (наш POST здесь есть)</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Access-Control-Allow-Origin</div>
+    <div class="team-desc">разрешает доступ с нашего домена</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Access-Control-Max-Age</div>
+    <div class="team-desc">кэширует этот запрос на 10 минут</div>
+  </div>
+  <div class="team-item">
+    <div class="team-role-tag">Vary: Origin</div>
+    <div class="team-desc">объясняет браузеру, что с нашего домена разрешено доставать запрос из кэша</div>
+  </div>
+</div>
+
+<img class="lesson-img" src="m2-09-cors-vk-flow.png" alt="Preflight-запрос к внешнему сервису авторизации VK">
+<div class="img-caption">В данном примере показан GET (Preflight) запрос к внешнему сервису авторизации</div>
+
+<h2 id="deep"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🧠</span>Если есть желание разобраться сильнее</h2>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Для легенды</div>
+    <p>Если захочешь расписать подробно про корсы в своей легенде, можешь ознакомиться с этим механизмом на уровне разработки, посмотреть примеры ошибок связанных с корсами, примеры реализации.<br><br>
+    В целом тема корсов популярна, но не часто поднимается на собеседованиях, далеко не каждый собеседующий QA лид её знает на должном уровне. Однако её уверенное знание и рассказ с примерами в своей легенде покажет тебя как синьора и пойдет жирным плюсом.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://habr.com/ru/companies/macloud/articles/553826/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">CORS на уровне разработки: примеры ошибок и реализации</div>
+    <div class="link-card-url">habr.com/ru/companies/macloud/articles/553826/</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-4-csr-ssr.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-6-tokens-auth.html">Следующий урок →</a>
+</div>
+</body>
+</html>

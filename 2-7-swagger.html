@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 2-7 Swagger, OpenAPI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 2 — Бэкенд · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 2-7</div>
+<h1>Swagger, OpenAPI</h1>
+<p class="lesson-intro">К этому моменту ты познакомился с архитектурными технологиями, составляющие основу процессов взаимодействия компонентов (клиент, сервер, БД). Теперь перейдем к изучению практических инструментов, изучим раздел анализа трафика и поработаем с API.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#swagger">Что такое Swagger</a>
+    <a class="toc-link" href="#openapi">Как посмотреть OpenAPI</a>
+    <a class="toc-link" href="#spec">Из чего состоит спецификация</a>
+    <a class="toc-link" href="#hw">ДЗ: исследование API в Swagger</a>
+  </div>
+</div>
+
+<h2 id="swagger"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📗</span>Swagger</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Swagger</div>
+    <p>Вспомни уроки 0-6 и 2-2. Там мы касались того, что собой представляет сваггер.<br>
+    По сути это спека (документация) к API, описание как и какие ручки можно дергать. Сваггер — это <strong>GUI</strong>, построенный на основе обычного JSON или YAML документа с перечислением тех самых ручек, методов, схем, допустимых значений и т.д. Этот документ называется <strong>OpenAPI</strong>.<br><br>
+    В тестировании долго копаться в сваггере не нужно, обычно посмотреть типы поддерживаемых данных и перечисляемые параметры, JSON схему, возможные коды ответов и так далее. И закинуть пару простеньких запросов на бэк (что ты уже делал в вводном модуле).</p>
+  </div>
+</div>
+
+<h2 id="openapi"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🔎</span>Как посмотреть OpenAPI, если есть сваггер</h2>
+
+<p>Перейди в уже знакомый тебе <a href="https://petstore.swagger.io/" target="_blank">swagger petstore</a>. Нажми на эту ссылочку:</p>
+
+<img class="lesson-img" src="m2-11-petstore-swagger-link.png" alt="Ссылка на swagger.json в интерфейсе petstore">
+
+<p>И нажми галочку «Автоформатировать». Ты увидишь большой JSON файл со всеми ручками из сваггера и их документацией.</p>
+
+<img class="lesson-img" src="m2-12-openapi-json.png" alt="OpenAPI в формате JSON с автоформатированием">
+<div class="img-caption">Так выглядит OpenAPI, написанный в формате JSON. На основе этой спеки и собран сваггер petstore. Сваггер берет эту спеку и красиво её визуализирует в GUI, которым удобно пользоваться</div>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Зачем мне знать про OpenAPI?</div>
+    <p>В теории на твоем будущем проекте можно откиснуть сваггер, и тебе придется вручную искать нужную ручку и просматривать требования к ней, чтобы корректно потестить бэк. Это скорее исключение, но знать важно. И в целом очень важно понимать, что ядро сваггера — это OpenAPI.<br><br>
+    Также немаловажно уметь импортировать OpenAPI в Postman, чтобы быстро формировать коллекции из ручек. Вместо того, чтобы вносить каждую ручку по отдельности. Об этом в уроках с Postman.</p>
+  </div>
+</div>
+
+<h2 id="spec"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">📝</span>Из чего состоит спецификация</h2>
+
+<div class="callout hard">
+  <div class="callout-icon">🧠</div>
+  <div>
+    <div class="callout-title">Если хочешь посмотреть как пишется спецификация разрабами</div>
+    <p>И позже внедрить это в свою легенду :)</p>
+  </div>
+</div>
+
+<div class="video-label">Видео: как пишется спецификация разработчиками</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/lYjm2w8-ERI" allowfullscreen></iframe></div>
+
+<p>Изучи из чего состоит спецификация и где искать её параметры в сваггере:</p>
+
+<div class="video-label">Видео: требования и документация к REST API, OpenAPI, Swagger</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/opevzmQJ1-Y" allowfullscreen></iframe></div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Типы данных в JSON (JSON Schema)</div>
+    <p>Читай, если подзабыл какие типы данных поддерживаются JSON и могут указываться в JSON схеме.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://www.schoolsw3.com/js/js_json_datatypes.php" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Типы данных в JSON</div>
+    <div class="link-card-url">schoolsw3.com/js/js_json_datatypes.php</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="divider"></div>
+
+<div class="hw-block" id="hw">
+  <div class="hw-header">
+    <div class="hw-title">Исследование API в Swagger</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+
+  <div class="hw-task">Представь разраб выкатил тебе доку в сваггере будущей функциональности, и ты уже собираешься писать тест-кейсы на бэк. Предварительно тебе важно понять ограничения в тех или иных ручках, какие типы данных допускаются для конкретных ключей, какие конкретные значения допускаются и так далее.</div>
+
+  <div class="hw-task">Заходи в <a href="https://petstore.swagger.io/#/user" target="_blank">сваггер</a> и переходи к сервису <strong>user</strong>.</div>
+
+  <div class="hw-task"><strong>Задача:</strong> заресерчить базовые круд-операции пользователя в системе (4 ручки), прогнать валидные кейсы для каждой ручки.</div>
+
+  <p><strong>Порядок действий:</strong></p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Выбери 4 главные ручки отвечающие требованиям CRUD</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Изучи типы данных для первой Create (POST) ручки, то есть прочти JSON схему: посмотри для каких ключей какие типы данных (а в некоторых какие конкретные данные) допустимы</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Для первой Create ручки придумай тестовые данные в соответствии с типами данных (пример: для типа string — строка, твои тестовые данные могут иметь вид <code>"test_name"</code>)</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Прогони с этими данными все свои ручки в таком круд-порядке: <strong>Create, Read, Update, Read, Delete, Read</strong> (сделай скрин каждого ответа)</div></div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">ℹ️</div>
+    <div>
+      <div class="callout-title">P.S.</div>
+      <p>БД может также криво отрабатывать, если после PUT отправляешь GET и не видишь изменений в приходящем JSON, попробуй отправить GET еще раз.</p>
+    </div>
+  </div>
+
+  <div class="hw-task"><strong>В ответ пришли:</strong></div>
+  <ul class="checklist">
+    <li>JSON схему Create ручки (ключи и типы данных для них)</li>
+    <li>Свой JSON с тестовыми данными (запиши свои значения для всех ключей)</li>
+    <li>Скрины с ответами по каждому отправленному запросу из шага 4</li>
+  </ul>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="2-6-tokens-auth.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="2-8-postman.html">Следующий урок →</a>
+</div>
+</body>
+</html>
