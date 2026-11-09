@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 3-7 TMS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 3-7</div>
+<h1>Ведение тестовой документации в TMS</h1>
+<p class="lesson-intro">Где хранят тест-кейсы, как собирают тест-планы и проводят прогоны. Разбираемся на примере Qase.io.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#tms">Что такое TMS</a>
+    <a class="toc-link" href="#repo">Репозиторий: сьюты и кейсы</a>
+    <a class="toc-link" href="#env">Среды и релизы</a>
+    <a class="toc-link" href="#plans">Тест-планы</a>
+    <a class="toc-link" href="#runs">Прогон</a>
+    <a class="toc-link" href="#hw">ДЗ: работа с TMS</a>
+  </div>
+</div>
+
+<h2 id="tms"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🗃️</span>Что такое TMS</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">TMS, Test Management System</div>
+    <p>— система управления тестированием. Удобный способ структурированно хранить тест-кейсы, формировать тест-сьюты и тест-планы, проводить запуски тест-планов (тест-раны или тест прогоны), формировать отчеты<br><br>
+    TMS-ок огромная масса, самые популярные:<br>
+    — TestIT (российская)<br>
+    — Allure TestOps<br>
+    — ... и импортозамещенный аналог ТестОпс<br>
+    — TestRail<br>
+    — Zephyr Scale (встраивается в джиру)<br>
+    — <strong>Qase</strong> (с этой поработаем)<br><br>
+    Некоторые компании без развитого тестирования ведут тест-доку на уровне гугл таблиц, либо кладут на плечи тестировщика выбор TMS (худший сценарий: поднимать самостоятельно на своем железе и шарить своей команде, оттуда лучше бежать)</p>
+  </div>
+</div>
+
+<h2 id="video"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🧭</span>Учебная Qase: разбор по шагам</h2>
+
+<p>Наш учебный проект в Qase называется <strong>EasyQA</strong>. В нём лежат тест-кейсы по тому же сайту <a href="https://rivo.agency" target="_blank">rivo.agency</a>, что и задачи в учебной Jira. Данные для входа — в описании урока под этим блоком. Интерфейс Qase на английском, поэтому названия кнопок ниже даны так, как они написаны на экране.</p>
+
+<h2 id="repo"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🗂️</span>Репозиторий: сьюты и кейсы</h2>
+
+<div class="steps">
+  <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Репозиторий.</strong> Слева в меню — <strong>Repository</strong>. В центре дерево сьютов (как папки): «Сервис карьеры» → «Список вакансий», «Карточка вакансии»; «Сервис обратной связи» → «Форма обратной связи», «Блок контактов». Сьют «Тест» — для твоего ДЗ в этом уроке, «Практика» — для практики в конце модуля. Клик по сьюту показывает его кейсы справа. Обведены две кнопки, которые понадобятся в ДЗ: <strong>«+» рядом с Suites</strong> (создать сьют) и <strong>Manual test</strong> (создать кейс).</div></div>
+</div>
+<img class="lesson-img" src="m3-23-qase-repository.png" alt="Репозиторий Qase: дерево сьютов и кейсы">
+
+<div class="steps">
+  <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Кейс изнутри.</strong> Клик по названию кейса открывает его справа: Description (что проверяем), Pre-conditions (где стоим перед началом) и Steps — таблица из действия (Action), тестовых данных (Data) и ожидаемого результата (Expected result). Во вкладке Properties — серьёзность, приоритет, тип, Behavior (позитивный/негативный) и Milestone (к какому релизу относится).</div></div>
+</div>
+<img class="lesson-img" src="m3-24-qase-case.png" alt="Открытый тест-кейс в Qase">
+
+<div class="steps">
+  <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Свой сьют.</strong> Нажми «+» рядом с Suites. В <strong>Suite name</strong> впиши своё имя и фамилию, в <strong>Parent suite</strong> выбери «Тест» — иначе сьют окажется в корне проекта. Нажми <strong>Create</strong>.</div></div>
+</div>
+<img class="lesson-img half" src="m3-25-qase-create-suite.png" alt="Форма создания сьюта">
+
+<div class="steps">
+  <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Новый кейс.</strong> Выдели свой сьют и нажми <strong>Manual test</strong> справа сверху — откроется форма нового кейса. Заполни Title — название, по которому понятно, что проверяем. Поля со звёздочкой обязательные: обязательно выбери <strong>Behavior</strong> (Positive или Negative) — по умолчанию там Not set. В <strong>Milestone</strong> укажи релиз, к которому относится задача: для EQA-1 это RLEQA-4. Проверь, что в поле Suite стоит твой сьют.</div></div>
+</div>
+<img class="lesson-img" src="m3-26-qase-create-case.png" alt="Форма создания тест-кейса: основные поля">
+
+<div class="steps">
+  <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Предусловия и шаги.</strong> Ниже заполни Pre-conditions, затем в блоке <strong>Test Case Steps</strong> нажимай <strong>New step</strong> и для каждого шага пиши действие, данные и ожидаемый результат. Сохрани кейс кнопкой <strong>Save</strong> внизу.</div></div>
+</div>
+<img class="lesson-img" src="m3-27-qase-case-steps.png" alt="Шаги тест-кейса: действие, данные, ожидаемый результат">
+<div class="img-caption">Пример негативного кейса: в поле Email вводим «abc» без @ и ждём, что заявка не уйдёт</div>
+
+<h2 id="env"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🌍</span>Среды и релизы</h2>
+
+<div class="steps">
+  <div class="step"><div class="step-num">6</div><div class="step-text"><strong>Environments.</strong> Среды, на которых проводится тестирование: Development, Staging, Production. У нас по факту есть только прод (rivo.agency), но на проектах обычно три стенда, и в прогоне всегда указываешь, где именно тестировал.</div></div>
+</div>
+<img class="lesson-img" src="m3-28-qase-environments.png" alt="Список сред в Qase">
+
+<div class="steps">
+  <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Milestones.</strong> Milestone = релиз. Названия совпадают с релизными задачами в Jira: RLEQA-4 — релиз сервиса обратной связи, в описании ссылка на задачу в Jira. Справа видно, сколько кейсов привязано к каждому релизу.</div></div>
+</div>
+<img class="lesson-img" src="m3-29-qase-milestones.png" alt="Список milestones (релизов)">
+
+<h2 id="plans"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">📋</span>Тест-планы</h2>
+
+<div class="steps">
+  <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Test Plans.</strong> Тест-план — набор кейсов под конкретную цель. Здесь лежат ПМИ двух релизов. Новый план создаётся кнопкой <strong>Create plan</strong>.</div></div>
+</div>
+<img class="lesson-img" src="m3-30-qase-plans.png" alt="Список тест-планов">
+
+<div class="steps">
+  <div class="step"><div class="step-num">9</div><div class="step-text"><strong>Создание плана.</strong> В Title пиши строго «Тест: Имя Фамилия» — по этому названию я найду твой план. Нажми <strong>Add cases</strong>: слева выбери «Тест», затем отметь галочкой свой сьют и нажми <strong>Done</strong>. Под названием появится «N test cases selected». Сохрани кнопкой <strong>Create plan</strong>.</div></div>
+</div>
+<img class="lesson-img" src="m3-31-qase-plan-cases.png" alt="Выбор кейсов в тест-план">
+<div class="img-caption">Окно выбора кейсов: слева сьюты, справа галочки. На скрине для примера выбран сьют «Форма обратной связи» — ты выбираешь свой сьют внутри «Тест»</div>
+
+<img class="lesson-img half" src="m3-32-qase-create-plan.png" alt="Форма создания тест-плана">
+
+<h2 id="runs"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">▶️</span>Прогон</h2>
+
+<div class="steps">
+  <div class="step"><div class="step-num">10</div><div class="step-text"><strong>Запуск прогона.</strong> Открой свой план и нажми <strong>Start a run</strong> (справа сверху).</div></div>
+</div>
+<img class="lesson-img" src="m3-33-qase-plan-page.png" alt="Страница тест-плана с кнопкой Start a run">
+
+<div class="steps">
+  <div class="step"><div class="step-num">11</div><div class="step-text"><strong>Параметры прогона.</strong> В названии напиши «Тест прогон: Имя Фамилия». Environment — Production, Milestone — RLEQA-4. Внизу уже подставлен твой план и число кейсов. Нажми <strong>Start run</strong>.</div></div>
+</div>
+<img class="lesson-img half" src="m3-34-qase-new-run.png" alt="Форма запуска прогона">
+
+<div class="steps">
+  <div class="step"><div class="step-num">12</div><div class="step-text"><strong>Прохождение.</strong> Откроется прогон: слева список кейсов со статусом Untested, справа круговая диаграмма выполнения. Кликни по кейсу — справа откроются его шаги. Иди по шагам руками на сайте и у каждого шага нажимай результат: <strong>Passed</strong>, <strong>Failed</strong>, <strong>Blocked</strong> или <strong>Skipped</strong>. Если шаг упал — опиши в Actual result, что произошло. Когда шаги отмечены, поставь результат всему кейсу кнопками над описанием.</div></div>
+</div>
+<img class="lesson-img half" src="m3-36-qase-run-steps.png" alt="Отметка шагов в прогоне">
+<div class="img-caption">Оба шага пройдены — ставим кейсу Passed</div>
+
+<div class="steps">
+  <div class="step"><div class="step-num">13</div><div class="step-text"><strong>Боевой сайт — Skipped.</strong> Шаги с реальной отправкой заявки не выполняем: rivo.agency — живой сайт, заявка уйдёт людям в агентство. Такой шаг и кейс отмечай <strong>Skipped</strong>.</div></div>
+</div>
+<img class="lesson-img half" src="m3-37-qase-run-skipped.png" alt="Шаг с отправкой заявки помечен Skipped">
+
+<div class="steps">
+  <div class="step"><div class="step-num">14</div><div class="step-text"><strong>Завершение.</strong> Когда пройдёшь все кейсы, нажми <strong>Complete</strong> (обведена) и подтверди в окне. Это обязательно: на бесплатном плане Qase одновременно может идти только 2 незавершённых прогона, и твой открытый прогон помешает другим ученикам.</div></div>
+</div>
+<img class="lesson-img" src="m3-35-qase-run.png" alt="Прогон: статусы кейсов и кнопка Complete">
+
+<img class="lesson-img small" src="m3-38-qase-complete.png" alt="Подтверждение завершения прогона">
+
+<div class="steps">
+  <div class="step"><div class="step-num">15</div><div class="step-text"><strong>Результат.</strong> Завершённый прогон появится в разделе <strong>Test Runs</strong> со статистикой по статусам. На бесплатном плане история прогонов хранится 30 дней.</div></div>
+</div>
+<img class="lesson-img" src="m3-39-qase-runs.png" alt="Список прогонов со статистикой">
+<div class="img-caption">Прогон для примера: 2 кейса Passed, 1 Skipped, остальные не проходились</div>
+
+<div class="divider"></div>
+
+<div class="hw-block" id="hw">
+  <div class="hw-header">
+    <div class="hw-title">Работа с TMS на примере тест-дизайна формы обратной связи</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+
+  <div class="hw-task"><strong>Задача:</strong> поработать в TMS, создать тест-кейсы по форме обратной связи, собрать тест-план, запустить и пройти прогон.</div>
+
+  <div class="hw-task">Данные для входа в Qase — в описании урока под этим блоком.</div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Заходи в <a href="https://app.qase.io/project/EASYQA" target="_blank">учебный репозиторий Qase</a> и в сьюте «Тест» создавай свой сьют, назови его своими Имя Фамилия</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Переходи в задачу <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a>, для которой будешь писать тест-кейсы (в задачу ничего крепить не надо, просто ознакомься, почитай требования и т.д. Ты уже делал эту задачу в практике по фронту)</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Накидай в своем сьюте 4 тест-кейса: 2 позитивных, 2 негативных. Упарываться в грамотный тест-дизайн не обязательно, но приветствуется (использование техник и правил тест-дизайна)</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Собери тест-план со своими тест-кейсами, назови его «Тест: &lt;Имя Фамилия&gt;» со своими именем и фамилией</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">Запусти прогон (назови «Тест прогон: &lt;Имя Фамилия&gt;»), пройди его и обязательно нажми <strong>Complete run</strong> — незавершенный прогон мешает другим ученикам запускать свои</div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div>
+      <div class="callout-title">Сайт боевой</div>
+      <p>rivo.agency — живой сайт агентства, заявки с формы уходят реальным людям. Позитивную отправку заявки не выполняй: в прогоне отмечай этот шаг как <strong>Skipped</strong>. Валидацию полей проверяй без отправки.</p>
+    </div>
+  </div>
+
+  <div class="hw-task">В ответ на ДЗ пришли <strong>ссылку на тест-план</strong></div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="3-6-jira-confluence.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="3-8-bug-reporting.html">Следующий урок →</a>
+</div>
+</body>
+</html>

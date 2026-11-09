@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | Диаграмма состояний: форма обратной связи</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.data-table th,.data-table td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top}
+.data-table th{background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:12px;font-weight:600}
+.data-table td{background:var(--surface)}
+.data-table td.c{text-align:center;font-family:var(--mono)}
+.yes{color:var(--green);font-weight:700} .no{color:var(--red);font-weight:700}
+.table-scroll{overflow-x:auto}
+.svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:16px 0;overflow-x:auto}
+.svg-wrap svg{display:block;min-width:720px;width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · 🗂️ Пример тестового артефакта</div>
+<div class="lesson-number">К уроку 3-3</div>
+<h1>Диаграмма состояний: форма обратной связи</h1>
+<p class="lesson-intro">Диаграмма состояний показывает, в каких состояниях бывает объект и какие события переводят его из одного в другое. Каждый переход (стрелка) — минимум один тест-кейс. Особенно полезна для многошаговых сценариев: оплата, бронирование, анкеты.</p>
+
+<div class="example">
+  <div class="example-label">Объект тестирования</div>
+  <p>Форма «Let's talk» и блок контактов на странице <a href="https://rivo.agency/contacts/" target="_blank">rivo.agency/contacts</a>. Требования — в задачах учебной Jira <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a> и <a href="https://easyqa.atlassian.net/browse/EQA-2" target="_blank">EQA-2</a>.</p>
+</div>
+<h2><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🔀</span>Диаграмма</h2>
+<div class="svg-wrap"><svg viewBox="0 0 940 360" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif" font-size="14">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/></marker></defs>
+<g fill="#212E45" stroke="#3B82F6" stroke-width="1.5">
+<rect x="10" y="50" width="150" height="56" rx="10"/>
+<rect x="270" y="50" width="160" height="56" rx="10"/>
+<rect x="270" y="270" width="160" height="56" rx="10" stroke="#EF4444"/>
+<rect x="540" y="50" width="150" height="56" rx="10"/>
+<rect x="780" y="50" width="150" height="56" rx="10" stroke="#22C55E"/>
+<rect x="540" y="270" width="150" height="56" rx="10" stroke="#EF4444"/>
+</g>
+<g fill="#E2E8F0" text-anchor="middle">
+<text x="85" y="83">Пустая форма</text>
+<text x="350" y="83">Заполняется</text>
+<text x="350" y="296">Ошибки</text><text x="350" y="314" font-size="12" fill="#94A3B8">валидации</text>
+<text x="615" y="83">Отправка</text>
+<text x="855" y="76">Заявка</text><text x="855" y="94">отправлена</text>
+<text x="615" y="296">Ошибка</text><text x="615" y="314" font-size="12" fill="#94A3B8">сервера</text>
+</g>
+<g stroke="#94A3B8" stroke-width="1.5" fill="none" marker-end="url(#a)">
+<path d="M160 78 H265"/>
+<path d="M430 78 H535"/>
+<path d="M690 78 H775"/>
+<path d="M330 106 V265"/>
+<path d="M370 270 V111"/>
+<path d="M595 106 V265"/>
+<path d="M635 270 V111"/>
+</g>
+<g fill="#94A3B8" font-size="12" text-anchor="middle">
+<text x="212" y="68">ввод данных</text>
+<text x="482" y="54">SEND,</text><text x="482" y="68">поля валидны</text>
+<text x="733" y="54">ответ</text><text x="733" y="68">success</text>
+<text x="320" y="180" text-anchor="end">SEND, есть</text><text x="320" y="194" text-anchor="end">ошибки</text>
+<text x="380" y="180" text-anchor="start">исправление</text><text x="380" y="194" text-anchor="start">поля</text>
+<text x="585" y="180" text-anchor="end">ошибка /</text><text x="585" y="194" text-anchor="end">нет сети</text>
+<text x="645" y="180" text-anchor="start">повторная</text><text x="645" y="194" text-anchor="start">отправка</text>
+</g>
+</svg></div>
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📋</span>Таблица переходов</h2>
+<p>Та же диаграмма в виде таблицы — по ней удобно писать кейсы: 7 переходов = 7 проверок.</p>
+<div class="table-scroll">
+<table class="data-table">
+<tr><th>№</th><th>Из состояния</th><th>Событие</th><th>В состояние</th></tr>
+<tr><td class="c">1</td><td>Пустая форма</td><td>Ввод данных</td><td>Заполняется</td></tr>
+<tr><td class="c">2</td><td>Заполняется</td><td>SEND, есть ошибки</td><td>Ошибки валидации</td></tr>
+<tr><td class="c">3</td><td>Ошибки валидации</td><td>Исправление поля</td><td>Заполняется</td></tr>
+<tr><td class="c">4</td><td>Заполняется</td><td>SEND, все поля валидны</td><td>Отправка</td></tr>
+<tr><td class="c">5</td><td>Отправка</td><td>Ответ сервера success</td><td>Заявка отправлена</td></tr>
+<tr><td class="c">6</td><td>Отправка</td><td>Ошибка сервера / нет сети</td><td>Ошибка сервера</td></tr>
+<tr><td class="c">7</td><td>Ошибка сервера</td><td>Повторная отправка</td><td>Отправка</td></tr>
+</table>
+</div>
+<p>Переходы в «Ошибку сервера» вручную на боевом сайте не воспроизвести: их проверяют подменой ответа сервера (DevTools Overrides из урока 2-9) на тестовом стенде.</p>
+
+<div class="lesson-nav">
+  <a class="nav-btn primary" href="3-3-test-design.html#artifacts">← Вернуться к уроку 3-3</a>
+</div>
+</body>
+</html>

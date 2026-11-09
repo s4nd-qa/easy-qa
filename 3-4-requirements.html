@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 3-4 Требования</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы</div>
+<div class="lesson-number">Урок 3-4</div>
+<h1>Тестирование и анализ требований</h1>
+<p class="lesson-intro">Отлично, ты уже разобрался с тем, как эффективно продумывать тестирование, но самая важная часть — это требования. Изначальное описание того, как и что вообще должно работать и выглядеть. В теории тестирования существует отдельный блок тестирования требований, но на практике мало кто этим занимается, и сейчас это вообще выделили как преимущество (shift-left testing).</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#practice">Тестирование требований на практике</a>
+    <a class="toc-link" href="#criteria">Критерии хороших требований</a>
+    <a class="toc-link" href="#mockups">Как тестировать макеты</a>
+  </div>
+</div>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Тестирование требований, макетов и прочей документации</div>
+    <p>— это статический вид тестирования</p>
+  </div>
+</div>
+
+<h2 id="practice"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🎬</span>Тестирование требований на практике</h2>
+
+<div class="video-label">Видео: тестирование требований на практике</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/HOjloaiYNkE" allowfullscreen></iframe></div>
+
+<h2 id="criteria"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">📋</span>Главные критерии хороших требований (по приоритету)</h2>
+
+<div class="rule-card green">
+  <div class="rule-title"><span class="rule-num">1</span>Полнота</div>
+  <p>Завершенность требований, не остается пробелов в понимании</p>
+  <p><strong>Пример неполноты:</strong> «спустя некоторое время происходит редирект обратно» — спустя сколько секунд конкретно? Редирект обратно — в какой эндпоинт?</p>
+</div>
+
+<div class="rule-card green">
+  <div class="rule-title"><span class="rule-num">2</span>Однозначность (недвусмысленность)</div>
+  <p>Требования сформулированы однозначно, без жаргона, аббревиатур и неясных фраз, чтобы не возникало различных трактовок</p>
+  <p><strong>Примеры неоднозначности:</strong><br>
+  — «по нажатию всплывает окошко» — какое окошко? Модалка? Попап? Алерт? Тултип?<br>
+  — «система вносит созданную роль в СП» — что такое СП? Сервис прав, или может быть семейное положение? + Здесь и неполнота, каким образом вносит? Это http запрос, или просто визуальные изменения через js?</p>
+</div>
+
+<div class="rule-card green">
+  <div class="rule-title"><span class="rule-num">3</span>Непротиворечивость</div>
+  <p>Требования не противоречат друг другу</p>
+  <p><strong>Пример противоречивости:</strong> «оплата заказа доступна в течение 10 минут», «заказ может быть отменен только пользователем»</p>
+</div>
+
+<div class="rule-card blue">
+  <div class="rule-title"><span class="rule-num">4</span>Выполнимость (осуществимость)</div>
+  <p>Реально ли реализовать с учетом технических, бюджетных, временных ограничений</p>
+  <p><strong>Пример невыполнимости:</strong> увидел очень короткий дедлайн, понял что для такой задачи это крайне мало времени (простая реализация, но слишком много тестовых случаев) — подсветил аналитику и настоял на пересогласовании сроков</p>
+</div>
+
+<div class="rule-card blue">
+  <div class="rule-title"><span class="rule-num">5</span>Проверяемость (тестируемость), корректность</div>
+  <p>Можно ли проверить требование, описать в тест-кейсе и так далее</p>
+  <p><strong>Пример непроверяемости:</strong> «система предлагает покупки в зависимости от предпочтений пользователя» — как установить эти предпочтения? Какими метриками определяются предпочтения пользователя, где они хранятся? Здесь налицо и неполнота, неоднозначность</p>
+</div>
+
+<div class="rule-card blue">
+  <div class="rule-title"><span class="rule-num">6</span>Приоритизированность (упорядоченность)</div>
+  <p>Требования идут в порядке от более важных к менее важным</p>
+  <p><strong>Пример неверной приоритизации:</strong><br>
+  — «добавленные в корзину товары через кнопку + изменяют счетчик рядом с корзиной»<br>
+  — «по нажатию кнопки "Корзина" пользователь попадает на страницу /cart» (важнее попасть в корзину и далее оформлять заказ, нежели видеть изменение счетчика товаров)</p>
+</div>
+
+<div class="rule-card">
+  <div class="rule-title"><span class="rule-num">7</span>Необходимость</div>
+  <p>Проверка, не избыточно ли описание функционала в требованиях</p>
+  <p><strong>Пример избыточности:</strong> «кнопки имеют красный фон», «шрифт текста кнопок Arial» — когда уже есть готовые макеты в Figma. В тест-кейсах тоже не упарываются и не описывают весь UI словами, можно просто вставить ссылку на фигму и скрин, если вдруг ссылка сдохнет или макет изменят</p>
+</div>
+
+<p>Таким образом, зная эти критерии тестирования требований, сэкономишь себе кучу нервов и времени уже непосредственно на самом тестировании.</p>
+
+<p>Про требования можно также почитать <a href="https://habr.com/ru/articles/543340/#relevancy" target="_blank">статью</a>.</p>
+
+<a class="link-card" href="https://habr.com/ru/articles/543340/#relevancy" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Статья про требования</div>
+    <div class="link-card-url">habr.com/ru/articles/543340</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="mockups"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🎨</span>А как тестировать макеты?</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">А как тестировать макеты?</div>
+    <p>Можно применять все те же критерии сверху, но особый акцент делаем на используемый UI kit, чтобы какой-нибудь новый неопытный дизайнер не отступил от него и не слепил новый дизайн элемента. Пример: по UI kit кнопки скругленные, дизайнер сделал квадратную и нигде эту особенность не описал. Это может привести к неконсистентности системы и такие вещи нужно пресекать. На проектах такое бывает<br><br>
+    Иногда также бывает, что дизайнер не учитывает сложность системы, например, какая-нибудь менюшка может быть закрыта ролью и дизайнер об этом не знает, и лепит такой дизайн, который будет накладываться на эту менюшку. Экспертиза тестировщика также помогает пресекать такие ошибки. Ошибаются все<br><br>
+    Ну и в целом нужно обращать внимание на UX, чтобы кнопки не были слишком мелкими, чтобы отступы выглядели ровно и в целом дизайн был гармоничным, соответствующий не только UI kit, но и брендбуку проекта (целевая аудитория, философия компании и т.д) + в частности гайдлайну (используемые цвета, прозрачность изображений и так далее)</p>
+  </div>
+</div>
+
+<p>Прочитай статью про <a href="https://habr.com/ru/articles/788416/" target="_blank">концепции</a> и <a href="https://vladislaveremeev.gitbook.io/qa_bible/vidy-metody-urovni-testirovaniya/testirovanie-dokumentacii-documentation-testing" target="_blank">техники</a> тестирования требований. Об этом круто говорить на собесах.</p>
+
+<a class="link-card" href="https://habr.com/ru/articles/788416/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Концепции тестирования требований</div>
+    <div class="link-card-url">habr.com/ru/articles/788416</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<a class="link-card" href="https://vladislaveremeev.gitbook.io/qa_bible/vidy-metody-urovni-testirovaniya/testirovanie-dokumentacii-documentation-testing" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Техники тестирования документации (QA Bible)</div>
+    <div class="link-card-url">vladislaveremeev.gitbook.io/qa_bible</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="3-3-test-design.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="3-5-processes-agile.html">Следующий урок →</a>
+</div>
+</body>
+</html>

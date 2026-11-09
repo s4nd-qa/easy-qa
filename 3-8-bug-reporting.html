@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 3-8 Баг-репортинг</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th,.data-table td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.data-table th{background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:11px;font-weight:600}
+.data-table td{background:var(--surface)}
+.data-table td.sev{font-family:var(--mono);font-size:12px;font-weight:600;text-align:center;vertical-align:middle}
+.sev.blocker{background:rgba(239,68,68,0.35);color:#FECACA}
+.sev.critical{background:rgba(245,158,11,0.28);color:#FDE68A}
+.sev.medium{background:rgba(124,58,237,0.28);color:#DDD6FE}
+.sev.minor{background:rgba(59,130,246,0.22);color:#BFDBFE}
+.sev.trivial{background:rgba(148,163,184,0.15);color:var(--muted)}
+.table-scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 3-8</div>
+<h1>Как писать хорошие баг-репорты</h1>
+<p class="lesson-intro">Один из распространенных вопросов на собесе — «Что для тебя идеальный баг-репорт?». Часто кандидаты недооценивают этот вопрос и рассказывают, мол, ну шаги воспроизведения должны быть, ОР, ФР, скриншотик. Когда-то и я так отвечал.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#structure">Состав баг-репорта</a>
+    <a class="toc-link" href="#severity">Серьезность</a>
+    <a class="toc-link" href="#ideal">Идеальный баг-репорт</a>
+    <a class="toc-link" href="#hw">ДЗ: баг-репортинг в Jira</a>
+  </div>
+</div>
+
+<h2 id="structure"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🧾</span>Состав баг-репорта</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Состав баг-репорта (отчета о найденном баге)</div>
+    <p>— <strong>ID</strong> (например, автоключ в джире, или нумерация, если ведете «быстрые» баг-репорты в тг*)<br>
+    — <strong>Название</strong> (дальше о том как давать правильные названия)<br>
+    — <strong>Описание</strong> (необязательно, кратко описать суть бага)<br>
+    — <strong>Приоритет/серьезность</strong> (пример проставления серьезности ниже)<br>
+    — <strong>Принадлежность</strong> (если джира, то верная вложенность: проект, эпик, задача + кто завел, на кого назначен; если тг* — правильно выбранный топик)<br>
+    — <strong>Предусловия</strong><br>
+    — <strong>Шаги воспроизведения</strong> (по пунктикам, как в тест-кейсе, либо просто скопировать шаги из тест-кейса до момента неуспешного шага)<br>
+    — <strong>ОР/ФР</strong> (ожидаемый результат, как должно быть + фактический, как получилось)<br>
+    — <strong>Среда/окружение</strong> (всё что влияет на воспроизводимость: хост/стенд, версия приложения, устройство, браузер, разрешение экрана, иногда даже User-Agent, геолокация, заряд)<br>
+    — <strong>Локализация</strong> (доп. инфа, твой ресерч, что конкретно повлияло на появление бага)<br>
+    — <strong>Вложения</strong> (скрины, видео, логи с консоли, серверные логи с Кибаны, HAR архив запросов с Network, логи с мобилок, аналитика, данные из БД по SQL запросу)<br><br>
+    *Баг-репортинг в тг — да, такое тоже есть, особенно когда разработка в запаре и некогда вести трекинг в джире. Пишешь краткие баг-репорты, когда их накапливается — пишешь список с гиперссылками на сообщения с баг-репортами, кидаешь список в закреп и отслеживаешь статусы/дополняешь багами.</p>
+  </div>
+</div>
+
+<h2 id="severity"><span class="h2-icon" style="background:rgba(239,68,68,0.15)">🔥</span>Серьезность (severity)</h2>
+
+<div class="table-scroll">
+<table class="data-table">
+  <tr><th>Проблема \ Количество пользователей</th><th>Все юзеры (100%)</th><th>Большинство юзеров (41-99%)</th><th>Много юзеров (16-40%)</th><th>Некоторые юзеры (1-15%)</th><th>Несколько юзеров (меньше 1%)</th></tr>
+  <tr><td>Потери данных, изменения в данных</td><td class="sev blocker">blocker</td><td class="sev blocker">blocker</td><td class="sev blocker">blocker</td><td class="sev critical">critical</td><td class="sev medium">medium</td></tr>
+  <tr><td>Креши</td><td class="sev blocker">blocker</td><td class="sev blocker">blocker</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev minor">minor</td></tr>
+  <tr><td>Не работает или неверно работает основной функционал</td><td class="sev blocker">blocker</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev medium">medium</td><td class="sev minor">minor</td></tr>
+  <tr><td>Не работает или неверно работает НЕ основной функционал</td><td class="sev critical">critical</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev medium">medium</td><td class="sev minor">minor</td></tr>
+  <tr><td>Неверно работает, но есть обходной путь</td><td class="sev critical">critical</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev minor">minor</td><td class="sev minor">minor</td></tr>
+  <tr><td>Низкая производительность</td><td class="sev blocker">blocker</td><td class="sev critical">critical</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev minor">minor</td></tr>
+  <tr><td>Проблемы интерфейса</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev medium">medium</td><td class="sev minor">minor</td><td class="sev trivial">trivial</td></tr>
+  <tr><td>Нет переводов, неверный или нелогичный текст</td><td class="sev critical">critical</td><td class="sev medium">medium</td><td class="sev minor">minor</td><td class="sev trivial">trivial</td><td class="sev trivial">trivial</td></tr>
+</table>
+</div>
+<div class="img-caption">Серьезность (severity) — величина риска для бизнеса в случае появления бага на проде. Пример расставления серьезности (вместо medium может использоваться major)</div>
+
+<h2 id="ideal"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🏆</span>Идеальный баг-репорт</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Идеальный баг-репорт</div>
+    <p>— это не только набор рекомендуемых полей, а твое отношение к разработчикам и уровень твоей коммуникации на проекте. Насколько смотрят на чистоту кода разрабов, настолько смотрят на чистоту баг-репортов и тест-кейсов у тестеров.<br><br>
+    <strong>Чем быстрее до разраба дойдет в чем проблема (не как фиксить, а в чем проблема) — тем идеальнее твой баг-репорт.</strong> Понятно есть такие баги, понять которые можно только на отдельных грумингах в несколько разрабов и тестеров, но я говорю про большинство — их описать не сложно<br><br>
+    Также важно не превращать баг-репортинг в написание диссертации. Поначалу, как и любая другая тест-дока, у тебя может занимать это время. Но с опытом ты будешь делать это не думая за минуту-две, без лишнего перфекционизма. По-крайней мере к этому классно стремиться<br><br>
+    Также на проекте не ленись <strong>перестраховываться и перепроверять</strong>, точно ли нужен баг-репорт. Бывает ты находишь старый баг (для этого сравни самый актуальный стенд с текущим), бывает ты находишь баг, но он не имеет отношения к задаче (и лучше сначала создать отдельную задачу)</p>
+  </div>
+</div>
+
+<p>Прочитай <a href="https://habr.com/ru/companies/docsvision/articles/264163/" target="_blank">статью</a> про хороший тон ведения баг-репортов. Инфа применима и к тест-кейсам, да и в целом к любым артефактам тест-дизайна.</p>
+
+<a class="link-card" href="https://habr.com/ru/companies/docsvision/articles/264163/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Хороший тон ведения баг-репортов</div>
+    <div class="link-card-url">habr.com/ru/companies/docsvision/articles/264163</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<p>Можно также придерживаться правила 5C:</p>
+
+<div class="team-list">
+  <div class="team-item"><div class="team-role-tag">Consistent</div><div class="team-desc">Единообразный: соблюдается стандартный шаблон, принятый в команде/проекте</div></div>
+  <div class="team-item"><div class="team-role-tag">Clear</div><div class="team-desc">Понятный: написание простым и ясным языком, без двусмысленностей</div></div>
+  <div class="team-item"><div class="team-role-tag">Concise</div><div class="team-desc">Лаконичный: содержится только необходимая информация, без воды</div></div>
+  <div class="team-item"><div class="team-role-tag">Complete</div><div class="team-desc">Полный: содержатся ВСЕ детали, нужные для воспроизведения и ресерча</div></div>
+  <div class="team-item"><div class="team-role-tag">Correct</div><div class="team-desc">Корректный: точно описывается реальное поведение системы на основе требований, а НЕ личного мнения</div></div>
+</div>
+
+<p>Также есть <a href="http://bugred.ru/" target="_blank">сайт</a> для создания емких названий баг-репортам, попробуй.</p>
+
+<a class="link-card" href="http://bugred.ru/" target="_blank">
+  <div class="link-card-icon">🐞</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Генератор названий баг-репортов</div>
+    <div class="link-card-url">bugred.ru</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<p>Дополнительное часовое видео по процессам и баг-репортам (если уже готов составлять, скипай):</p>
+
+<div class="video-label">Видео: как создать баг-репорт на практике. С примером шаблона</div>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/R5pB4d5Hh0Q" allowfullscreen></iframe></div>
+
+<p>Теперь переходи к написанию чистых баг-репортов.</p>
+
+<div class="divider"></div>
+
+<div class="hw-block" id="hw">
+  <div class="hw-header">
+    <div class="hw-title">Баг-репортинг в Jira</div>
+    <div class="hw-num">ДЗ</div>
+  </div>
+
+  <div class="hw-task"><strong>Задача:</strong> попробовать написать/переписать 3 идеальных баг-репорта, корректно оформить их в виде задач в джире.</div>
+
+  <div class="hw-task">Переходи на <a href="https://easyqa.atlassian.net/jira/software/projects/BUGEQA/boards/4" target="_blank">доску баг-репортов</a>.</div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">Создай эпик со своими именем и фамилией, по желанию выбери цвет для эпика</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Переходи на доску и создавай 3 бага по задаче <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Присвой баги к своему эпику (поле «Родитель»)</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Поставь в багах метку «ДЗ-баг-репорты»</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">Прикрепи к багам задачу EQA-1 с типом связи <strong>blocks</strong></div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">Двигай баги в статус «В работе» и начинай их расписывать (всё та же задача из практики по фронтенду, можешь как найти новые баги, так и взять те, что ты описывал ранее)</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-text">Как баг-репорты будут готовы, двигай их в статус «На проверке»</div></div>
+  </div>
+
+  <div class="hw-task">Внизу подсказка по эпику и скрин, как у тебя должен получиться баг-репорт. Эталон можно открыть и в самой джире: <a href="https://easyqa.atlassian.net/browse/BUGEQA-2" target="_blank">BUGEQA-2</a>. Вложения можно грузить в описание. После проверки баг двинется либо обратно в работу, либо будет принят.</div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div>
+      <div class="callout-title">Сайт боевой</div>
+      <p>Форма на rivo.agency отправляет заявки реальным людям. Для поиска багов отправлять заявку с реальными данными не нужно.</p>
+    </div>
+  </div>
+
+  <div class="hw-task">В ответ на ДЗ пришли <strong>ссылку на свой эпик</strong></div>
+</div>
+
+<img class="lesson-img small" src="m3-12-assign-epic.png" alt="Поля Родитель и Метки в задаче Jira">
+<div class="img-caption">Где присваивается эпик и ставится метка</div>
+
+<img class="lesson-img" src="m3-13-bug-report-example.png" alt="Пример баг-репорта в Jira">
+<div class="img-caption">Задача с проставленными эпиком, меткой и связью с задачей. Если метка не находится, начни писать (ДЗ...) и высветится. Осталось только заполнить сам баг-репорт</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="3-7-tms.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="3-9-reports-demo.html">Следующий урок →</a>
+</div>
+</body>
+</html>

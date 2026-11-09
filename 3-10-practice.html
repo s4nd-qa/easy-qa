@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 3-10 Практика по теории и процессам</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.data-table th,.data-table td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+.data-table th{background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:12px;font-weight:600}
+.data-table td{background:var(--surface)}
+.data-table td:first-child{width:90px;font-family:var(--mono);color:var(--muted)}
+.pdf-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:12px 0 20px;background:#fff}
+.pdf-wrap iframe{display:block;width:100%;height:720px;border:0}
+</style>
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · ✏️ Домашнее задание</div>
+<div class="lesson-number">Урок 3-10</div>
+<h1>Практика по теории и процессам</h1>
+<p class="lesson-intro">Часто на собесе тебя попросят протестировать какую-нибудь форму со стандартной схемой клиент-сервер-БД. Это крайне важный момент, когда смотрят на твои хард- и софт-скиллы, твою насмотренность и умение приоритезировать, задавать правильные вопросы, продвигать свою точку зрения и т.д. Твоей практикой будет аналогичное задание, тебе предстоит включить все свои знания из этого модуля и проявить инициативность (у тебя нет четкого ТЗ, поэтому требования ты докидываешь сам, исходя из собственного опыта и понимания теории тестирования).</p>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Рекомендация</div>
+    <p>Убедись что все предыдущие ДЗ со статусом «принято», если сейчас есть непонимание какой-то из тем — разберись, задай вопросы в чате. Какие ключевые знания и навыки понадобятся для практики: виды тестирования, техники тест-дизайна, тестовые артефакты, тестирование требований, работа в TMS Qase.io и Jira, ранее изученные инструменты тестирования</p>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#ideas">Чит-лист и идеи</a>
+    <a class="toc-link" href="#task">Описание задачи</a>
+    <a class="toc-link" href="#start">Начало тестирования</a>
+    <a class="toc-link" href="#hw1">№1. Приоритезация тестирования</a>
+    <a class="toc-link" href="#hw2">№2. Исследовательское тестирование, тест-дизайн</a>
+    <a class="toc-link" href="#hw3">№3. Репортинг и демо</a>
+  </div>
+</div>
+
+<h2 id="ideas"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">💡</span>Чит-лист и идеи</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Чит-лист исследовательского тестирования формы регистрации</div>
+    <p>Перед тест-дизайном фичи можешь ознакомиться со внушительным <a href="https://qarocks.ru/100-test-cases-for-registration-page/" target="_blank">чит-листом</a> по форме регистрации. Точно не нужно прорабатывать на практике каждый кейс, но поможет покрыть какие-то пробелы и объективнее выстроить стратегию тестирования</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://qarocks.ru/100-test-cases-for-registration-page/" target="_blank">
+  <div class="link-card-icon">📄</div>
+  <div class="link-card-text">
+    <div class="link-card-title">100 тест-кейсов для страницы регистрации</div>
+    <div class="link-card-url">qarocks.ru/100-test-cases-for-registration-page</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Идеи из моего тестового задания</div>
+    <p>Также можешь почерпнуть для себя какие-либо идеи для выполнения практики из моего старого тестового задания. Это было единственное тестовое до техсобеса, которое я делал. Не получив никакого фидбека и отправившись в игнор, раз и навсегда понял, что это максимально неблагодарное занятие, советую избегать тестовых до техсобесов</p>
+  </div>
+</div>
+
+<div class="pdf-wrap"><iframe src="m3-werent-test-task.pdf#view=FitH" title="Тестовое задание: E2E-тест WeRent.me"></iframe></div>
+
+<a class="link-card" href="m3-werent-test-task.pdf" target="_blank">
+  <div class="link-card-icon">📑</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Тестовое задание: проведение End-to-End (E2E) теста — PDF, 9 стр.</div>
+    <div class="link-card-url">Открыть в новой вкладке</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<h2 id="task"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">🎯</span>Описание задачи</h2>
+
+<p>Ты попал в ситуацию, когда тебе нужно протестить срочную фичу вне скрамовских процессов, без хороших макетов в Фигме и расписанных аналитиком требований, без сваггера. Такие ситуации бывают в стартапах, новых проектах, да и в целом в проектах с нестабильными процессами — кто-то не успевает, кого-то подгоняют. Все что у тебя есть — это <a href="https://easyqa.atlassian.net/browse/EQA-22" target="_blank">таска</a> в джире со скриншотами вместо макетов и ключевыми требованиями, которые спешно накидал аналитик. Твой фуллстек разраб запотел и накатил сборку на <a href="https://karofilm.ru/" target="_blank">стенд</a>.</p>
+
+<p>От тебя требуется задействовать все свои QA ресурсы, потренироваться на примере этой практики в применении всех знаний из этого модуля, дать оперативный фидбек по реализации, подготовить тестовую документацию и продемонстрировать функционал (полноценный флоу тестирования от и до).</p>
+
+<a class="link-card" href="https://easyqa.atlassian.net/browse/EQA-22" target="_blank">
+  <div class="link-card-icon">📋</div>
+  <div class="link-card-text">
+    <div class="link-card-title">EQA-22 — анкета соискателя</div>
+    <div class="link-card-url">easyqa.atlassian.net/browse/EQA-22</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<a class="link-card" href="https://karofilm.ru/" target="_blank">
+  <div class="link-card-icon">🎬</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Стенд: karofilm.ru → Вакансии → Откликнуться</div>
+    <div class="link-card-url">karofilm.ru</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Это реальный HR-портал</div>
+    <p>Анкета уходит в отдел кадров КАРО, а на последнем шаге телефон подтверждается по SMS. Поэтому: в полях «Фамилия» и «Имя» пиши <strong>TEST</strong>, номер не подтверждай и заявку не отправляй — тестируй всё до кнопки «Оставить заявку».</p>
+  </div>
+</div>
+
+<h2 id="start"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">🚦</span>Начало тестирования</h2>
+
+<p>Изучи входные данные и накидай себе первый тестовый артефакт — <strong>краткую стратегию тестирования</strong>: опиши какие компоненты задействуются в фиче (краткое саммери по ресерчу, ключевые пункты), какие вопросы есть к ожидаемому поведению, с чего в первую очередь начнешь тестировать, какие виды и уровни тестирования применишь, какие техники тест-дизайна и какие тестовые артефакты заведешь.</p>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Каждую задачу так тестить что-ли на работе?</div>
+    <p>Обычно так заморачиваться не надо, в 80% случаев берешь тестишь по требованиям, пишешь тест-кейсы и баги, показываешь и всё. Но проговоришь и сделаешь 1 раз — навсегда выстроишь классный подход для теста задач разной сложности</p>
+  </div>
+</div>
+
+<table class="data-table">
+  <tr><th>Приоритет / последовательность</th><th>Действие / описание</th></tr>
+  <tr><td>1</td><td>Изучение требований и готового функционала: &lt;саммери по твоему ресерчу&gt;</td></tr>
+  <tr><td>2</td><td>Список вопросов аналитику:<br>&lt;вопрос 1&gt;<br>&lt;вопрос 2&gt;<br>&lt;вопрос 3&gt;<br>&lt;...&gt;</td></tr>
+  <tr><td>3</td><td>Порядок тестирования:<br>&lt;1 вид/уровень тестирования, функциональность&gt;<br>&lt;2 вид/уровень тестирования, функциональность&gt;<br>&lt;...&gt;</td></tr>
+  <tr><td>4</td><td>Подходы к тест-дизайну, тестовые артефакты:<br>&lt;1 артефакт/техника&gt;<br>&lt;2 артефакт/техника&gt;<br>&lt;...&gt;</td></tr>
+  <tr><td>5</td><td>Инструменты, применяемые в тестировании:<br>&lt;инструмент 1&gt;<br>&lt;инструмент 2&gt;<br>&lt;...&gt;</td></tr>
+  <tr><td>6</td><td>Метрики оценки качества и готовности к релизу:<br>&lt;метрика 1&gt;<br>&lt;метрика 2&gt;<br>&lt;...&gt;</td></tr>
+</table>
+
+<div class="divider"></div>
+
+<div class="hw-block" id="hw1">
+  <div class="hw-header">
+    <div class="hw-title">Приоритезация тестирования</div>
+    <div class="hw-num">№1</div>
+  </div>
+
+  <div class="hw-task">По шаблону выше начни расписывать стратегию с чек-листа — твой план по закрытию этой таски от анализа до демо. Опытный тестер не хватается за всё подряд при горящей и непонятной задаче, а старается выстроить правильный порядок и следовать ему, попутно сообщая команде о своем статусе.</div>
+
+  <div class="hw-task">В ответ пришли заполненную <strong>таблицу чек-лист</strong>, в ней обязательно, в порядке приоритезации, должны быть:</div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-text">твой ресерч</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">твои вопросы команде (минимум 3)</div></div>
+    <div class="step"><div class="step-num">3-4</div><div class="step-text">опиши свой подход к тестированию — на какие части функционала особый акцент, какие виды, краткая суть проверок, используемые техники тест-дизайна, выбери и напиши какие тестовые артефакты будешь заводить (просто перечисли)</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">перечисли инструменты с помощью которых будешь проводить тестирование</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">распиши метрики с помощью которых будешь формировать свой фидбек по итогам тестирования (можешь использовать формат отчета «Готовность к релизу» из урока 3-9)</div></div>
+  </div>
+
+  <div class="hw-task"><strong>Не трать на задачу больше 2 часов</strong><br>
+  <em>После выполнения этого пункта уже можешь передать на промежуточную проверку, дабы в дальнейшем совершить меньше ошибок (необязательно)</em></div>
+</div>
+
+<div class="hw-block" id="hw2">
+  <div class="hw-header">
+    <div class="hw-title">Исследовательское тестирование, тест-дизайн</div>
+    <div class="hw-num">№2</div>
+  </div>
+
+  <div class="hw-task">Для проверки функционала тебе понадобится <strong>любая ненужная почта</strong>. В полях «Фамилия» и «Имя» пиши <strong>TEST</strong>, номер не подтверждай и заявку не отправляй.</div>
+
+  <div class="hw-task">Переходи непосредственно к самому тестированию по сформированному тобой порядку (п.3 чек-листа), обязательно с применением техник тест-дизайна проведи функциональное тестирование и тест UX/UI по скриншотам из задачи, остальное нефункциональное на свое усмотрение.</div>
+
+  <div class="hw-task">Во время тестирования накидывай тестовые артефакты (п.4 чек-листа).</div>
+
+  <div class="hw-task"><strong>Работа в TMS</strong><br>
+  — Обязательно составь 4 смоуковых тест-кейса в <a href="https://app.qase.io/project/EASYQA" target="_blank">TMS</a> (в сьюте «Практика» создай свой сьют, назови его своими Имя Фамилия): 2 позитивных, 2 негативных, прикрепи к каждому номер <a href="https://easyqa.atlassian.net/browse/RLEQA-5" target="_blank">релизной задачи</a> через поле «Milestone» — RLEQA-5<br>
+  — Создай тест-план по релизу (фильтр по Milestone = RLEQA-5)</div>
+
+  <div class="hw-task">В ответ пришли тестовые артефакты и ссылку на тест-план<br>
+  <strong>Не трать на задачу больше 2 часов</strong></div>
+</div>
+
+<div class="hw-block" id="hw3">
+  <div class="hw-header">
+    <div class="hw-title">Репортинг и демо</div>
+    <div class="hw-num">№3</div>
+  </div>
+
+  <div class="hw-task">Закончив исследовательское тестирование, проведи расчеты по метрикам из п.6 и, используя их как аргумент, составь грамотный фидбек по реализации (итоговый статус для разраба и менеджера, можешь использовать советы в блоке «Готовность к релизу» из урока 3-9).</div>
+
+  <div class="hw-task"><strong>Баг-репортинг</strong><br>
+  Оформи 1 любой баг-репорт в <a href="https://easyqa.atlassian.net/jira/software/projects/BUGEQA/boards/4" target="_blank">джире</a>, не забудь проставить метку (label) <strong>со своим именем</strong>.<br>
+  Остальные баги в порядке убывания приоритета напиши в таблице формата «название-ОР-ФР».</div>
+
+  <div class="hw-task">Подготовь себе небольшой план демонстрации задачи в виде кратких шагов.</div>
+
+  <div class="hw-task">В ответ пришли фидбек, ссылку на баг, таблицу остальных багов, план демо<br>
+  <strong>Не трать на задачу больше 1 часа</strong></div>
+
+  <div class="hw-task"><strong>Если все ок, назначим с тобой звонок, где ты проведешь демо</strong></div>
+</div>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="3-9-reports-demo.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="3-results.html">Результаты модуля →</a>
+</div>
+</body>
+</html>

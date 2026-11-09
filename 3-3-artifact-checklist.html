@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | Чек-лист: форма обратной связи</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.data-table th,.data-table td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top}
+.data-table th{background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:12px;font-weight:600}
+.data-table td{background:var(--surface)}
+.data-table td.c{text-align:center;font-family:var(--mono)}
+.yes{color:var(--green);font-weight:700} .no{color:var(--red);font-weight:700}
+.table-scroll{overflow-x:auto}
+.svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:16px 0;overflow-x:auto}
+.svg-wrap svg{display:block;min-width:720px;width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · 🗂️ Пример тестового артефакта</div>
+<div class="lesson-number">К уроку 3-3</div>
+<h1>Чек-лист: форма обратной связи</h1>
+<p class="lesson-intro">Чек-лист — короткий список проверок без подробных шагов. Удобен, чтобы ничего не забыть на большой фиче, и как черновик будущих тест-кейсов. Колонка «Результат» заполняется во время тестирования: OK / баг (ключ задачи).</p>
+
+<div class="example">
+  <div class="example-label">Объект тестирования</div>
+  <p>Форма «Let's talk» и блок контактов на странице <a href="https://rivo.agency/contacts/" target="_blank">rivo.agency/contacts</a>. Требования — в задачах учебной Jira <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a> и <a href="https://easyqa.atlassian.net/browse/EQA-2" target="_blank">EQA-2</a>.</p>
+</div>
+<h2><span class="h2-icon" style="background:rgba(34,197,94,0.15)">✅</span>Чек-лист</h2>
+<div class="table-scroll">
+<table class="data-table">
+<tr><th>№</th><th>Область</th><th>Проверка</th><th>Приоритет</th><th>Результат</th></tr>
+<tr><td class="c">1</td><td>Смоук</td><td>Страница /contacts/ открывается, есть блок «Let's talk» с полями Name, Email, Phone, Message, Attach file и кнопкой SEND MESSAGE</td><td>High</td><td></td></tr>
+<tr><td class="c">2</td><td>Смоук</td><td>Все обязательные поля отмечены звёздочкой (*)</td><td>High</td><td></td></tr>
+<tr><td class="c">3</td><td>Name</td><td>Отправка с пустым Name — заявка не уходит, под полем подсказка «The field is required»</td><td>High</td><td></td></tr>
+<tr><td class="c">4</td><td>Name</td><td>Граничные значения длины: 1, 2, 100, 101 символ (по требованиям 2–100)</td><td>Medium</td><td></td></tr>
+<tr><td class="c">5</td><td>Email</td><td>Email без @ (abc) — заявка не уходит, подсказка о неверном формате</td><td>High</td><td></td></tr>
+<tr><td class="c">6</td><td>Email</td><td>Email без доменной зоны (a@b) — заявка не уходит, подсказка «The e-mail address entered is invalid.»</td><td>Medium</td><td></td></tr>
+<tr><td class="c">7</td><td>Phone</td><td>По клику подставляется флаг и код страны по геолокации, отображается маска</td><td>Medium</td><td></td></tr>
+<tr><td class="c">8</td><td>Phone</td><td>Смена страны в списке меняет код и маску (например, United States → +1)</td><td>Medium</td><td></td></tr>
+<tr><td class="c">9</td><td>Phone</td><td>Буквы в поле не вводятся</td><td>Medium</td><td></td></tr>
+<tr><td class="c">10</td><td>Phone</td><td>Отправка с пустым Phone — заявка не уходит, подсказка под полем</td><td>High</td><td></td></tr>
+<tr><td class="c">11</td><td>Message</td><td>Отправка с пустым Message — подсказка «The field is required»</td><td>High</td><td></td></tr>
+<tr><td class="c">12</td><td>Message</td><td>Граничные значения длины: 1000 и 1001 символ</td><td>Low</td><td></td></tr>
+<tr><td class="c">13</td><td>Attach file</td><td>Прикрепляется файл допустимого формата (pdf), имя файла отображается</td><td>Medium</td><td></td></tr>
+<tr><td class="c">14</td><td>Attach file</td><td>Файл недопустимого формата (exe) недоступен для выбора</td><td>Low</td><td></td></tr>
+<tr><td class="c">15</td><td>Отправка</td><td>Пустая форма — подсказки под всеми обязательными полями</td><td>High</td><td></td></tr>
+<tr><td class="c">16</td><td>Блок контактов</td><td>Адреса и телефоны офисов США и Украины совпадают с требованиями EQA-2</td><td>Medium</td><td></td></tr>
+<tr><td class="c">17</td><td>Блок контактов</td><td>Адрес открывает Google Maps, телефон — ссылка tel:</td><td>Low</td><td></td></tr>
+</table>
+</div>
+<div class="callout warn"><div class="callout-icon">⚠️</div><div><div class="callout-title">Сайт боевой</div><p>Позитивную отправку заявки с реальными данными не выполняем: rivo.agency — живой сайт агентства.</p></div></div>
+
+<div class="lesson-nav">
+  <a class="nav-btn primary" href="3-3-test-design.html#artifacts">← Вернуться к уроку 3-3</a>
+</div>
+</body>
+</html>

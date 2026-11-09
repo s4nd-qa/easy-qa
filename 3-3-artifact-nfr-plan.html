@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | План нефункционального тестирования</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.data-table th,.data-table td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top}
+.data-table th{background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:12px;font-weight:600}
+.data-table td{background:var(--surface)}
+.data-table td.c{text-align:center;font-family:var(--mono)}
+.yes{color:var(--green);font-weight:700} .no{color:var(--red);font-weight:700}
+.table-scroll{overflow-x:auto}
+.svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:16px 0;overflow-x:auto}
+.svg-wrap svg{display:block;min-width:720px;width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · 🗂️ Пример тестового артефакта</div>
+<div class="lesson-number">К уроку 3-3</div>
+<h1>План нефункционального тестирования</h1>
+<p class="lesson-intro">План нефункционального тестирования отвечает на вопрос «как работает ПО»: удобно ли, быстро ли, безопасно ли, одинаково ли во всех браузерах. Для каждого вида — что проверяем, чем и какой результат считаем успешным.</p>
+
+<div class="example">
+  <div class="example-label">Объект тестирования</div>
+  <p>Форма «Let's talk» и блок контактов на странице <a href="https://rivo.agency/contacts/" target="_blank">rivo.agency/contacts</a>. Требования — в задачах учебной Jira <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a> и <a href="https://easyqa.atlassian.net/browse/EQA-2" target="_blank">EQA-2</a>.</p>
+</div>
+<h2><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📐</span>План</h2>
+<div class="table-scroll">
+<table class="data-table">
+<tr><th>Вид тестирования</th><th>Что проверяем</th><th>Как / инструмент</th><th>Критерий прохождения</th></tr>
+<tr><td>UI / верстка</td><td>Отступы, шрифты, цвета, состояния полей (фокус, ошибка) единообразны с остальными страницами сайта</td><td>Визуально, DevTools → Elements</td><td>Нет «съехавших» элементов, стили полей одинаковые</td></tr>
+<tr><td>Адаптивность</td><td>Форма и блок контактов на ширинах 375, 768, 1440 px</td><td>DevTools → Device toolbar</td><td>Нет горизонтальной прокрутки, поля и кнопка не обрезаются</td></tr>
+<tr><td>Кроссбраузерность</td><td>Отображение и отправка формы (без реальной отправки) в Chrome, Firefox, Safari</td><td>Браузеры / BrowserStack</td><td>Одинаковое поведение и вид</td></tr>
+<tr><td>Производительность</td><td>Время ответа на отправку формы, вес страницы</td><td>DevTools → Network, Lighthouse</td><td>Ответ сервера &lt; 2 с, Lighthouse Performance ≥ 70</td></tr>
+<tr><td>Безопасность</td><td>Ввод HTML/JS в поля (&lt;script&gt;), загрузка файла с подменённым расширением</td><td>Ручные проверки, DevTools</td><td>Скрипт не выполняется, недопустимый файл не принимается</td></tr>
+<tr><td>Usability</td><td>Порядок перехода по Tab, понятность текстов ошибок, кликабельная область кнопки</td><td>Ручная проверка</td><td>Логичный порядок фокуса, ошибки объясняют, что исправить</td></tr>
+<tr><td>Доступность</td><td>Подписи полей (label), контраст текста, работа без мыши</td><td>Lighthouse Accessibility, клавиатура</td><td>Accessibility ≥ 80, форма заполняется с клавиатуры</td></tr>
+<tr><td>Локализация</td><td>Тексты интерфейса и ошибок на английском без опечаток</td><td>Ручная проверка</td><td>Нет смешения языков и опечаток</td></tr>
+</table>
+</div>
+<p>Критерии с цифрами (2 секунды, 70 и 80 баллов Lighthouse) — пример. На реальном проекте их согласуют с аналитиком или берут из требований.</p>
+
+<div class="lesson-nav">
+  <a class="nav-btn primary" href="3-3-test-design.html#artifacts">← Вернуться к уроку 3-3</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | 3-6 Jira и Confluence</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы</div>
+<div class="lesson-number">Урок 3-6</div>
+<h1>Таск- и док-менеджмент на проекте на примере Jira и Confluence</h1>
+<p class="lesson-intro">В видео из прошлого урока ты поверхностно познакомился с таск-трекерами по типу Jira и сервисом хранения документации по типу Confluence. Разберемся какие еще популярные решения есть и как этим всем пользоваться.</p>
+
+<div class="toc">
+  <div class="toc-title">В этом уроке</div>
+  <div class="toc-links">
+    <a class="toc-link" href="#trackers">Таск-трекеры</a>
+    <a class="toc-link" href="#docs">Ведение документации</a>
+    <a class="toc-link" href="#video">Учебная Jira: разбор по шагам</a>
+    <a class="toc-link" href="#sandbox">Учебная Jira: попробуй сам</a>
+  </div>
+</div>
+
+<h2 id="trackers"><span class="h2-icon" style="background:rgba(59,130,246,0.15)">📌</span>Таск-трекеры</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Таск-трекеры</div>
+    <p>Нужны для управления задачами (планирование, назначение, движение по статусам, прикрепление всей необходимой информации для задачи: ссылки на требования, макеты, тест-планы, ПМИ, инструкции, ветки в репозитории, merge-requests и прочее)<br><br>
+    Самым популярным решением была Jira, но ушла с РФ рынка. Однако Jira осталась на проектах в том или ином виде — либо сидят через впн, либо «импортозаместили» и сделали точно такие же аналоги: МосТрек, EvaTeam, Yandex Tracker, СфераЗадачи.<br><br>
+    Также встречаются Trello и древнерусский Битрикс24</p>
+  </div>
+</div>
+
+<h2 id="docs"><span class="h2-icon" style="background:rgba(34,197,94,0.15)">📚</span>Ведение документации</h2>
+
+<div class="callout info">
+  <div class="callout-icon">ℹ️</div>
+  <div>
+    <div class="callout-title">Ведение документации</div>
+    <p>Главное решение — Confluence, по сути многофункциональный гугл док, нужен для хранения, ведения документации на проекте, для создания вики страниц с удобной навигацией. Те же импортозамещения: МосВики, EvaWiki, Сфера.Документы.<br><br>
+    Также встречаются Notion и всё тот же Битрикс24. Иногда доку ведут в GitBook или Miro (плохая практика).</p>
+  </div>
+</div>
+
+<h2 id="video"><span class="h2-icon" style="background:rgba(124,58,237,0.15)">🧭</span>Учебная Jira: разбор по шагам</h2>
+
+<p>Ниже — экскурсия по нашей учебной Jira. Все задачи в ней про реальный сайт <a href="https://rivo.agency" target="_blank">rivo.agency</a>: сервис карьеры (вакансии) и сервис обратной связи (форма «Let's talk»). По этой Jira ты будешь писать тест-кейсы и заводить баги в следующих уроках. Данные для входа — в описании урока под этим блоком.</p>
+
+<div class="steps">
+  <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Три проекта.</strong> Слева в «Разделах» лежат три проекта (на скрине обведены):<br>
+  — <strong>Easy QA</strong> (ключ EQA) — рабочие задачи команды, ведутся по скраму;<br>
+  — <strong>Релизная очередь Easy QA</strong> (RLEQA) — что и когда выкатывается в прод;<br>
+  — <strong>Баги учеников Easy QA</strong> (BUGEQA) — доска для твоих баг-репортов из ДЗ.</div></div>
+</div>
+<img class="lesson-img half" src="m3-14-jira-projects.png" alt="Список проектов в боковой панели Jira">
+
+<div class="steps">
+  <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Доска спринта.</strong> Открой проект Easy QA → вкладка «Доска». Колонки — это жизненный цикл задачи из урока про SDLC: В бэклоге → На анализе → Дизайн → Согласовано → В разработке → На тестировании → На приёмке → Принято. Тестировщика в первую очередь интересуют «На тестировании» и «На приёмке». Доска показывает только текущий спринт, кнопка «Завершить спринт» — справа сверху.</div></div>
+</div>
+<img class="lesson-img" src="m3-15-jira-board.png" alt="Доска спринта проекта Easy QA">
+<div class="img-caption">Карточка задачи: название, метки, эпик (цветная плашка), срок, ключ (EQA-1), оценка в story points и исполнитель</div>
+
+<div class="steps">
+  <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Бэклог.</strong> Вкладка «Бэклог»: сверху задачи текущего спринта с датами и целью спринта, снизу — то, что ещё не взяли в работу (пагинация, локализация). На планировании задачи перетаскивают отсюда в спринт.</div></div>
+</div>
+<img class="lesson-img" src="m3-16-jira-backlog.png" alt="Бэклог и спринт">
+
+<div class="steps">
+  <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Эпики.</strong> Вкладка «Хронология» показывает эпики — крупные куски функционала, внутри которых лежат задачи: «Сервис обратной связи», «Сервис карьеры», «Песочница для учеников», «Практика: анкета соискателя КАРО». Стрелка слева раскрывает задачи эпика.</div></div>
+</div>
+<img class="lesson-img half" src="m3-17-jira-epics.png" alt="Эпики во вкладке Хронология">
+
+<div class="steps">
+  <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Карточка задачи.</strong> Кликни по задаче EQA-1. Слева — описание с требованиями, ниже подзадачи и связанные задачи (здесь — релиз RLEQA-4). Справа — статус (кнопка над панелью), исполнитель, родитель-эпик, срок, метки, спринт и оценка. Внизу карточки — вкладки «Комментарии» и «История»: в истории видно, кто и когда что менял.</div></div>
+</div>
+<img class="lesson-img" src="m3-18-jira-issue.png" alt="Карточка задачи EQA-1">
+
+<div class="steps">
+  <div class="step"><div class="step-num">6</div><div class="step-text"><strong>Смена статуса.</strong> Статус меняется двумя способами: кнопкой статуса в карточке (выпадающий список, как на скрине) или перетаскиванием карточки между колонками доски. Статус «В работе» в этом проекте не используем — колонки под него на доске нет, задача пропадёт с доски.</div></div>
+</div>
+<img class="lesson-img" src="m3-19-jira-status.png" alt="Выпадающий список статусов задачи">
+
+<div class="steps">
+  <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Релизная очередь.</strong> В проекте RLEQA каждая задача — это один выкат в прод. Колонки: План → Ожидание → Установлено.</div></div>
+</div>
+<img class="lesson-img half" src="m3-20-jira-release-board.png" alt="Доска релизной очереди">
+
+<div class="steps">
+  <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Релизная задача.</strong> Открой RLEQA-4: затронутые компоненты, краткое описание, уровень риска, ссылка на тест-план ПМИ в Qase и список задач, которые входят в релиз. Ключ RLEQA-4 совпадает с milestone в Qase — так релиз связан с тест-кейсами (подробнее в уроке 3-7).</div></div>
+</div>
+<img class="lesson-img" src="m3-21-jira-release-task.png" alt="Релизная задача RLEQA-4">
+
+<div class="steps">
+  <div class="step"><div class="step-num">9</div><div class="step-text"><strong>Доска багов.</strong> В проекте BUGEQA ты будешь заводить баги в уроке 3-8. Колонки: Новые баги → В работе → На проверке → Принято. В колонке «Принято» лежит эталонный баг-репорт <a href="https://easyqa.atlassian.net/browse/BUGEQA-2" target="_blank">BUGEQA-2</a> — открой и посмотри, как заполнены поля.</div></div>
+</div>
+<img class="lesson-img half" src="m3-22-jira-bug-board.png" alt="Доска баг-репортов учеников">
+
+<h2 id="sandbox"><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🧪</span>Учебная Jira: попробуй сам</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <div class="callout-title">Песочница</div>
+    <p>Потыкай джиру сам: подвигай задачки из зеленого эпика «Песочница для учеников» (EQA-18, EQA-19, EQA-20) — в каждой написано, что сделать. Только не забудь вернуть как было: с доской работают и другие ученики. Ничего не удаляй. Через урок будешь заводить баг-репорты в джире.<br><br>
+    Данные для входа — в описании урока под этим блоком. Если запросит подтверждение по почте — пиши в лс.</p>
+  </div>
+</div>
+
+<a class="link-card" href="https://easyqa.atlassian.net/jira/software/projects/EQA/boards/2" target="_blank">
+  <div class="link-card-icon">📋</div>
+  <div class="link-card-text">
+    <div class="link-card-title">Учебная Jira — доска проекта Easy QA</div>
+    <div class="link-card-url">easyqa.atlassian.net/jira/software/projects/EQA/boards/2</div>
+  </div>
+  <div class="link-card-arrow">→</div>
+</a>
+
+<div class="lesson-nav">
+  <a class="nav-btn" href="3-5-processes-agile.html">← Предыдущий урок</a>
+  <a class="nav-btn primary" href="3-7-tms.html">Следующий урок →</a>
+</div>
+</body>
+</html>

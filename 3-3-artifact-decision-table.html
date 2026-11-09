@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy QA | Таблица принятия решений: отправка формы</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.data-table th,.data-table td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top}
+.data-table th{background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:12px;font-weight:600}
+.data-table td{background:var(--surface)}
+.data-table td.c{text-align:center;font-family:var(--mono)}
+.yes{color:var(--green);font-weight:700} .no{color:var(--red);font-weight:700}
+.table-scroll{overflow-x:auto}
+.svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:16px 0;overflow-x:auto}
+.svg-wrap svg{display:block;min-width:720px;width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<div class="lesson-tag">📚 Модуль 3 — Теория и процессы · 🗂️ Пример тестового артефакта</div>
+<div class="lesson-number">К уроку 3-3</div>
+<h1>Таблица принятия решений: отправка формы</h1>
+<p class="lesson-intro">Таблица принятия решений связывает комбинации условий с ожидаемыми действиями системы. Каждый столбец-правило — готовый тест-кейс. Здесь 6 правил вместо 16 возможных комбинаций (2⁴): все поля валидны, по одному невалидному полю и все поля пустые.</p>
+
+<div class="example">
+  <div class="example-label">Объект тестирования</div>
+  <p>Форма «Let's talk» и блок контактов на странице <a href="https://rivo.agency/contacts/" target="_blank">rivo.agency/contacts</a>. Требования — в задачах учебной Jira <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a> и <a href="https://easyqa.atlassian.net/browse/EQA-2" target="_blank">EQA-2</a>.</p>
+</div>
+<h2><span class="h2-icon" style="background:rgba(245,158,11,0.15)">🧮</span>Таблица</h2>
+<div class="table-scroll">
+<table class="data-table">
+<tr><th></th><th>Правило 1</th><th>Правило 2</th><th>Правило 3</th><th>Правило 4</th><th>Правило 5</th><th>Правило 6</th></tr>
+<tr><td colspan="7"><strong>Условия</strong></td></tr>
+<tr><td>Name заполнено</td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td></tr>
+<tr><td>Email в верном формате</td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td></tr>
+<tr><td>Phone заполнен</td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td></tr>
+<tr><td>Message заполнено</td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="yes">Да</span></td><td class="c"><span class="no">Нет</span></td><td class="c"><span class="no">Нет</span></td></tr>
+<tr><td colspan="7"><strong>Действия (ожидаемый результат)</strong></td></tr>
+<tr><td>Заявка отправлена, сообщение об успехе</td><td class="c"><span class="yes">✓</span></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+<tr><td>Подсказка под Name</td><td class="c"></td><td class="c"><span class="yes">✓</span></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"><span class="yes">✓</span></td></tr>
+<tr><td>Подсказка под Email</td><td class="c"></td><td class="c"></td><td class="c"><span class="yes">✓</span></td><td class="c"></td><td class="c"></td><td class="c"><span class="yes">✓</span></td></tr>
+<tr><td>Подсказка под Phone</td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"><span class="yes">✓</span></td><td class="c"></td><td class="c"><span class="yes">✓</span></td></tr>
+<tr><td>Подсказка под Message</td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+</table>
+</div>
+<p>Ожидаемые результаты взяты из требований <a href="https://easyqa.atlassian.net/browse/EQA-1" target="_blank">EQA-1</a>: при ошибке заявка не отправляется, под каждым полем с ошибкой — подсказка. Если на сайте поведение другое (например, вместо подсказки появляется браузерный alert) — это баг.</p>
+
+<div class="lesson-nav">
+  <a class="nav-btn primary" href="3-3-test-design.html#artifacts">← Вернуться к уроку 3-3</a>
+</div>
+</body>
+</html>
